@@ -13,7 +13,7 @@ import './App.scss';
 // import Flagged from "./pages/Flagged";
 // import Pending from "./pages/Pending";
 import Login from "./pages/Login";
-// import SingleApplication from "./pages/SingleApplication";
+import SingleApplication from "./pages/SingleApplication";
 // import Home from "./components/Home";
 import Admin from "./pages/Admin";
 import ProtectedRouteAdmin from "./pages/ProtectedRouteAdmin";
@@ -60,6 +60,7 @@ const App = () => {
            <Route path='birth-report' element={<BirthReport/>}/>
            <Route path='cert-pending' element={<CertPending/>}/>
           <Route path='admin-approved' element={<AdminVerified/>} />
+          <Route path='single' element={<SingleApplication/>} />
           {/* <Route path='single' element={<SingleApplication/>} /> */}
         </Route>
        

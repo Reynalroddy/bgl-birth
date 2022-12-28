@@ -1,8 +1,10 @@
-import React,{useRef} from 'react'
+import React,{useRef,useState} from 'react'
 import { Chart } from 'primereact/chart';
 import './admin.css';
 import male from "../assets/images/man.svg"
 import female from "../assets/images/woman.svg"
+
+import { Dialog } from 'primereact/dialog';
 import {
     BarChart,
     Bar,
@@ -14,7 +16,14 @@ import {
   } from "recharts";
 const Admin = () => {
 const lineRef= useRef(null);
+const [visible,setVisible] = useState(false);
+const onClick = () => {
+setVisible(true);
+}
 
+const onHide = () => {
+    setVisible(false);
+}
 
     const lineData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -118,16 +127,50 @@ pv: 2400,
     ]
 
     const data = {
-        labels: ['0-5 years','6-10 years','11-17 years'],
+        labels: ['0-1 years','1-5 years','5-10 years','10-17 years'],
         datasets: [{
             label:'Age',
-           data: [20, 40, 60],
+           data: [20, 40, 60,78],
            backgroundColor: ["#2F96FB","#FEA93B","#0A5CAC"], 
            borderRadius:50,
            barThickness: 30,
         }]
      }
-
+     const data12 = {
+        labels: ['Kano','Lagos','Gombe'],
+        datasets: [
+            {
+            label:'0-1',
+           data: [20, 40, 60],
+           backgroundColor: "#BC5FD3", 
+           borderRadius:50,
+           barThickness: 10,
+        },
+        {
+            label: '1-5',
+            backgroundColor: '#FF7F2A',
+            data: [65, 59, 80],
+            borderRadius:50,
+           barThickness: 10,
+        },
+        {
+            label: '5-10',
+            backgroundColor: '#008000',
+            data: [28, 48, 40],
+            borderRadius:50,
+           barThickness: 10,
+        },
+        {
+            label:'10-17',
+           data: [20, 40, 60],
+           backgroundColor: "#D40000", 
+           borderRadius:50,
+           barThickness: 10,
+        },
+       
+     
+    ]
+     }
      const doughnut =    {
      labels: ['Birth', 'Death'],
      datasets: [
@@ -307,8 +350,9 @@ pv: 2400,
         </div>
         <div className="col-12 md:col-6  py-4">
                 <div className="surface-card shadow-2 border-round p-3">
-                    <div className="flex align-items-center justify-content-between mb-3">
+                    <div className="flex flex-column lg:flex-row lg:align-items-center lg:justify-content-between mb-3">
                         <div className="text-900 font-medium">Statistics by Age</div> 
+                        <span className='cursor-pointer' onClick={() => onClick()}>view more..</span>
                     </div>
                     <Chart type="bar" data={data}  options={horizontalOptions} />
                 </div>
@@ -438,7 +482,16 @@ pv: 2400,
 
 
                
-           
+            <Dialog visible={visible} onHide={onHide} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
+            <div className="col-12  py-4">
+                <div className="surface-card shadow-2 border-round p-3">
+                    <div className="flex align-items-center justify-content-between mb-3">
+                        <div className="text-900 font-medium">Birth Registrations By Age Frequency By State</div> 
+                    </div>
+                    <Chart type="bar" data={data12}   />
+                </div>
+            </div>
+</Dialog>
 
     </div>
     </>
