@@ -246,7 +246,7 @@ const onHide = () => {
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Printed Certificates</span>
-                        <div className="text-0 font-medium text-xl">1,866,841</div>
+                        <div className="text-0 font-medium text-xl">1,100,841</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-inbox text-cyan-500 text-xl"></i>
