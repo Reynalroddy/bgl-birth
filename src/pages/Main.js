@@ -109,7 +109,7 @@ pv: 2400,
         labels: ['Birth', 'Death'],
         datasets: [
             {
-                data: [300, 50],
+                data: [1662000, 0],
                 backgroundColor: [
                     "#2F96FB",
                     "#FEA93B",
@@ -404,7 +404,7 @@ pv: 2400,
 <div className='flex flex-column '>
 <div className='flex justify-content-between'>
 <p className='text-blue-400 text-xs font-bold'>Birth</p>
-<p className='text-blue-400 text-xs font-bold'>1500</p>
+<p className='text-blue-400 text-xs font-bold'>1,662,000</p>
 </div>
 <div className='border-y-3 border-blue-400 border-round-sm text-xs text-white p-1'>
 
@@ -414,7 +414,7 @@ pv: 2400,
 <div className='flex flex-column '>
 <div className='flex justify-content-between'>
 <p className='text-yellow-400 text-xs font-bold'>Death</p>
-<p className='text-yellow-400 text-xs font-bold'>500</p>
+<p className='text-yellow-400 text-xs font-bold'>0</p>
 </div>
 <div className='border-y-3 border-yellow-400 border-round-sm text-xs text-white p-1 '>
 
