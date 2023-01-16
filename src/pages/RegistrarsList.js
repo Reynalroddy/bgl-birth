@@ -10,7 +10,7 @@ import { InputText } from 'primereact/inputtext';
 import { FilterMatchMode } from 'primereact/api';
 // import jsPDF from 'jspdf';
 import { Tooltip } from 'primereact/tooltip';
-const AdminVerified = () => {
+const RegList = () => {
   const [loading1, setLoading1] = useState(true);
   const [filters1, setFilters1] = useState(null);
   const [globalFilterValue1, setGlobalFilterValue1] = useState('');
@@ -20,14 +20,7 @@ const AdminVerified = () => {
 // const statz = await axios.get('https://api.verxid.site/bt-mdm/get-device');
 // console.log(statz.data.results)
 const statz = await axios.get('https://jsonplaceholder.typicode.com/users');
-const newz = await axios.post('https://api.verxid.site/verify/fingerSearch',{
-    "data":"",
-    "position":"6"
-},
-{headers: {"Authorization" : `Basic YmFybmtzZm9ydGUtbmltYzowbmx5YmFybmtz`} });
 console.log(statz.data)
-console.log(newz)
-
 // setMyStatz(statz.data.mtn);
 setProducts(statz.data)
 console.log(statz.data)
@@ -65,7 +58,7 @@ console.log(_filters1)
     setGlobalFilterValue1(value);
 }
 const statusBodyTemplate2 = (rowData) => {
-    return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single/${rowData.id}`} >
+    return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single-registrars/${rowData.id}`} >
 VIEW 
     </Link>
 }
@@ -87,48 +80,48 @@ const header1 = renderHeader1();
 const dt = useRef(null);
    
 
-const cols = [
-  { field: 'code', header: 'Code' },
-  { field: 'name', header: 'Name' },
-  { field: 'category', header: 'Category' },
-  { field: 'quantity', header: 'Quantity' }
-];
+// const cols = [
+//   { field: 'code', header: 'Code' },
+//   { field: 'name', header: 'Name' },
+//   { field: 'category', header: 'Category' },
+//   { field: 'quantity', header: 'Quantity' }
+// ];
 
-const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
+// const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
-const exportPdf = () => {
-  import('jspdf').then(jsPDF => {
-      import('jspdf-autotable').then(() => {
-          const doc = new jsPDF.default(0, 0);
-          doc.autoTable(exportColumns, products);
-          doc.save('products.pdf');
-      })
-  })
-}
+// const exportPdf = () => {
+//   import('jspdf').then(jsPDF => {
+//       import('jspdf-autotable').then(() => {
+//           const doc = new jsPDF.default(0, 0);
+//           doc.autoTable(exportColumns, products);
+//           doc.save('products.pdf');
+//       })
+//   })
+// }
 
 
-const exportExcel = () => {
-  import('xlsx').then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(products);
-      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-      const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      saveAsExcelFile(excelBuffer, 'products');
-  });
-}
-const saveAsExcelFile = (buffer, fileName) => {
-  import("file-saver").then((FileSaver) => {
-    let EXCEL_TYPE =
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-    let EXCEL_EXTENSION = ".xlsx";
-    const data = new Blob([buffer], {
-      type: EXCEL_TYPE,
-    });
-    FileSaver.saveAs(
-      data,
-      fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
-    );
-  });
-};
+// const exportExcel = () => {
+//   import('xlsx').then(xlsx => {
+//       const worksheet = xlsx.utils.json_to_sheet(products);
+//       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+//       const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+//       saveAsExcelFile(excelBuffer, 'products');
+//   });
+// }
+// const saveAsExcelFile = (buffer, fileName) => {
+//   import("file-saver").then((FileSaver) => {
+//     let EXCEL_TYPE =
+//       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+//     let EXCEL_EXTENSION = ".xlsx";
+//     const data = new Blob([buffer], {
+//       type: EXCEL_TYPE,
+//     });
+//     FileSaver.saveAs(
+//       data,
+//       fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+//     );
+//   });
+// };
   return (
     <>
     
@@ -155,11 +148,13 @@ const saveAsExcelFile = (buffer, fileName) => {
      <div className="col-12 lg:col-12">
                 <div className="card border-round shadow-2 p-3 ">
                 <div className="mb-3 flex align-items-center justify-content-between p-3">
-        <span className="text-xl font-medium text-900">Registration List</span>
+        <span className="text-xl font-medium text-900">Registrars List(Adamawa)</span>
         <div className="flex align-items-center export-buttons">
             {/* <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" /> */}
-            <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
-            <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
+           <Link to={'/registrars-new'}>
+           <Button type="button" icon="pi pi-user" label='Create new' className="p-button-success mr-2"  />
+           </Link> 
+            {/* <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" /> */}
             {/* <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info ml-auto" data-pr-tooltip="Selection Only" /> */}
         </div>
        
@@ -177,14 +172,14 @@ const saveAsExcelFile = (buffer, fileName) => {
                   
                         >
                         {/* <Column field="id" header="Device Id"></Column> */}
-                            <Column field="name" header="Certificate Number"></Column>
+                            {/* <Column field="name" header="Certificate Number"></Column> */}
                             <Column field="username" header="Name"></Column>
-                            <Column field="email" header="Gender"></Column>
-                            <Column field="phone" header="Birth Order"></Column>
-                            <Column field="name" header="Date of Birth"></Column>
-                            <Column field="username" header="Birth place"></Column>
-                            <Column field="email" header="LGA birth"></Column>
-                            <Column field="email" header="Status"></Column>
+                            <Column field="email" header="Email"></Column>
+                            <Column field="phone" header="Phone number"></Column>
+                            <Column field="name" header="LGA"></Column>
+                            <Column field="username" header="Registration Centre"></Column>
+                            <Column field="email" header="Total Registrations"></Column>
+                            <Column field="email" header="Volunteers"></Column>
                             {/* <Column field="phone" header="Birth Order"></Column> */}
                             {/* <Column field="imei" header="Device IMEI"></Column> */}
                         <Column field="" header="Action" body={statusBodyTemplate2} />
@@ -199,4 +194,5 @@ const saveAsExcelFile = (buffer, fileName) => {
   )
 }
 
-export default AdminVerified;
+export default RegList;
+

@@ -1,21 +1,16 @@
-import React,{useRef,useState} from 'react'
+import React,{useState} from 'react'
 import { Chart } from 'primereact/chart';
 import './admin.css';
 import male from "../assets/images/man.svg"
 import female from "../assets/images/woman.svg"
 
 import { Dialog } from 'primereact/dialog';
-import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
- 
-    Tooltip,
-    ResponsiveContainer,
-  } from "recharts";
+
+import SexBar from '../components/SexBar';
+import BirthOccurence from '../components/BirthOccurence';
+import MotherAge from '../components/MotherAge';
 const Admin = () => {
-const lineRef= useRef(null);
+// const lineRef= useRef(null);
 const [visible,setVisible] = useState(false);
 const onClick = () => {
 setVisible(true);
@@ -25,49 +20,8 @@ const onHide = () => {
     setVisible(false);
 }
 
-    const lineData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-            {
-                label: '',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                // fill: false,
-                // borderColor: '#004E93',
-                tension: .4,
-                backgroundColor:'#B5E8A3',
-                // fill: true
-                fill: {
-                    target: 'origin',
-                    above: 'rgb(181, 232, 163,0.5)',  
-                    // below: '#B5E8A3'    
-                  }
-            },
-            // {
-            //     label: 'Second Dataset',
-            //     data: [28, 48, 40, 19, 86, 27, 90],
-            //     fill: false,
-            //     borderColor: '#027EC9',
-            //     tension: .4
-            // }
-        ]
-    };
-    // const doughnutData = {
-    //     labels: ['A', 'B', 'C'],
-    //     datasets: [
-    //         {
-    //             data: [300, 50, 100],
-    //             backgroundColor: [
-    //                 "#e2841a",
-    //                 "#0F97C7",
-    //                 "#10b163"
-    //             ],
-    //             hoverBackgroundColor: [
-    //                 "#edb575",
-    //                 "#6fc0dd",
-    //                 "#6fd0a1"
-    //             ]
-    //         }]
-    // };
+
+  
 
     const barData = {
         labels: ['Borno','Abuja','Nasarawa','Kano','Lagos','Kaduna'],
@@ -81,16 +35,7 @@ const onHide = () => {
         }],
     }  
 
-    const bar3Data = {
-        labels: ['Male','Female'],
-        datasets: [{
-            label:'Gender',
-           data: [20, 40,],
-           backgroundColor: ["#0A5CAC","#FEA93B"], 
-           borderRadius:50,
-           barThickness: 30,
-        }]
-    };
+
     // const bar2Data = {
     //     labels: ['9-17','18-26','27-35','36-50','51 above'],
     //     datasets: [{
@@ -102,29 +47,7 @@ const onHide = () => {
     //     }]
     // };
 
-    const bar2Data = [
-        {name: '9-17',
-        uv: 40,
-        pv: 2400,
-      },
-      {name: '18-26',
-      uv: 20,
-      pv: 2400,
-    },
-    {name: '27-35',
-    uv: 22,
-    pv: 2400,
-  }
-  ,
-  {name: '36-50',
-  uv: 10,
-  pv: 2400,
-},
-{name: '51 above',
-uv: 48,
-pv: 2400,
-}
-    ]
+
 
     const data = {
         labels: ['0-1 years','1-5 years','5-10 years','10-17 years'],
@@ -172,7 +95,7 @@ pv: 2400,
     ]
      }
      const doughnut =    {
-     labels: ['Birth', 'Death'],
+     labels: ['Illiteracy', 'Literate'],
      datasets: [
          {
              data: [300, 50],
@@ -284,7 +207,7 @@ pv: 2400,
     <>
     <div className="grid my-3">
           <div className="col-12  bg-green-700">
-          <span className="text-0 font-bold text-sm">Total Registrations: 1,550,671</span> 
+          <span className="text-0 font-bold text-sm">Total Registrations: 2,650,671</span> 
           </div>
         
 
@@ -293,7 +216,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Pending Registrations</span>
-                        <div className="text-0 font-medium text-xl">152</div>
+                        <div className="text-0 font-medium text-xl">344,380</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-shopping-cart text-blue-500 text-xl"></i>
@@ -308,7 +231,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Approved Registrations</span>
-                        <div className="text-0 font-medium text-xl">$2.100</div>
+                        <div className="text-0 font-medium text-xl">1,660,077</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-map-marker text-orange-500 text-xl"></i>
@@ -323,7 +246,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Printed Certificates</span>
-                        <div className="text-0 font-medium text-xl">28441</div>
+                        <div className="text-0 font-medium text-xl">1,866,841</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-inbox text-cyan-500 text-xl"></i>
@@ -338,7 +261,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Queried Registrations</span>
-                        <div className="text-0 font-medium text-xl">152 Unread</div>
+                        <div className="text-0 font-medium text-xl">159,456</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-comment text-purple-500 text-xl"></i>
@@ -381,37 +304,15 @@ pv: 2400,
                     </div>
 
                     {/* <Chart type="bar" data={bar2Data} options ={basicOptions} width="100%" /> */}
-                    <ResponsiveContainer width="100%" height={480}>
-      <BarChart data={bar2Data} 
-      margin={{ top: 50 }}
-      >
-        {/* <CartesianGrid strokeDasharray="3 3 " /> */}
-        <XAxis dataKey="name" />
-        <YAxis allowDecimals={false} />
-        <Tooltip />
-        <defs>
-        <linearGradient
-          id="colorUv"
-          x1="0"
-          y1="0"
-          x2="0"
-          y2="100%"
-          spreadMethod="reflect"
-        >   
-          <stop offset="0" stopColor="#15612B" />
-          <stop offset="1" stopColor="#4BD024" />
-        </linearGradient>
-      </defs>
-        <Bar dataKey="uv" fill="url(#colorUv)" barSize={30} radius={[15, 15, 0, 0]} />
-      </BarChart>
-    </ResponsiveContainer>
+                    <MotherAge/>
+                
                 </div>
             </div>
 
             <div className="col-12 md:col-6 lg:col-6 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Birth vs Death registration</div>
+                        <div className="text-900 font-medium">Statistics by Mother's Literacy</div>
                       
                     </div>
 
@@ -420,7 +321,7 @@ pv: 2400,
                     <div className='bel flex flex-column'>
 <div className='flex flex-column '>
 <div className='flex justify-content-between'>
-<p className='text-blue-400 text-xs font-bold'>Birth</p>
+<p className='text-blue-400 text-xs font-bold'>literate</p>
 <p className='text-blue-400 text-xs font-bold'>1500</p>
 </div>
 <div className='border-y-3 border-blue-400 border-round-sm text-xs text-white p-1'>
@@ -428,9 +329,11 @@ pv: 2400,
 </div>
 </div>
 
+
+
 <div className='flex flex-column '>
 <div className='flex justify-content-between'>
-<p className='text-yellow-400 text-xs font-bold'>Death</p>
+<p className='text-yellow-400 text-xs font-bold'>Illiterate</p>
 <p className='text-yellow-400 text-xs font-bold'>500</p>
 </div>
 <div className='border-y-3 border-yellow-400 border-round-sm text-xs text-white p-1 '>
@@ -449,7 +352,8 @@ pv: 2400,
                       
                     </div>
 
-                    <Chart type="line" data={lineData} ref={lineRef}  className='my-chart'/>
+                    {/* <Chart type="line" data={lineData} ref={lineRef}  className='my-chart'/> */}
+                    <BirthOccurence/>
                 </div>
             </div>
 
@@ -457,11 +361,11 @@ pv: 2400,
             <div className="col-12 md:col-6 lg:col-4 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Birth by Gender</div>
+                        <div className="text-900 font-medium">Birth by Sex</div>
                      
                     </div>
 
-                    <Chart type="bar" data={bar3Data} options ={basicOptions} width="100%" />
+                  <SexBar/>
                     <div className='flex  justify-content-between'>
                     <div className='flex gap-2'>
                     <img src={male} className='' style={{width:'9px'}} alt=''/>

@@ -18,6 +18,9 @@ const Homez = () => {
     const btnRef8 = useRef(null);
     const btnRef9 = useRef(null);
     const btnRef10 = useRef(null);
+    const btnRef12 = useRef(null);
+    const btnRef13 = useRef(null);
+    const btnRef14 = useRef(null);
   return (              
 
     
@@ -96,21 +99,14 @@ const Homez = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to='/birth-reg' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                                <Link to='/birth/registrations' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                     transition-duration-150 transition-colors w-full">
                                     <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
                                     <span className="font-medium text-white">Registrations</span>
                                     <Ripple />
                                 </Link>
                             </li>
-                            <li>
-                                <Link  to='/birth-report' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
-                    transition-duration-150 transition-colors w-full">
-                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
-                                    <span className="font-medium text-white">Reports</span>
-                                    <Ripple />
-                                </Link>
-                            </li>
+                            
                         </ul>
                     </li>
 
@@ -144,14 +140,14 @@ const Homez = () => {
                                     <Ripple />
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link  to='/birth-report' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                     transition-duration-150 transition-colors w-full">
                                     <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
                                     <span className="font-medium text-white">Reports</span>
                                     <Ripple />
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </li>
 
@@ -187,14 +183,42 @@ const Homez = () => {
                                     <Ripple />
                                 </Link>
                             </li>
+                            
+                        </ul>
+                    </li>
+
+
+
+                    <li className='border-bottom-1 border-white'>
+                        <StyleClass nodeRef={btnRef14} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                            {/* eslint-disable-next-line */}
+                            <a ref={btnRef14} className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                transition-duration-150 transition-colors w-full">
+                                <i className="pi pi-book mr-2 text-white font-bold"></i>
+                                <span className="text-white font-medium">Still Birth</span>
+                                <i className="pi pi-chevron-right ml-auto mr-1 text-white"></i>
+                                <Ripple />
+                            </a>
+                        </StyleClass>
+                        <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                          
                             <li>
-                                <Link  to='/birth-report' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                                <Link to='/still' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                     transition-duration-150 transition-colors w-full">
                                     <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
-                                    <span className="font-medium text-white">Reports</span>
+                                    <span className="font-medium text-white">Statistics</span>
                                     <Ripple />
                                 </Link>
                             </li>
+                            <li>
+                                <Link  to='/birth/registrations' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Registrations</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                            
                         </ul>
                     </li>
 
@@ -203,7 +227,7 @@ const Homez = () => {
                             {/* eslint-disable-next-line */}
                             <a ref={btnRef10} className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                 transition-duration-150 transition-colors w-full">
-                                <i className="pi pi-book mr-2 text-white font-bold"></i>
+                               <i className="pi pi-check mr-2 text-white font-bold"></i>
                                 <span className="text-white font-medium">Verified certificates</span>
                                 <i className="pi pi-chevron-right ml-auto mr-1 text-white"></i>
                                 <Ripple />
@@ -212,7 +236,7 @@ const Homez = () => {
                         <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
                           
                             <li>
-                                <Link to='/cert-pending' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                                <Link to='/pending-cert' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                     transition-duration-150 transition-colors w-full">
                                     <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
                                     <span className="font-medium text-white">Pending Applications</span>
@@ -237,34 +261,100 @@ const Homez = () => {
                             </li>
                         </ul>
                     </li>
-                    <li className='border-bottom-1 border-white'>
-                        {/* eslint-disable-next-line */}
+                    {/* <li className='border-bottom-1 border-white'>
+                        
                         <a className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                 transition-duration-150 transition-colors w-full">
                             <i className="pi pi-check mr-2 text-white font-bold"></i>
                             <span className="font-medium text-white font-medium">Verified certificates</span>
                             <Ripple />
                         </a>
+                    </li> */}
+
+
+<li className='border-bottom-1 border-white'>
+                        <StyleClass nodeRef={btnRef12} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                            {/* eslint-disable-next-line */}
+                            <a ref={btnRef12} className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                transition-duration-150 transition-colors w-full">
+                              <i className="pi pi-plus mr-2 text-white font-bold"></i>
+                               <span className="font-medium text-white font-medium">Hospitals</span>
+                                <i className="pi pi-chevron-right ml-auto mr-1 text-white"></i>
+                                <Ripple />
+                            </a>
+                        </StyleClass>
+                        <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                          
+                            <li>
+                                <Link to='/hospital/pending' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Pending Applications</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link  to='/hospital/public' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Public hospitals</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link  to='/hospital/private' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Private hospitals</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                        </ul>
                     </li>
+                  
+                  
 
                     <li className='border-bottom-1 border-white'>
-                        {/* eslint-disable-next-line */}
-                        <a className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                        <StyleClass nodeRef={btnRef13} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                            {/* eslint-disable-next-line */}
+                            <a ref={btnRef13} className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                 transition-duration-150 transition-colors w-full">
-                            <i className="pi pi-plus mr-2 text-white font-bold"></i>
-                            <span className="font-medium text-white font-medium">Hospitals</span>
-                            <Ripple />
-                        </a>
+                              <i className="pi pi-users mr-2 text-white font-bold"></i>
+                               <span className="font-medium text-white font-medium">Registrars/DCR</span>
+                                <i className="pi pi-chevron-right ml-auto mr-1 text-white"></i>
+                                <Ripple />
+                            </a>
+                        </StyleClass>
+                        <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                          
+                            <li>
+                                <Link to='/registrars' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Registrars</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link  to='/dcr' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">DCR</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                   
+                        </ul>
                     </li>
-                    <li className='border-bottom-1 border-white'>
-                        {/* eslint-disable-next-line */}
+                    {/* <li className='border-bottom-1 border-white'>
+                      
                         <a className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                 transition-duration-150 transition-colors w-full">
                             <i className="pi pi-users mr-2 text-white font-bold"></i>
                             <span className="font-medium text-white font-medium">Registrars/dcr</span>
                             <Ripple />
                         </a>
-                    </li>
+                    </li> */}
                     <li className='border-bottom-1 border-white'>
                         {/* eslint-disable-next-line */}
                         <a className="p-ripple flex align-items-center cursor-pointer p-3  border-round 

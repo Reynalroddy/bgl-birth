@@ -1,25 +1,97 @@
-import React from 'react'
+import React,{useRef,useState,useEffect} from 'react'
 import { Chart } from 'primereact/chart';
 import './admin.css';
-import male from "../assets/images/man.svg"
-import female from "../assets/images/woman.svg"
-import naija from "../assets/images/naija.png"
-// import round from "../assets/images/Eclipse.png"
-// import rect from "../assets/images/rect.png"
-// import { Divider } from 'primereact/divider';
-import YearlyReg from '../components/YearlyReg';
-import RegStat from '../components/RegStat';
-import GenderStat from '../components/GenderStat';
+
+import naija from "../assets/images/ci.svg"
+
 import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
+
    
     Tooltip,
-    ResponsiveContainer,
+   
   } from "recharts";
-const Main = () => {
+  import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import axios from "axios";
+import { Link } from 'react-router-dom';
+import { Button } from 'primereact/button';
+// import { Dialog } from 'primereact/dialog';
+import { InputText } from 'primereact/inputtext';
+import { FilterMatchMode } from 'primereact/api';
+// import jsPDF from 'jspdf';
+// import { Tooltip } from 'primereact/tooltip';
+const PublicHos = () => {
+// const lineRef= useRef(null);
+const [loading1, setLoading1] = useState(true);
+const [filters1, setFilters1] = useState(null);
+const [globalFilterValue1, setGlobalFilterValue1] = useState('');
+const [products, setProducts] = useState([]);
+useEffect(() => {
+  const getDatz=async ()=>{
+// const statz = await axios.get('https://api.verxid.site/bt-mdm/get-device');
+// console.log(statz.data.results)
+const statz = await axios.get('https://jsonplaceholder.typicode.com/users');
+console.log(statz.data)
+// setMyStatz(statz.data.mtn);
+setProducts(statz.data)
+  // setProducts(statz.data.results)
+  setLoading1(false)
+  }
+          getDatz()
+         
+
+}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+useEffect(() => {
+ 
+          initFilters1();
+
+}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+
+const initFilters1 = () => {
+  setFilters1({
+      'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+    
+  });
+   
+  setGlobalFilterValue1('');
+}
+
+const onGlobalFilterChange1 = (e) => {
+  const value = e.target.value;
+  console.log(value);
+  let _filters1 = { ...filters1 };
+  _filters1['global'].value = value;
+console.log(_filters1)
+  setFilters1(_filters1);
+  setGlobalFilterValue1(value);
+}
+const statusBodyTemplate2 = (rowData) => {
+  return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single/${rowData.id}`} >
+VIEW 
+  </Link>
+}
+const clearFilter1 = () => {
+  initFilters1();
+}
+const renderHeader1 = () => {
+  return (
+      <div className="flex justify-content-between">
+          <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} />
+          <span className="p-input-icon-left">
+              <i className="pi pi-search" />
+              <InputText value={globalFilterValue1} onChange={onGlobalFilterChange1} placeholder="Keyword Search" />
+          </span>
+      </div>
+  )
+}
+const header1 = renderHeader1();
+const dt = useRef(null);
+
+
+
+
 
     // const doughnutData = {
     //     labels: ['A', 'B', 'C'],
@@ -52,6 +124,7 @@ const Main = () => {
     // }  
 
 
+
     // const bar2Data = {
     //     labels: ['9-17','18-26','27-35','36-50','51 above'],
     //     datasets: [{
@@ -63,62 +136,30 @@ const Main = () => {
     //     }]
     // };
 
-    const bar2Data = [
-        {name: '9-17',
-        uv: 40,
-        pv: 2400,
-      },
-      {name: '18-26',
-      uv: 20,
-      pv: 2400,
-    },
-    {name: '27-35',
-    uv: 22,
-    pv: 2400,
-  }
-  ,
-  {name: '36-50',
-  uv: 10,
-  pv: 2400,
-},
-{name: '51 above',
-uv: 48,
-pv: 2400,
-}
-    ]
 
-  
 
-     const doughnut =    {
-     labels: ['Accident', 'Illness','others'],
-     datasets: [
-         {
-             data: [80, 50,30],
-             backgroundColor: [
-                 "#FEBC31",
-                 "#99DA01",
-                 "#83F3FF"
-                
-             ],
-            }
-        ],
-        
-    }
-
-    const doughnut2 =    {
-        labels: ['Birth', 'Death'],
+    const data = {
+        labels: ['June','July','August','September','October','November'],
         datasets: [
             {
-                data: [300, 50],
-                backgroundColor: [
-                    "#2F96FB",
-                    "#FEA93B",
-                   
-                ],
-               }
-           ],
-           
-       }
+            label:'Birth Reg',
+           data: [20, 40,55,67,32,54],
+           backgroundColor: "#2AF216", 
+        //    borderRadius:,
+           barThickness: 15,
+        },
+        {
+            label: 'Death Reg',
+            backgroundColor: '#3152E2',
+            data: [65, 59,90,45,32,12],
+            // borderRadius:50,
+           barThickness: 15,
+        },
+      
+    ]
+     }
+
+
 
     // const barData2 = {
     //     labels: ['0-5 years', '6-10 years', '11-17 years'],
@@ -213,15 +254,15 @@ pv: 2400,
   return (
     <>
     <div className="grid my-3">
-         <div className="col-12 md:col-6 lg:col-3">
-        <div className="bg-white shadow-2 p-3 border-round">
+         <div className="col-12 md:col-6 lg:col-4">
+        <div className=" shadow-2 p-3 border-round text-white" style={{background:'#0E7706'}}>
                 <div className="flex justify-content-between mb-3">
                     <div>
-                        <span className="block  text-sm font-medium  mb-3">Total Birth Registrations</span>
-                        <div className=" font-bold text-xl">1,662,000</div>
+                        <span className="block  text-sm font-medium  mb-3">Total Public Hospitals</span>
+                        <div className=" font-bold text-xl">12,000,000</div>
                         <div className='flex mt-2'>
-                        <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
-                        <span className='text-xs text-green-500 font-bold'>4.6%</span>
+                        <i className="pi pi-arrow-up  text-xs font-bold"></i>
+                        <span className='text-xs  font-bold'>4.6%</span>
                         </div>
                         
                     </div>
@@ -233,12 +274,12 @@ pv: 2400,
                 
             </div>
         </div>
-        <div className="col-12 md:col-6 lg:col-3">
+        <div className="col-12 md:col-6 lg:col-4">
             <div className="bg-white shadow-2 p-3 border-round">
                 <div className="flex justify-content-between mb-3">
                     <div>
-                        <span className="block  text-sm font-medium  mb-3">Total Death Registrations</span>
-                        <div className=" font-bold text-xl">0</div>
+                        <span className="block  text-sm font-medium  mb-3">Total Birth Registrations</span>
+                        <div className=" font-bold text-xl">12,000,000</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>
@@ -253,12 +294,12 @@ pv: 2400,
                
             </div>
         </div>
-        <div className="col-12 md:col-6 lg:col-3">
+        <div className="col-12 md:col-6 lg:col-4">
         <div className="bg-white shadow-2 p-3 border-round">
                 <div className="flex justify-content-between mb-3">
                     <div>
-                        <span className="block  text-sm font-medium  mb-3">Total Birth Attestations</span>
-                        <div className=" font-bold text-xl">0</div>
+                        <span className="block  text-sm font-medium  mb-3">Total Death Registrations</span>
+                        <div className=" font-bold text-xl">12,000,000</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>
@@ -273,57 +314,26 @@ pv: 2400,
                 
             </div>
         </div>
-        <div className="col-12 md:col-6 lg:col-3">
-        <div className="bg-white shadow-2 p-3 border-round">
-                <div className="flex justify-content-between mb-3">
-                    <div>
-                        <span className="block  text-sm font-medium  mb-3">Total Certificates Verified</span>
-                        <div className=" font-bold text-xl">186,000</div>
-                        <div className='flex mt-2'>
-                        <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
-                        <span className='text-xs text-green-500 font-bold'>4.6%</span>
-                        </div>
-                        
-                    </div>
-                    <div className="flex align-items-center justify-content-center " style={{ width: '2.8rem', height: '2.8rem' }}>
-                       <img src={naija} className='w-full' alt='' />
-                       
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <div className="col-12 md:col-6 lg:col-6 py-4">
+      
+      
+        <div className="col-12   py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Yearly Registration Statistics</div>
-                      
+                        <div className="text-900 font-medium">Death & Birth Certificate Registrations(Statistics)</div> 
                     </div>
-
-                    {/* <Chart type="line" data={lineData} ref={lineRef}  className='my-chart'/> */}
-                    <YearlyReg/>
-                </div>
-            </div>
-        <div className="col-12 md:col-6 lg:col-6  py-4">
-                <div className="surface-card shadow-2 border-round p-3">
-                    <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Regional Registration Statistics</div> 
-                    </div>
-                    {/* <Chart type="bar" data={data}   /> */}
-                    <RegStat/>
+                    <Chart type="bar" data={data}   />
                 </div>
             </div>
 
 
-            <div className="col-12 md:col-6 lg:col-7 py-4">
+            {/* <div className="col-12 md:col-6 lg:col-7 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
                         <div className="text-900 font-medium">Gender Registration Statistics</div>
                      
                     </div>
 
-                    {/* <Chart type="bar" data={bar3Data} options ={stackedOptions} width="100%" height={'150px'} /> */}
-                    <GenderStat/>
+                    <Chart type="bar" data={bar3Data} options ={stackedOptions} width="100%" height={'150px'} />
                     <div className='flex  justify-content-between'>
                     <div className='flex gap-2'>
                     <img src={male} className='' style={{width:'9px'}} alt=''/>
@@ -343,7 +353,7 @@ pv: 2400,
             </div>
 
 
-            {/* <div className="col-12 md:col-6 lg:col-5 py-4"> 
+            <div className="col-12 md:col-6 lg:col-5 py-4"> 
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
                         
@@ -391,41 +401,8 @@ pv: 2400,
                 </div>
             </div> */}
            
-           <div className="col-12 md:col-5 lg:col-5 py-4">
-                <div className="surface-card shadow-2 border-round p-3">
-                    <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Birth vs Death registration</div>
-                      
-                    </div>
 
-                    <Chart type="doughnut" data={doughnut2} style={{  width: '50%',margin:'0 auto' }}  />
-
-                    <div className='bel flex flex-column'>
-<div className='flex flex-column '>
-<div className='flex justify-content-between'>
-<p className='text-blue-400 text-xs font-bold'>Birth</p>
-<p className='text-blue-400 text-xs font-bold'>1500</p>
-</div>
-<div className='border-y-3 border-blue-400 border-round-sm text-xs text-white p-1'>
-
-</div>
-</div>
-
-<div className='flex flex-column '>
-<div className='flex justify-content-between'>
-<p className='text-yellow-400 text-xs font-bold'>Death</p>
-<p className='text-yellow-400 text-xs font-bold'>500</p>
-</div>
-<div className='border-y-3 border-yellow-400 border-round-sm text-xs text-white p-1 '>
-
-</div>
-</div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div className=" hidden md:block col-12 md:col-6 lg:col-6 py-4">
+            {/* <div className=" hidden md:block col-12 md:col-6 lg:col-6 py-4">
                 <div className="surface-card shadow-2 border-round p-3" >
                     <div className="flex align-items-center justify-content-between mb-3">
                         <div className="text-900 font-medium">Statistics of Death Registration by Age</div>
@@ -460,9 +437,9 @@ pv: 2400,
     </ResponsiveContainer>
     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="col-12 md:col-6 lg:col-6 py-4">
+            {/* <div className="col-12 md:col-6 lg:col-6 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
                         <div className="text-900 font-medium">Major Causes of Death Stats</div>
@@ -473,20 +450,61 @@ pv: 2400,
 
                  
                 </div>
+            </div> */}
+         
+         
+
+         {/* <div className='grid mt-2'> */}
+     <div className="col-12 lg:col-12 mt-2">
+                <div className="card border-round shadow-2 p-3 ">
+                <div className="mb-3 flex align-items-center justify-content-between p-3">
+        <span className="text-xl font-medium text-900">Recent Registrations</span>
+        {/* <div className="flex align-items-center export-buttons">
+           
+            <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
+            <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
+           
+        </div> */}
+       
+    </div>
+             <DataTable value={products} 
+             ref={dt}
+                  filters={filters1}
+                    loading={loading1}
+                    stripedRows
+                     responsiveLayout="scroll"
+                     header={header1}
+                     paginator
+                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={5} rowsPerPageOptions={[5,10,50]}
+                  
+                        >
+                        {/* <Column field="id" header="Device Id"></Column> */}
+                        <Column field="name" header="Certificate Number"></Column>
+                            <Column field="username" header="Name"></Column>
+                            <Column field="email" header="Gender"></Column>
+                            <Column field="phone" header="Birth Order"></Column>
+                            <Column field="name" header="Date of Birth"></Column>
+                            <Column field="username" header="Birth place"></Column>
+                            <Column field="email" header="LGA birth"></Column>
+                            <Column field="email" header="Status"></Column>
+                        <Column field="" header="Action" body={statusBodyTemplate2} />
+                    </DataTable>
+                    <Tooltip target=".export-buttons>button" position="bottom" />
+                </div>
             </div>
-         
-         
-
-
+            
+           
+</div> 
           
 
 
                
            
 
-    </div>
+    {/* </div> */}
     </>
   )
 }
 
-export default Main
+export default PublicHos;

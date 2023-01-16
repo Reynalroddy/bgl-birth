@@ -10,7 +10,7 @@ import { InputText } from 'primereact/inputtext';
 import { FilterMatchMode } from 'primereact/api';
 // import jsPDF from 'jspdf';
 import { Tooltip } from 'primereact/tooltip';
-const AdminVerified = () => {
+const PendingHospital = () => {
   const [loading1, setLoading1] = useState(true);
   const [filters1, setFilters1] = useState(null);
   const [globalFilterValue1, setGlobalFilterValue1] = useState('');
@@ -20,14 +20,7 @@ const AdminVerified = () => {
 // const statz = await axios.get('https://api.verxid.site/bt-mdm/get-device');
 // console.log(statz.data.results)
 const statz = await axios.get('https://jsonplaceholder.typicode.com/users');
-const newz = await axios.post('https://api.verxid.site/verify/fingerSearch',{
-    "data":"",
-    "position":"6"
-},
-{headers: {"Authorization" : `Basic YmFybmtzZm9ydGUtbmltYzowbmx5YmFybmtz`} });
 console.log(statz.data)
-console.log(newz)
-
 // setMyStatz(statz.data.mtn);
 setProducts(statz.data)
 console.log(statz.data)
@@ -65,7 +58,7 @@ console.log(_filters1)
     setGlobalFilterValue1(value);
 }
 const statusBodyTemplate2 = (rowData) => {
-    return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single/${rowData.id}`} >
+    return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single-hospital/${rowData.id}`} >
 VIEW 
     </Link>
 }
@@ -155,7 +148,7 @@ const saveAsExcelFile = (buffer, fileName) => {
      <div className="col-12 lg:col-12">
                 <div className="card border-round shadow-2 p-3 ">
                 <div className="mb-3 flex align-items-center justify-content-between p-3">
-        <span className="text-xl font-medium text-900">Registration List</span>
+        <span className="text-xl font-medium text-900">Pending Applications</span>
         <div className="flex align-items-center export-buttons">
             {/* <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" /> */}
             <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
@@ -177,14 +170,14 @@ const saveAsExcelFile = (buffer, fileName) => {
                   
                         >
                         {/* <Column field="id" header="Device Id"></Column> */}
-                            <Column field="name" header="Certificate Number"></Column>
+                            <Column field="name" header="Registration Number"></Column>
                             <Column field="username" header="Name"></Column>
-                            <Column field="email" header="Gender"></Column>
-                            <Column field="phone" header="Birth Order"></Column>
-                            <Column field="name" header="Date of Birth"></Column>
-                            <Column field="username" header="Birth place"></Column>
-                            <Column field="email" header="LGA birth"></Column>
-                            <Column field="email" header="Status"></Column>
+                            <Column field="email" header="Hospital type"></Column>
+                            <Column field="phone" header="State"></Column>
+                            <Column field="name" header="Location"></Column>
+                            <Column field="username" header="Date"></Column>
+                            {/* <Column field="email" header="LGA birth"></Column> */}
+                            {/* <Column field="email" header="Status"></Column> */}
                             {/* <Column field="phone" header="Birth Order"></Column> */}
                             {/* <Column field="imei" header="Device IMEI"></Column> */}
                         <Column field="" header="Action" body={statusBodyTemplate2} />
@@ -199,4 +192,4 @@ const saveAsExcelFile = (buffer, fileName) => {
   )
 }
 
-export default AdminVerified;
+export default PendingHospital;
