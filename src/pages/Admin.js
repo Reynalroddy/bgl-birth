@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { Chart } from 'primereact/chart';
+import React,{useState,useEffect} from 'react'
+// import { Chart } from 'primereact/chart';
 import './admin.css';
 import male from "../assets/images/man.svg"
 import female from "../assets/images/woman.svg"
@@ -9,12 +9,19 @@ import { Dialog } from 'primereact/dialog';
 import SexBar from '../components/SexBar';
 import BirthOccurence from '../components/BirthOccurence';
 import MotherAge from '../components/MotherAge';
+import Doughnut from '../components/Doughnut';
+import U5 from '../components/U5';
+import axios from 'axios';
+import AgeStat from '../components/AgeStat';
+import OtherReg from '../components/OtherReg';
 const Admin = () => {
-// const lineRef= useRef(null);
 const [visible,setVisible] = useState(false);
+const [rez,setRez] = useState({});
 const onClick = () => {
 setVisible(true);
 }
+
+
 
 const onHide = () => {
     setVisible(false);
@@ -23,183 +30,24 @@ const onHide = () => {
 
   
 
-    const barData = {
-        labels: ['Borno','Abuja','Nasarawa','Kano','Lagos','Kaduna'],
-        datasets: [{
-            label:'States',
-           data: [20, 40, 60,34,55,23],
-           backgroundColor: ["#29F683"], 
-           borderRadius:50,
-           barThickness: 30,
-           
-        }],
-    }  
 
+useEffect(() => {
+  
+const getStatz=async()=>{
 
-    // const bar2Data = {
-    //     labels: ['9-17','18-26','27-35','36-50','51 above'],
-    //     datasets: [{
-    //         label:'States',
-    //        data: [20, 40, 60,34,27],
-    //        backgroundColor: ["#248129"], 
-    //        borderRadius:50,
-    //        barThickness: 30,
-    //     }]
-    // };
-
-
-
-    const data = {
-        labels: ['0-1 years','1-5 years','5-10 years','10-17 years'],
-        datasets: [{
-            label:'Age',
-           data: [20, 40, 60,78],
-           backgroundColor: ["#2F96FB","#FEA93B","#0A5CAC"], 
-           borderRadius:50,
-           barThickness: 30,
-        }]
-     }
-     const data12 = {
-        labels: ['Kano','Lagos','Gombe'],
-        datasets: [
-            {
-            label:'0-1',
-           data: [20, 40, 60],
-           backgroundColor: "#BC5FD3", 
-           borderRadius:50,
-           barThickness: 10,
-        },
-        {
-            label: '1-5',
-            backgroundColor: '#FF7F2A',
-            data: [65, 59, 80],
-            borderRadius:50,
-           barThickness: 10,
-        },
-        {
-            label: '5-10',
-            backgroundColor: '#008000',
-            data: [28, 48, 40],
-            borderRadius:50,
-           barThickness: 10,
-        },
-        {
-            label:'10-17',
-           data: [20, 40, 60],
-           backgroundColor: "#D40000", 
-           borderRadius:50,
-           barThickness: 10,
-        },
-       
-     
-    ]
-     }
-     const doughnut =    {
-     labels: ['Illiteracy', 'Literate'],
-     datasets: [
-         {
-             data: [300, 50],
-             backgroundColor: [
-                 "#2F96FB",
-                 "#FEA93B",
-                
-             ],
-            }
-        ],
-        
+    try {
+        const statistics = await axios.get('https://npc-api.dsaved.com/v0/birth-registration/stats/birth-statistic-data');
+console.log(statistics.data);
+setRez(statistics.data[0]);
+    } catch (error) {
+        console.log(error)
     }
+}
 
-    // const barData2 = {
-    //     labels: ['0-5 years', '6-10 years', '11-17 years'],
-    //     datasets: [
-    //         {
-    //             label: '0-5 years',
-    //             backgroundColor: '#2F96FB',
-    //             borderColor: '#2F96FB',
-    //             data: [65],
-    //             borderRadius:50
-    //         }, 
-            // {
-            //     label: '6-10 years',
-            //     backgroundColor: '#FEA93B',
-            //     borderColor: '#FEA93B',
-            //     data: [28],
-            //     borderRadius:50
-            // }
+getStatz();
+     
+}, [])
 
-            // , {
-            //     label: '11-17 years',
-            //     backgroundColor: '#0A5CAC',
-            //     borderColor: '#0A5CAC',
-            //     data: [18],
-            //     borderRadius:50
-            // }
-        // ]
-        // ,
-        // datasets: [
-         
-        //     {
-        //         label: '6-10 years',
-        //         backgroundColor: '#FEA93B',
-        //         borderColor: '#FEA93B',
-        //         data: [28],
-        //         borderRadius:50
-        //     }
-        // ]
-    // };
-
-    let horizontalOptions = {
-        indexAxis: 'y',
-        maintainAspectRatio: false,
-        aspectRatio: 2,
-        plugins: {  
-        legend: {
-            // labels: {
-            //     color: "red",
-            //     fontSize: 18,
-            //     backgroundColor:'green',
-            // }
-            display:false
-        }
-    },
-        scales: {
-            y: {
-                grid: {
-                    display: false,
-                  }
-            },
-            x: {
-                grid: {
-                  display: false,
-                }
-              },
-          }
-      
-    };
-
-    let basicOptions = {
-        
-        aspectRatio: 2,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                grid: {
-                    display: false,
-                  }
-            },
-            x: {
-                grid: {
-                  display: false,
-                }
-              },
-          }
-        // scales: {
-        //     xAxes: [{
-        //         barPercentage: 0.4
-        //     }]
-        // }
-      
-    };
 
 
     
@@ -207,7 +55,7 @@ const onHide = () => {
     <>
     <div className="grid my-3">
           <div className="col-12  bg-green-700">
-          <span className="text-0 font-bold text-sm">Total Registrations: 2,650,671</span> 
+          <span className="text-0 font-bold text-sm">Total Registrations: {rez && rez.total_registration}</span> 
           </div>
         
 
@@ -216,10 +64,10 @@ const onHide = () => {
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Pending Registrations</span>
-                        <div className="text-0 font-medium text-xl">344,380</div>
+                        <div className="text-0 font-medium text-xl">{rez && rez.pending}</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                        <i className="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                        <i className="pi pi-exclamation-circle text-blue-500 text-xl"></i>
                     </div>
                 </div>
                 {/* <span className="text-green-500 font-medium">24 new </span>
@@ -231,10 +79,10 @@ const onHide = () => {
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Approved Registrations</span>
-                        <div className="text-0 font-medium text-xl">1,660,077</div>
+                        <div className="text-0 font-medium text-xl">{rez? rez.approved:''}</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                        <i className="pi pi-map-marker text-orange-500 text-xl"></i>
+                        <i className="pi pi-check-circle text-orange-500 text-xl"></i>
                     </div>
                 </div>
                 {/* <span className="text-green-500 font-medium">%52+ </span>
@@ -246,10 +94,10 @@ const onHide = () => {
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Printed Certificates</span>
-                        <div className="text-0 font-medium text-xl">1,100,841</div>
+                        <div className="text-0 font-medium text-xl">{rez && rez.printed}</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                        <i className="pi pi-inbox text-cyan-500 text-xl"></i>
+                        <i className="pi pi-book text-cyan-500 text-xl"></i>
                     </div>
                 </div>
                 {/* <span className="text-green-500 font-medium">520  </span>
@@ -261,10 +109,10 @@ const onHide = () => {
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Queried Registrations</span>
-                        <div className="text-0 font-medium text-xl">159,456</div>
+                        <div className="text-0 font-medium text-xl">{rez && rez.querried}</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                        <i className="pi pi-comment text-purple-500 text-xl"></i>
+                        <i className="pi pi-question-circle text-purple-500 text-xl"></i>
                     </div>
                 </div>
                 {/* <span className="text-green-500 font-medium">85 </span>
@@ -277,7 +125,8 @@ const onHide = () => {
                         <div className="text-900 font-medium">Statistics by Age</div> 
                         <span className='cursor-pointer' onClick={() => onClick()}>view more..</span>
                     </div>
-                    <Chart type="bar" data={data}  options={horizontalOptions} />
+                    {/* <Chart type="bar" data={data}  options={horizontalOptions} /> */}
+                    <AgeStat/>
                 </div>
             </div>
 
@@ -292,11 +141,12 @@ const onHide = () => {
                      
                     </div>
 
-                    <Chart type="bar" data={barData} options ={basicOptions} />
+                    {/* <Chart type="bar" data={barData} options ={basicOptions} /> */}
+                    <U5/>
                 </div>
             </div>
 
-            <div className="col-12 md:col-6 lg:col-6 py-4">
+            <div className="col-12 md:col-7 lg:col-7 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
                         <div className="text-900 font-medium">Mother's age at birth</div>
@@ -309,39 +159,14 @@ const onHide = () => {
                 </div>
             </div>
 
-            <div className="col-12 md:col-6 lg:col-6 py-4">
+            <div className="col-12 md:col-5 lg:col-5 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
                         <div className="text-900 font-medium">Statistics by Mother's Literacy</div>
                       
                     </div>
 
-                    <Chart type="doughnut" data={doughnut} style={{  width: '50%',margin:'0 auto' }}  />
-
-                    <div className='bel flex flex-column'>
-<div className='flex flex-column '>
-<div className='flex justify-content-between'>
-<p className='text-blue-400 text-xs font-bold'>literate</p>
-<p className='text-blue-400 text-xs font-bold'>1500</p>
-</div>
-<div className='border-y-3 border-blue-400 border-round-sm text-xs text-white p-1'>
-
-</div>
-</div>
-
-
-
-<div className='flex flex-column '>
-<div className='flex justify-content-between'>
-<p className='text-yellow-400 text-xs font-bold'>Illiterate</p>
-<p className='text-yellow-400 text-xs font-bold'>500</p>
-</div>
-<div className='border-y-3 border-yellow-400 border-round-sm text-xs text-white p-1 '>
-
-</div>
-</div>
-
-                    </div>
+                   <Doughnut/>
                 </div>
             </div>
          
@@ -392,7 +217,8 @@ const onHide = () => {
                     <div className="flex align-items-center justify-content-between mb-3">
                         <div className="text-900 font-medium">Birth Registrations By Age Frequency By State</div> 
                     </div>
-                    <Chart type="bar" data={data12}   />
+                    {/* <Chart type="bar" data={data12}   /> */}
+                    <OtherReg/>
                 </div>
             </div>
 </Dialog>

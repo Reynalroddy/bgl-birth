@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { Chart } from 'primereact/chart';
 import './admin.css';
 import male from "../assets/images/man.svg"
@@ -10,6 +10,7 @@ import naija from "../assets/images/naija.png"
 import YearlyReg from '../components/YearlyReg';
 import RegStat from '../components/RegStat';
 import GenderStat from '../components/GenderStat';
+import axios from 'axios';
 import {
     BarChart,
     Bar,
@@ -20,7 +21,7 @@ import {
     ResponsiveContainer,
   } from "recharts";
 const Main = () => {
-
+    const [rez,setRez] = useState({});
     // const doughnutData = {
     //     labels: ['A', 'B', 'C'],
     //     datasets: [
@@ -208,7 +209,25 @@ pv: 2400,
       
     // };
 
-
+    useEffect(() => {
+  
+        const getStatz=async()=>{
+        
+            try {
+                const statistics = await axios.get('https://npc-api.dsaved.com/v0/birth-registration/stats/dcr-registras-dashboard-stat');
+        console.log(statistics.data);
+        setRez(statistics.data[0]);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        
+        getStatz();
+             
+        }, [])
+        
+        
+        
     
   return (
     <>
@@ -218,7 +237,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block  text-sm font-medium  mb-3">Total Birth Registrations</span>
-                        <div className=" font-bold text-xl">1,662,000</div>
+                        <div className=" font-bold text-xl">{rez && rez.birth_registrations}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>
@@ -238,7 +257,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block  text-sm font-medium  mb-3">Total Death Registrations</span>
-                        <div className=" font-bold text-xl">0</div>
+                        <div className=" font-bold text-xl">{rez && rez.death_registrations}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>
@@ -258,7 +277,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block  text-sm font-medium  mb-3">Total Birth Attestations</span>
-                        <div className=" font-bold text-xl">0</div>
+                        <div className=" font-bold text-xl">{rez && rez.birth_attestation}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>
@@ -278,7 +297,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block  text-sm font-medium  mb-3">Total Certificates Verified</span>
-                        <div className=" font-bold text-xl">0</div>
+                        <div className=" font-bold text-xl">{rez && rez.verified_cetificates}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>
