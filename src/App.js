@@ -69,7 +69,7 @@ const App = () => {
            <Route path='attestation' element={<Attestation/>}/>
            <Route path='still' element={<Still/>}/>
            <Route path='cert-pending' element={<CertPending/>}/>
-           <Route path='birth/list/:zonalid/:stateId/:lgaid' element={<AdminVerified/>} />    
+           <Route path='birth/list' element={<AdminVerified/>} />    
            <Route path='hospital/pending' element={<PendingHospital/>} />    
            <Route path='hospital/public' element={<PublicHos/>} />    
            <Route path='hospital/private' element={<PrivateHos/>} />    

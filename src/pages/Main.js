@@ -423,7 +423,7 @@ pv: 2400,
 <div className='flex flex-column '>
 <div className='flex justify-content-between'>
 <p className='text-blue-400 text-xs font-bold'>Birth</p>
-<p className='text-blue-400 text-xs font-bold'>1,662,000</p>
+<p className='text-blue-400 text-xs font-bold'>{rez && rez.birth_registrations}</p>
 </div>
 <div className='border-y-3 border-blue-400 border-round-sm text-xs text-white p-1'>
 

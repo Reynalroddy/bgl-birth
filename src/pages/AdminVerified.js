@@ -1,86 +1,95 @@
-import React,{useEffect,useState,useRef} from 'react'
+import React,{useEffect,useRef} from 'react'
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import axios from "axios";
+// import axios from "axios";
 import { Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
 // import { Dialog } from 'primereact/dialog';
-import { InputText } from 'primereact/inputtext';
-import { FilterMatchMode } from 'primereact/api';
+
+// import { FilterMatchMode } from 'primereact/api';
 // import jsPDF from 'jspdf';
 import { Tooltip } from 'primereact/tooltip';
+import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+// import { ProgressSpinner } from 'primereact/progressspinner';
+import { getRegz } from '../redux/apiCalls';
+import { getGender,getOrder } from '../redux/apiCalls';
+import Filter from '../components/Filter';
 const AdminVerified = () => {
-  const [loading1, setLoading1] = useState(true);
-  const [filters1, setFilters1] = useState(null);
-  const [globalFilterValue1, setGlobalFilterValue1] = useState('');
-  const [products, setProducts] = useState([]);
+
+const dispatch = useDispatch();
+
+  const loc = useLocation();
+  const sp = new URLSearchParams(loc.search); //search?category=cat
+  const stateId = parseInt(sp.get("state"))||null;
+  const lgaId = sp.get("lga")||null;
+  const centerId = sp.get("center")||null;
+  const {
+    isLoading,
+    search,
+    result_per_page,
+    page,
+
+    Sex,
+    Age,
+    BirthType,
+    BirthOrder,
+    BirthPlace,
+    registerations,
+  } = useSelector((state) => state.birth);
   useEffect(() => {
-    const getDatz=async ()=>{
-// const statz = await axios.get('https://api.verxid.site/bt-mdm/get-device');
-// console.log(statz.data.results)
-const statz = await axios.get('https://jsonplaceholder.typicode.com/users');
-const newz = await axios.post('https://api.verxid.site/verify/fingerSearch',{
-    "data":"",
-    "position":"6"
-},
-{headers: {"Authorization" : `Basic YmFybmtzZm9ydGUtbmltYzowbmx5YmFybmtz`} });
-console.log(statz.data)
-console.log(newz)
-
-// setMyStatz(statz.data.mtn);
-setProducts(statz.data)
-console.log(statz.data)
-    // setProducts(statz.data.results)
-    setLoading1(false)
-    }
-            getDatz()
+           getRegz(dispatch, search,
+            result_per_page,
+            page,
+            stateId,
+            lgaId,
+           centerId,
+            Sex,
+            Age,
+            BirthType,
+            BirthOrder,
+            BirthPlace
            
+           )
 
-}, []); // eslint-disable-line react-hooks/exhaustive-deps
+}, [dispatch,search,
+    result_per_page,
+    page,
+    stateId,
+    lgaId,
+    centerId,
+    Sex,
+    Age,
+    BirthType,
+    BirthOrder,
+    BirthPlace]); // eslint-disable-line react-hooks/exhaustive-deps
 
-useEffect(() => {
-   
-            initFilters1();
 
-}, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-
-const initFilters1 = () => {
-    setFilters1({
-        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
-      
-    });
-     
-    setGlobalFilterValue1('');
-}
-
-const onGlobalFilterChange1 = (e) => {
-    const value = e.target.value;
-    console.log(value);
-    let _filters1 = { ...filters1 };
-    _filters1['global'].value = value;
-console.log(_filters1)
-    setFilters1(_filters1);
-    setGlobalFilterValue1(value);
-}
 const statusBodyTemplate2 = (rowData) => {
     return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single/${rowData.id}`} >
 VIEW 
     </Link>
 }
-const clearFilter1 = () => {
-    initFilters1();
+const genderTemplate = (rowData) => {
+    return <p  className={`font-bold`}>
+{getGender(rowData.Gender)}
+    </p>
 }
+// const birthTypeTemplate = (rowData) => {
+//     return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single/${rowData.id}`} >
+// VIEW 
+//     </Link>
+// }
+const birthOrder = (rowData) => {
+    return <p  className={`font-bold`}>
+    {getOrder(rowData.Birth_Order)}
+        </p>
+}
+
 const renderHeader1 = () => {
     return (
-        <div className=" hidden md:flex justify-content-between">
-            <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} />
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText value={globalFilterValue1} onChange={onGlobalFilterChange1} placeholder="Keyword Search" />
-            </span>
-        </div>
+<Filter/>
     )
 }
 const header1 = renderHeader1();
@@ -100,7 +109,7 @@ const exportPdf = () => {
   import('jspdf').then(jsPDF => {
       import('jspdf-autotable').then(() => {
           const doc = new jsPDF.default(0, 0);
-          doc.autoTable(exportColumns, products);
+          doc.autoTable(exportColumns, registerations);
           doc.save('products.pdf');
       })
   })
@@ -109,7 +118,7 @@ const exportPdf = () => {
 
 const exportExcel = () => {
   import('xlsx').then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(products);
+      const worksheet = xlsx.utils.json_to_sheet(registerations);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
       saveAsExcelFile(excelBuffer, 'products');
@@ -129,6 +138,11 @@ const saveAsExcelFile = (buffer, fileName) => {
     );
   });
 };
+// if(isLoading){
+//     return <div className='flex justify-content-center align-items-center'>
+//     <ProgressSpinner style={{width:'3rem',height:'3rem'}}/>
+//     </div>
+//     }
   return (
     <>
     
@@ -164,27 +178,25 @@ const saveAsExcelFile = (buffer, fileName) => {
         </div>
        
     </div>
-             <DataTable value={products} 
+             <DataTable value={registerations} 
              ref={dt}
-                  filters={filters1}
-                    loading={loading1}
+                    loading={isLoading}
                     stripedRows
                      responsiveLayout="stack"
                      header={header1}
-                     paginator
-                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={5} rowsPerPageOptions={[5,10,50]}
-                  
+                    //  paginator
+                    //  paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                    //  currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={5} rowsPerPageOptions={[5,10,50]}
                         >
                         {/* <Column field="id" header="Device Id"></Column> */}
-                            <Column field="name" header="Certificate Number"></Column>
-                            <Column field="username" header="Name"></Column>
-                            <Column field="email" header="Gender"></Column>
-                            <Column field="phone" header="Birth Order"></Column>
-                            <Column field="name" header="Date of Birth"></Column>
+                            <Column field="Name" header="Name"></Column>
+                            <Column field="Certificate_No" header="Certificate Number"></Column>
+                            <Column field="email" header="Gender" body={genderTemplate}></Column>
+                            <Column field="phone" header="Birth Order" body={birthOrder}></Column>
+                            <Column field="Date_Of_Birth" header="Date of Birth"></Column>
                             <Column field="username" header="Birth place"></Column>
-                            <Column field="email" header="LGA birth"></Column>
-                            <Column field="email" header="Status"></Column>
+                            <Column field="Reg_Center_Name" header="Reg_Center_Name"></Column>
+                            <Column field="State" header="State"></Column>
                             {/* <Column field="phone" header="Birth Order"></Column> */}
                             {/* <Column field="imei" header="Device IMEI"></Column> */}
                         <Column field="" header="Action" body={statusBodyTemplate2} />
