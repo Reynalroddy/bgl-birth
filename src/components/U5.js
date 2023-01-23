@@ -21,7 +21,12 @@ const U5 = () => {
                   display: false,
                 }
               },
-          }
+          },
+          plugins: {
+            legend: {
+                display: false
+            },
+        }
         // scales: {
         //     xAxes: [{
         //         barPercentage: 0.4
@@ -47,13 +52,15 @@ const U5 = () => {
                 {
                     labels,
                     datasets: [{
-                        label:'States',
+                       label:'',
                        data: count,
                        backgroundColor: ["#29F683"], 
                        borderRadius:50,
                        barThickness: 30,
-                       
-                    }],
+                       color:'white',
+                    },
+                    
+                    ]
                 } 
             )
     

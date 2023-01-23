@@ -137,7 +137,7 @@ getStatz();
             <div className="col-12 md:col-6 lg:col-6 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Under 5 birth registrations</div>
+                        <div className="text-900 font-medium">Under 5 birth registrations per state</div>
                      
                     </div>
 

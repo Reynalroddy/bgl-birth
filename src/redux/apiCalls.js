@@ -1,5 +1,5 @@
 import authFetch from "../axios";
-import { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess } from "./birthSlice";
+import { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess } from "./birthSlice";
 // import nc from "../assets/images/nc.png"
 // import ne from "../assets/images/nc.png"
 // import nw from "../assets/images/nc.png"
@@ -56,6 +56,35 @@ export const getStates=async(dispatch,id)=>{
     console.log(error)
     }
     // clearAlert(dispatch);
+
+}
+
+
+export const getLgas=async(dispatch,id)=>{
+  dispatch(getLgaStart());
+  try {
+    const res = await authFetch.get(`birth-registration/stats/birth-reg-by-lga/${id}`);
+
+    dispatch(getLgaSuccess(res.data));
+  } catch (error) {
+    dispatch(getLgaFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
+export const getCenters=async(dispatch,id)=>{
+  dispatch(getCenterStart());
+  try {
+    const res = await authFetch.get(`birth-registration/stats/birth-reg-by-centre/${id}`);
+
+    dispatch(getCenterSuccess(res.data));
+  } catch (error) {
+    dispatch(getCenterFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
 
 }
 

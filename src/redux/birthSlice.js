@@ -12,7 +12,7 @@ isLoading:false,
 search: "",
     result_per_page: 20,
     page: 1,
-    GeoZoneID: 1,
+    GeoZoneID: null,
     StateID: null,
     LGAID: null,
     CenterId: null,
@@ -58,6 +58,45 @@ search: "",
         };
       },
       getStateFailure: (state) => {
+        return {
+          ...state,
+          isLoading: false,
+        };
+      },
+
+      getCenterStart: (state) => {
+        return {
+          ...state,
+          isLoading: true,
+        };
+      },
+      getCenterSuccess: (state, action) => {
+        return {
+          ...state,
+          isLoading: false,
+         centers: action.payload,
+        };
+      },
+      getCenterFailure: (state) => {
+        return {
+          ...state,
+          isLoading: false,
+        };
+      },
+      getLgaStart: (state) => {
+        return {
+          ...state,
+          isLoading: true,
+        };
+      },
+      getLgaSuccess: (state, action) => {
+        return {
+          ...state,
+          isLoading: false,
+          lgas: action.payload,
+        };
+      },
+      getLgaFailure: (state) => {
         return {
           ...state,
           isLoading: false,
@@ -117,6 +156,6 @@ search: "",
   },
 });
 
-export const { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess,getRegFailure,getRegStart,getRegSuccess,changePage,handleChange } = birthSlice.actions;
+export const { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess,getRegFailure,getRegStart,getRegSuccess,changePage,handleChange,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess } = birthSlice.actions;
 
 export default birthSlice.reducer;

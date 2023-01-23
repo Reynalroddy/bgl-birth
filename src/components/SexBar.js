@@ -13,7 +13,7 @@ const SexBar = () => {
         .then(res => {
             console.log(res.data);
             setLoad(false);
-arr = [res.data[1].Count,res.data[2].Count]
+arr = [res.data[0].Count,res.data[1].Count]
 console.log(arr);
             // for(const dataObj of res.data){
                 // northCen=res.data[1]['North-Central'];

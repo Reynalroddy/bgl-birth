@@ -23,8 +23,8 @@ const dispatch = useDispatch();
   const loc = useLocation();
   const sp = new URLSearchParams(loc.search); //search?category=cat
   const stateId = parseInt(sp.get("state"))||null;
-  const lgaId = sp.get("lga")||null;
-  const centerId = sp.get("center")||null;
+  const lgaId = parseInt(sp.get("lga"))||null;
+  const centerId = parseInt(sp.get("center"))||null;
   const {
     isLoading,
     search,

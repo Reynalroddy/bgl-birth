@@ -26,6 +26,7 @@ import SingleRegistrars from "./pages/Single-registrars";
 import NewReg from "./pages/NewReg";
 import PendingCert from "./pages/PendingCert";
 import Still from "./pages/Still";
+import BirthCenter from "./pages/BirthCenter";
 const App = () => {
   return (
     <Router>
@@ -58,7 +59,8 @@ const App = () => {
            <Route path='birth' element={<Admin/>}/>
            <Route path='birth/registrations' element={<BirthReg/>}/>
            <Route path='birth/state/:id' element={<BirthRegState/>}/>
-           <Route path='birth/lga/:lgaId' element={<BirthRegLga/>}/>
+           <Route path='birth/lga/:id' element={<BirthRegLga/>}/>
+           <Route path='birth/center/:id' element={<BirthCenter/>}/>
            {/* <Route path='birth/list/:zonalid/:stateId/:lgaid' element={<BirthRegList/>}/> */}
            {/* </Route> */}
                          

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../assets/images/72.png'
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { getLgas } from '../redux/apiCalls';
+import { getCenters } from '../redux/apiCalls';
 import { ProgressSpinner } from 'primereact/progressspinner';
 // import {
 //     BarChart,
@@ -20,7 +20,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 //     Tooltip,
 //     ResponsiveContainer,
 //   } from "recharts";
-const BirthRegLga = () => {
+const BirthCenter = () => {
 
     const {id}=useParams();
 
@@ -30,11 +30,11 @@ const BirthRegLga = () => {
       }
     const {
         isLoading,
-       lgas
+      centers
       } = useSelector((state) => state.birth);
     useEffect(() => {
-    getLgas(dispatch,id)
-    // console.log(lgas)
+    getCenters(dispatch,id)
+    // console.log(centers)
     }, [dispatch,id])
     
     if(isLoading){
@@ -57,20 +57,20 @@ const BirthRegLga = () => {
 </div>
 
 {
-    lgas.map((it,i)=>{
+    centers.map((it,i)=>{
 return <div className='col-12 md:col-4' key={i}>
 <div className="flex flex-column align-items-center  gap-2 surface-card shadow-2 border-round p-3">
 <img  src={Logo} style={{width:'3rem',height:'3rem'}} alt=''/>
-<span className='text-md uppercase font-bold'>{it.LGA_Name
+<span className='text-md uppercase font-bold'>{it.Reg_Center_Name
 }</span>
 <span className='text-xs text-green-500 '>{numberWithCommas(it.count)}</span>
 {/* <img  src={nc} style={{width:'3rem',height:'3rem'}} alt=''/> */}
-<Link to={`/birth/center/${it.LGA_ID}`}>
+{/* <Link to={`/birth/center/${it.LGA_ID}`}>
 <span className='text-green-500 text-xs font-bold'>view centers</span>
-</Link>
+</Link> */}
 
 
-<Link to={`/birth/list?lga=${it.LGA_ID}`}>
+<Link to={`/birth/list?center=${it.Reg_Center}`}>
 <span className='text-green-500 text-xs font-bold'>view registrations</span>
 </Link>
   
@@ -85,4 +85,4 @@ return <div className='col-12 md:col-4' key={i}>
   )
 }
 
-export default BirthRegLga;
+export default BirthCenter;
