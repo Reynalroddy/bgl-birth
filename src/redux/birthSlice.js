@@ -20,7 +20,11 @@ search: "",
     Age: null,
     BirthType: null,
     BirthOrder: null,
-    BirthPlace: null
+    BirthPlace: null,
+    sexOptions:[],
+    typeOptions:[],
+    placeOptions:[],
+    orderOptions:[],
   },
 
   reducers: {
@@ -38,6 +42,48 @@ search: "",
         };
       },
       getZonesFailure: (state) => {
+        return {
+          ...state,
+          isLoading: false,
+        };
+      },
+
+      getOptionStart: (state) => {
+        return {
+          ...state,
+          isLoading: true,
+        };
+      },
+      getSexOptionSuccess: (state, action) => {
+        return {
+          ...state,
+          isLoading: false,
+          sexOptions: action.payload,
+        };
+      },
+     getTypeOptionSuccess: (state, action) => {
+        return {
+          ...state,
+          isLoading: false,
+          typeOptions: action.payload,
+        };
+      },
+
+      getPlaceOptionSuccess: (state, action) => {
+        return {
+          ...state,
+          isLoading: false,
+          placeOptions: action.payload,
+        };
+      },
+      getOrderOptionSuccess: (state, action) => {
+        return {
+          ...state,
+          isLoading: false,
+          orderOptions: action.payload,
+        };
+      },
+      getOptionFailure: (state) => {
         return {
           ...state,
           isLoading: false,
@@ -134,6 +180,26 @@ search: "",
           [action.payload.name]: action.payload.value,
         };
       },
+      clearFilters: (state) => {
+        const init = {
+          search: "",
+          result_per_page: 20,
+          page: 1,
+          GeoZoneID: null,
+          StateID: null,
+          LGAID: null,
+          CenterId: null,
+          Sex: null,
+          Age: null,
+          BirthType: null,
+          BirthOrder: null,
+          BirthPlace: null,
+        };
+        return {
+          ...state,
+          ...init,
+        };
+      },
 
 //     addItem:(state,action)=>{
 // state.items = [...state.items,action.payload];
@@ -156,6 +222,6 @@ search: "",
   },
 });
 
-export const { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess,getRegFailure,getRegStart,getRegSuccess,changePage,handleChange,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess } = birthSlice.actions;
+export const { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess,getRegFailure,getRegStart,getRegSuccess,changePage,handleChange,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,clearFilters } = birthSlice.actions;
 
 export default birthSlice.reducer;

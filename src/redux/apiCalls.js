@@ -1,5 +1,5 @@
 import authFetch from "../axios";
-import { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess } from "./birthSlice";
+import { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess } from "./birthSlice";
 // import nc from "../assets/images/nc.png"
 // import ne from "../assets/images/nc.png"
 // import nw from "../assets/images/nc.png"
@@ -190,6 +190,61 @@ export const getType=(type)=>{
 }
 
 export const getPlace=(place)=>{
-    
+  let res;
+  const ans= dataOptions.birthPlace.filter(item=>place === item.BirthPlace_ID);
+  // console.log(ans)
+res = ans[0].BirthPlace_Desc;
+return res;
+  
+}
+
+export const getSex=async(dispatch)=>{
+  dispatch(getOptionStart());
+  try {
+    await Promise.allSettled([
+      authFetch.get(`option/sex`),
+      authFetch.get(`option/birth-type`),
+      authFetch.get(`option/birth-order`),
+      authFetch.get(`option/birth-place`),
+    ])
+      .then((results) => {
+        // const [repos, followers] = results;
+        const status = 'fulfilled';
+        if (results[0].status === status) {
+          const newRes = results[0].value.data.map((item,i)=>{
+  
+return {label: item.Gender, value: item.Gender_ID}
+});
+    dispatch(getSexOptionSuccess(newRes));
+        }
+        if (results[1].status === status) {
+          const newRes = results[1].value.data.map((item,i)=>{
+  
+return {label: item.Description, value: item.Birth_Type_ID}
+});
+    dispatch(getTypeOptionSuccess(newRes));
+        }
+        if (results[2].status === status) {
+          const newRes = results[2].value.data.map((item,i)=>{
+  
+return {label: item.Desc, value: item.Birth_Order_ID}
+});
+    dispatch(getOrderOptionSuccess(newRes));
+        }
+        if (results[3].status === status) {
+          const newRes = results[3].value.data.map((item,i)=>{
+  
+return {label: item.BirthPlace_Desc , value: item.BirthPlace_ID}
+});
+    dispatch(getPlaceOptionSuccess(newRes));
+        }
+        // console.log(results);
+      })
+      .catch((err) => console.log(err));
+  } catch (error) {
+    dispatch(getOptionFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
 
 }

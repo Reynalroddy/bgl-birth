@@ -14,10 +14,9 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 // import { ProgressSpinner } from 'primereact/progressspinner';
 import { getRegz } from '../redux/apiCalls';
-import { getGender,getOrder } from '../redux/apiCalls';
+import { getGender,getOrder,getPlace } from '../redux/apiCalls';
 import Filter from '../components/Filter';
 const AdminVerified = () => {
-
 const dispatch = useDispatch();
 
   const loc = useLocation();
@@ -86,6 +85,20 @@ const birthOrder = (rowData) => {
     {getOrder(rowData.Birth_Order)}
         </p>
 }
+
+const birthPlace = (rowData) => {
+  return <p  className={`font-bold`}>
+  {getPlace(rowData.Birth_Place)}
+      </p>
+}
+
+const center=(rowData)=>{
+return <p>{rowData.Reg_CenterData.Reg_Center_Name}</p>
+}
+
+const state=(rowData)=>{
+  return <p>{rowData.LGA_of_BirthData.States.State_Name}</p>
+  }
 
 const renderHeader1 = () => {
     return (
@@ -194,9 +207,9 @@ const saveAsExcelFile = (buffer, fileName) => {
                             <Column field="email" header="Gender" body={genderTemplate}></Column>
                             <Column field="phone" header="Birth Order" body={birthOrder}></Column>
                             <Column field="Date_Of_Birth" header="Date of Birth"></Column>
-                            <Column field="username" header="Birth place"></Column>
-                            <Column field="Reg_Center_Name" header="Reg_Center_Name"></Column>
-                            <Column field="State" header="State"></Column>
+                            <Column field="username" body={birthPlace} header="Birth place"></Column>
+                            <Column body={center} header="Reg_Center_Name"></Column>
+                            <Column body={state}  header="State"></Column>
                             {/* <Column field="phone" header="Birth Order"></Column> */}
                             {/* <Column field="imei" header="Device IMEI"></Column> */}
                         <Column field="" header="Action" body={statusBodyTemplate2} />

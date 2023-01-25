@@ -1,32 +1,42 @@
-import React,{useState} from
+import React,{useEffect} from
  'react';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
-// import { useDispatch } from "react-redux";
-// import { changePage,handleChange } from '../redux/birthSlice';
+import { Button } from 'primereact/button';
+import { useDispatch,useSelector } from "react-redux";
+import { handleChange,clearFilters } from '../redux/birthSlice';
+import { getSex } from '../redux/apiCalls';
 const Filter = () => {
-    const [city, setCity] = useState('');
-    // const dispatch = useDispatch();
+    // const [city, setCity] = useState('');
+    const dispatch = useDispatch();
     
-    // const {
-    //     isLoading,
-    //     search,
-    //     result_per_page,
-    //     page,
-    //     Sex,    
-    //     Age,      
-    //     BirthType,
-    //     BirthOrder,
-    //     BirthPlace,
-    //   } = useSelector((state) => state.birth);
+    const {
+        search,
+        Sex,        
+        // BirthType,
+        BirthOrder,
+        BirthPlace,
+        sexOptions,
+        // typeOptions,
+    placeOptions,
+    orderOptions,
+      } = useSelector((state) => state.birth);
 
-    const citySelectItems = [
-        {label: 'New York', value: 'NY'},
-        {label: 'Rome', value: 'RM'},
-        {label: 'London', value: 'LDN'},
-        {label: 'Istanbul', value: 'IST'},
-        {label: 'Paris', value: 'PRS'}
-    ];
+    // const citySelectItems = [
+    //     {label: 'New York', value: 'NY'},
+    //     {label: 'Rome', value: 'RM'},
+    //     {label: 'London', value: 'LDN'},
+    //     {label: 'Istanbul', value: 'IST'},
+    //     {label: 'Paris', value: 'PRS'}
+    // ];
+    const clearForm = () => {
+        // e.preventDefault();
+        dispatch(clearFilters());
+      };
+    useEffect(() => {
+      getSex(dispatch);
+    }, [dispatch])
+    
   return  (
     <div className=" hidden md:flex justify-content-between">
         {/* <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} /> */}
@@ -34,8 +44,9 @@ const Filter = () => {
 <div className='col-12 md:col-3'>
 
             <InputText 
-            // value={globalFilterValue1} 
+            value={search} 
             // onChange={onGlobalFilterChange1}
+            onChange={(e) => dispatch(handleChange({ name:'search', value:e.target.value }))}
              placeholder="Keyword Search" />
        
 
@@ -44,25 +55,22 @@ const Filter = () => {
 <div className='col-12 md:col-3'>
 
 
-<Dropdown value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
+<Dropdown value={Sex} options={sexOptions} onChange={(e) => dispatch(handleChange({ name:'Sex', value:e.value }))} placeholder="Select Sex"/>
 
 </div>
 <div className='col-12 md:col-3'>
 
-<Dropdown value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
+<Dropdown value={BirthPlace} options={placeOptions} onChange={(e) => dispatch(handleChange({ name:'BirthPlace', value:e.value }))} placeholder="Select Birth place"/>
 </div>
 <div className='col-12 md:col-3'>
-<Dropdown value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
-
+<Dropdown value={BirthOrder} options={orderOptions} onChange={(e) => dispatch(handleChange({ name:'BirthOrder', value:e.value }))} placeholder="Select Birth order"/>
 </div>
+
 <div className='col-12 md:col-3'>
-
-<Dropdown value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
+{/* <Dropdown value={BirthType} options={typeOptions} onChange={(e) => setCity(e.value)} placeholder="Select Birth type"/> */}
+<Button label="Reset Filter" className="p-button-warning" onClick={clearForm}  />
 </div>
-<div className='col-12 md:col-3'>
 
-<Dropdown value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
-</div>
        </div>
         
     </div>
