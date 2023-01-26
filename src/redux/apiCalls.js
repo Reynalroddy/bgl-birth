@@ -158,8 +158,8 @@ export const getRegz=async(dispatch,
 //   .then(result => console.log(result))
 //   .catch(error => console.log('error', error));
 
-      dispatch(getRegSuccess(res.data.result));
-    //   console.log(res.data)
+      dispatch(getRegSuccess(res.data));
+      console.log(res.data)
     } catch (error) {
       dispatch(getRegFailure());
     console.log(error)

@@ -1,4 +1,4 @@
-import React,{useEffect,useRef} from 'react'
+import React,{useEffect,useRef,useState} from 'react'
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -6,19 +6,31 @@ import { Column } from 'primereact/column';
 import { Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
 // import { Dialog } from 'primereact/dialog';
-
+import { Paginator } from 'primereact/paginator';
 // import { FilterMatchMode } from 'primereact/api';
 // import jsPDF from 'jspdf';
 import { Tooltip } from 'primereact/tooltip';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 // import { ProgressSpinner } from 'primereact/progressspinner';
 import { getRegz } from '../redux/apiCalls';
 import { getGender,getOrder,getPlace } from '../redux/apiCalls';
 import Filter from '../components/Filter';
+import { changePage } from '../redux/birthSlice';
 const AdminVerified = () => {
 const dispatch = useDispatch();
+const [basicFirst, setBasicFirst] = useState(0);
+// eslint-disable-next-line
+const [basicRows, setBasicRows] = useState(20);
+const onBasicPageChange = (event) => {
 
+  // console.log(event)
+  setBasicFirst(event.first);
+  // setBasicRows(event.rows);
+  dispatch(changePage(event.page + 1))
+}
+const navigate = useNavigate();
+    const goBack = () => navigate(-1);
   const loc = useLocation();
   const sp = new URLSearchParams(loc.search); //search?category=cat
   const stateId = parseInt(sp.get("state"))||null;
@@ -29,13 +41,13 @@ const dispatch = useDispatch();
     search,
     result_per_page,
     page,
-
     Sex,
     Age,
     BirthType,
     BirthOrder,
     BirthPlace,
     registerations,
+    numPages
   } = useSelector((state) => state.birth);
   useEffect(() => {
            getRegz(dispatch, search,
@@ -45,11 +57,10 @@ const dispatch = useDispatch();
             lgaId,
            centerId,
             Sex,
-            Age,
-            BirthType,
+            Age,  
+            BirthType,   
             BirthOrder,
             BirthPlace
-           
            )
 
 }, [dispatch,search,
@@ -95,6 +106,8 @@ const birthPlace = (rowData) => {
 const center=(rowData)=>{
 return <p>{rowData.Reg_CenterData.Reg_Center_Name}</p>
 }
+
+
 
 const state=(rowData)=>{
   return <p>{rowData.LGA_of_BirthData.States.State_Name}</p>
@@ -182,6 +195,7 @@ const saveAsExcelFile = (buffer, fileName) => {
      <div className="col-12 lg:col-12">
                 <div className="card border-round shadow-2 p-3 ">
                 <div className="mb-3 flex align-items-center justify-content-between p-3">
+                <Button label="Go back" icon="pi pi-arrow-left" className="p-button-sm" onClick={goBack}  />
         <span className="text-xl font-medium text-900">Registration List</span>
         <div className="flex align-items-center export-buttons">
             {/* <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" /> */}
@@ -215,6 +229,7 @@ const saveAsExcelFile = (buffer, fileName) => {
                         <Column field="" header="Action" body={statusBodyTemplate2} />
                     </DataTable>
                     <Tooltip target=".export-buttons>button" position="bottom" />
+                    <Paginator  first ={basicFirst} rows={basicRows} totalRecords={numPages}  onPageChange={onBasicPageChange}></Paginator>
                 </div>
             </div>
             

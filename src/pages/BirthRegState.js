@@ -5,14 +5,16 @@ import './admin.css';
 // import nc from "../assets/images/nc.png"
 import { Link } from 'react-router-dom';
 import Logo from '../assets/images/72.png'
-import { useParams } from 'react-router-dom';
+import { useParams ,useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { getStates } from '../redux/apiCalls';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { Button } from 'primereact/button';
 const BirthRegState = () => {
 // const lineRef= useRef(null);
 const {id}=useParams();
-
+const navigate=useNavigate();
+const goBack = () => navigate(-1);
 const dispatch = useDispatch();
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -68,7 +70,8 @@ return <div className='flex justify-content-center align-items-center'>
                 </div>
             </div> */}
       <div className="col-12">
-<div className='w-full flex flex-column '>
+<div className=' flex flex-column '>
+<Button label="Go back" icon="pi pi-arrow-left" className="p-button-sm w-2" onClick={goBack}  />
 <h4>Registrations by state</h4>
 <div className='py-2 bg-green-500'>
 
@@ -89,7 +92,7 @@ states.map((it,i)=>{
     </Link>
     
     
-    
+
     <Link to={`/birth/list?state=${it.State_ID}`}>
     <span className='text-green-500 text-xs font-bold'>view registrations</span>
     </Link>

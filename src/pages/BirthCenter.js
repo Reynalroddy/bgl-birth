@@ -7,10 +7,11 @@ import './admin.css';
 // import nc from "../assets/images/nc.png"
 import { Link } from 'react-router-dom';
 import Logo from '../assets/images/72.png'
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { getCenters } from '../redux/apiCalls';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { Button } from 'primereact/button';
 // import {
 //     BarChart,
 //     Bar,
@@ -23,7 +24,8 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 const BirthCenter = () => {
 
     const {id}=useParams();
-
+    const navigate=useNavigate();
+    const goBack = () => navigate(-1);
     const dispatch = useDispatch();
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -49,7 +51,8 @@ const BirthCenter = () => {
     <div className="grid my-3">
       <div className="col-12">
 <div className='w-full flex flex-column '>
-<h4>Registrations by LGA's</h4>
+<Button label="Go back" icon="pi pi-arrow-left" className="p-button-sm w-2" onClick={goBack}  />
+<h4>Registrations by Center's</h4>
 <div className='py-2 bg-green-500'>
 
 </div>

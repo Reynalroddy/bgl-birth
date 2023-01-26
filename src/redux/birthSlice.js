@@ -12,6 +12,7 @@ isLoading:false,
 search: "",
     result_per_page: 20,
     page: 1,
+    numPages:1,
     GeoZoneID: null,
     StateID: null,
     LGAID: null,
@@ -158,7 +159,8 @@ search: "",
         return {
           ...state,
           isLoading: false,
-          registerations: action.payload,
+          registerations: action.payload.result,
+          numPages:action.payload.pagination.total,
         };
       },
       getRegFailure: (state) => {

@@ -10,11 +10,13 @@ import { InputText } from 'primereact/inputtext';
 import { FilterMatchMode } from 'primereact/api';
 // import jsPDF from 'jspdf';
 import { Tooltip } from 'primereact/tooltip';
+
 const AdminFlagged = () => {
   const [loading1, setLoading1] = useState(true);
   const [filters1, setFilters1] = useState(null);
   const [globalFilterValue1, setGlobalFilterValue1] = useState('');
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     const getDatz=async ()=>{
 // const statz = await axios.get('https://api.verxid.site/bt-mdm/get-device');
@@ -179,6 +181,7 @@ const saveAsExcelFile = (buffer, fileName) => {
                         <Column field="" header="Action" body={statusBodyTemplate2} />
                     </DataTable>
                     <Tooltip target=".export-buttons>button" position="bottom" />
+                   
                 </div>
             </div>
             
