@@ -77,7 +77,7 @@ const navigate = useNavigate();
 
 
 const statusBodyTemplate2 = (rowData) => {
-    return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single/${rowData.id}`} >
+    return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single/${rowData.Birth_Reg_ID}`} >
 VIEW 
     </Link>
 }

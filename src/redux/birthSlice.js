@@ -8,6 +8,7 @@ export const birthSlice = createSlice({
     lgas:[],
     centers:[],
     registerations:[],
+    reg:{},
 isLoading:false,
 search: "",
     result_per_page: 20,
@@ -169,6 +170,27 @@ search: "",
           isLoading: false,
         };
       },
+
+      getSingleRegStart: (state) => {
+        return {
+          ...state,
+          isLoading: true,
+        };
+      },
+      getSingleRegSuccess: (state, action) => {
+        return {
+          ...state,
+          isLoading: false,
+          reg: action.payload
+          // numPages:action.payload.pagination.total,
+        };
+      },
+      getSingleRegFailure: (state) => {
+        return {
+          ...state,
+          isLoading: false,
+        };
+      },
       changePage: (state, action) => {
         return {
           ...state,
@@ -224,6 +246,6 @@ search: "",
   },
 });
 
-export const { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess,getRegFailure,getRegStart,getRegSuccess,changePage,handleChange,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,clearFilters } = birthSlice.actions;
+export const { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess,getRegFailure,getRegStart,getRegSuccess,changePage,handleChange,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,clearFilters,getSingleRegFailure,getSingleRegStart,getSingleRegSuccess } = birthSlice.actions;
 
 export default birthSlice.reducer;

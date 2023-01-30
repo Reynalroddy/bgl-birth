@@ -1,5 +1,5 @@
 import authFetch from "../axios";
-import { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess } from "./birthSlice";
+import { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,getSingleRegFailure,getSingleRegStart,getSingleRegSuccess } from "./birthSlice";
 // import nc from "../assets/images/nc.png"
 // import ne from "../assets/images/nc.png"
 // import nw from "../assets/images/nc.png"
@@ -128,7 +128,9 @@ export const getRegz=async(dispatch,
             BirthPlace: BirthPlace  
     }
     try {
-      const res = await authFetch.post(`birth-registration/`,data);
+      const res = await authFetch.get(`birth-registration/`,{
+        params: data
+      });
 //     var myHeaders = new Headers();
 // myHeaders.append("Content-Type", "application/json");
 
@@ -167,6 +169,34 @@ export const getRegz=async(dispatch,
     // clearAlert(dispatch);
 
 }
+
+
+
+
+
+
+
+
+export const getRegs=async(dispatch,id)=>{
+  dispatch(getSingleRegStart());
+  try {
+    const res = await authFetch.get(`birth-registration/${id}`);
+    dispatch(getSingleRegSuccess(res.data.data));
+    // console.log(res.data.data)
+  } catch (error) {
+
+    dispatch(getSingleRegFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
+
+
+
+
+
 
 export const getGender = (g)=>{
 let res;
