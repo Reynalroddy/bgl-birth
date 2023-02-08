@@ -1,20 +1,20 @@
 import React,{useEffect,useState} from 'react'
 import { Chart } from 'primereact/chart';
-import authFetch from '../axios';
-import Loading from './Loading';
+import authFetch from '../../axios';
+import Loading from '../Loading';
 
-const SexBar = () => {
+const DeathSexBar = () => {
     const [chartData, setChartData]  = useState({});
     const [load, setLoad]  = useState(true);
     const chart = () => {
         let arr ;
        
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/bygendercount")
+        authFetch.get("https://npc-api.dsaved.com/v0/death-registration/stats/bygendercount")
         .then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             setLoad(false);
 arr = [res.data[0].Count,res.data[1].Count]
-console.log(arr);
+// console.log(arr);
             // for(const dataObj of res.data){
                 // northCen=res.data[1]['North-Central'];
                 // northEas=res.data[2]['North-East'];  
@@ -126,4 +126,4 @@ console.log(arr);
   )
 }
 
-export default SexBar
+export default DeathSexBar;

@@ -2,7 +2,7 @@
 import React,{useEffect,useState} from 'react'
 import { Chart } from 'primereact/chart';
 import '../pages/admin.css';
-import axios from 'axios';
+import authFetch from '../axios';
 import Loading from './Loading';
 const OtherReg=()=>{
     // const data12 = {
@@ -47,7 +47,7 @@ const OtherReg=()=>{
         let v3 ;
         let labels=[];
         let v4;
-        axios.get("https://npc-api.dsaved.com/v0/birth-registration/stats/birth-reg-by-age-frequency-by-state")
+        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/birth-reg-by-age-frequency-by-state")
         .then(res => {
             console.log(res.data);
             setLoad(false);

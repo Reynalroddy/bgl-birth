@@ -3,13 +3,17 @@ const authFetch = axios.create({
   baseURL: "https://npc-api.dsaved.com/v0/",
 });
 
+
+
+
+
 authFetch.interceptors.request.use(
   function (req) {
-    const token = localStorage.getItem("token");
-
+    // const token = localStorage.getItem("token");
+    const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyX0lEIjo0LCJFbWFpbCI6Imtlc3RvbkBlbWFpbC5jb20iLCJSb2xlX0lEIjpudWxsLCJpYXQiOjE2NzM2MTYwOTQsImV4cCI6MTY3MzY5ODg5NH0.XZXaaOsCeVxtw1-DmPPe9mJtkNGAz8LH5ttDqHxTLc4"
     if (token) {
-      const toks = localStorage.getItem("token");
-      req.headers.authorization = `Bearer ${toks}`;
+      // const toks = localStorage.getItem("token");
+      req.headers.authorization = `Bearer ${token}`;
       return req;
     }
     return req;

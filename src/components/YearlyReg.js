@@ -1,7 +1,7 @@
 import React,{useRef,useEffect,useState} from 'react'
 import { Chart } from 'primereact/chart';
 import '../pages/admin.css';
-import axios from 'axios';
+import authFetch from '../axios';
 import Loading from './Loading';
 const YearlyReg = ({data1,data2}) => {
     const lineRef= useRef(null);
@@ -13,7 +13,7 @@ const YearlyReg = ({data1,data2}) => {
         let birthAttest = [];
         let labels=[];
         let still=[];
-        axios.get("https://npc-api.dsaved.com/v0/birth-registration/stats/year")
+        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/year")
         .then(res => {
             console.log(res.data);
             setLoad(false);

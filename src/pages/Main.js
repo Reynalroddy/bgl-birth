@@ -10,7 +10,7 @@ import naija from "../assets/images/naija.png"
 import YearlyReg from '../components/YearlyReg';
 import RegStat from '../components/RegStat';
 import GenderStat from '../components/GenderStat';
-import axios from 'axios';
+import authFetch from '../axios';
 import {
     BarChart,
     Bar,
@@ -214,14 +214,14 @@ pv: 2400,
         const getStatz=async()=>{
         
             try {
-                const statistics = await axios.get('https://npc-api.dsaved.com/v0/birth-registration/stats/dcr-registras-dashboard-stat');
+                const statistics = await authFetch.get('https://npc-api.dsaved.com/v0/birth-registration/stats/dcr-registras-dashboard-stat');
         console.log(statistics.data);
         setRez(statistics.data[0]);
             } catch (error) {
                 console.log(error)
             }
         }
-        
+            
         getStatz();
              
         }, [])

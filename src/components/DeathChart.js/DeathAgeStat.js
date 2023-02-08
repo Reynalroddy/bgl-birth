@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import { Chart } from 'primereact/chart';
-import '../pages/admin.css';
+import '../../pages/admin.css';
 // import authFetch from 'authFetch';
-import authFetch from '../axios';
-import Loading from './Loading';
-const AgeStat = () => {
+import authFetch from '../../axios';
+import Loading from '../Loading';
+const DeathAgeStat = () => {
 
     let horizontalOptions = {
         indexAxis: 'y',
@@ -39,19 +39,30 @@ const AgeStat = () => {
     const chart = () => {
       let labels=[];
       let count=[];
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/statistics-by-age")
+        authFetch.get("https://npc-api.dsaved.com/v0/death-registration/stats/cause-of-death")
         .then(res => {
             console.log(res.data);
             setLoad(false);
             for(const dataObj of res.data){
-                labels.push(dataObj.name)
-                count.push(dataObj.uv);  
+                labels.push(dataObj.Cause)
+                count.push(dataObj.Count);  
             }
+
+            // const data = {
+            //     labels: ['Illness','Accident','others'],
+            //     datasets: [{
+            //         label:'Death',
+            //        data: [20, 40, 60],
+            //        backgroundColor: ["#2F96FB","#FEA93B","#0A5CAC"], 
+            //        borderRadius:50,
+            //        barThickness: 30,
+            //     }]
+            //  }
             setChartData(
                 {
                     labels,
                     datasets: [{
-                        label:'Age',
+                        label:'',
                        data: count,
                        backgroundColor: ["#2F96FB","#FEA93B","#0A5CAC"], 
                        borderRadius:50,
@@ -79,4 +90,4 @@ const AgeStat = () => {
   )
 }
 
-export default AgeStat
+export default DeathAgeStat;

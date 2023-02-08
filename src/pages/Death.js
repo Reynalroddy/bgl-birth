@@ -1,8 +1,13 @@
-import React,{} from 'react'
-import { Chart } from 'primereact/chart';
+import React,{useState,useEffect} from 'react'
+// import { Chart } from 'primereact/chart';
 import './admin.css';
 import male from "../assets/images/man.svg"
 import female from "../assets/images/woman.svg"
+import DeathAgeStat from '../components/DeathChart.js/DeathAgeStat';
+import DeathByAge from '../components/DeathChart.js/DeathByAge';
+import DeathSexBar from '../components/DeathChart.js/DeathSexBar';
+import State from '../components/DeathChart.js/State';
+import authFetch from '../axios';
 // import {
 //     BarChart,
 //     Bar,
@@ -13,10 +18,28 @@ import female from "../assets/images/woman.svg"
 //     ResponsiveContainer,
 //   } from "recharts";
 const Death = () => {
+    const [rez,setRez] = useState();
+    useEffect(() => {
+  
+        const getStatz=async()=>{
+        
+            try {
+                const statistics = await authFetch.get('https://npc-api.dsaved.com/v0/death-registration/stats/total-death');
+        console.log(statistics);
+
+        setRez(statistics.data);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        
+        getStatz();
+             
+        }, [])
     // const lineData = {
     //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    //     datasets: [
-    //         {
+    //     datasets: [ 
+    //         { 
     //             label: '',
     //             data: [65, 59, 80, 81, 56, 55, 40],
     //             // fill: false,
@@ -57,40 +80,49 @@ const Death = () => {
     //         }]
     // };
 
-    const barData = {
-        labels: ['Under 18','19-25','26-35','36-45','46-55','56-over'],
-        datasets: [{
-            label:'Death',
-           data: [20, 40, 60,34,55,23],
-           backgroundColor: ["#29F683"], 
-           borderRadius:50,
-           barThickness: 30,
+    // const barData = {
+    //     labels: ['Under 18','19-25','26-35','36-45','46-55','56-over'],
+    //     datasets: [{
+    //         label:'Death',
+    //        data: [20, 40, 60,34,55,23],
+    //        backgroundColor: ["#29F683"], 
+    //        borderRadius:50,
+    //        barThickness: 30,
            
-        }],
-    } 
+    //     }],
+    // } 
     
-    const barDats = {
-        labels: ['Borno','Abuja','Nasarawa','Kano','Lagos','Kaduna'],
-        datasets: [{
-            label:'Death',
-           data: [20, 40, 60,34,55,23],
-           backgroundColor: ["#2F95FB"], 
-           borderRadius:50,
-           barThickness: 30,
+    // const barDats = {
+    //     labels: ['Borno','Abuja','Nasarawa','Kano','Lagos','Kaduna'],
+    //     datasets: [{
+    //         label:'Death',
+    //        data: [20, 40, 60,34,55,23],
+    //        backgroundColor: ["#2F95FB"], 
+    //        borderRadius:50,
+    //        barThickness: 30,
            
-        }],
-    } 
+    //     }],
+    // } 
 
-    const bar3Data = {
-        labels: ['Male','Female'],
-        datasets: [{
-            label:'Gender',
-           data: [20, 40,],
-           backgroundColor: ["#0A5CAC","#FEA93B"], 
-           borderRadius:50,
-           barThickness: 30,
-        }]
-    };
+    // const bar3Data = {
+    //     labels: ['Male','Female'],
+    //     datasets: [{
+    //         label:'Gender',
+    //        data: [20, 40,],
+    //        backgroundColor: ["#0A5CAC","#FEA93B"], 
+    //        borderRadius:50,
+    //        barThickness: 30,
+    //     }] 
+    // };
+
+
+
+    
+        
+
+
+
+
     // const bar2Data = {
     //     labels: ['9-17','18-26','27-35','36-50','51 above'],
     //     datasets: [{
@@ -126,16 +158,7 @@ const Death = () => {
 // }
 //     ]
 
-    const data = {
-        labels: ['Illness','Accident','others'],
-        datasets: [{
-            label:'Death',
-           data: [20, 40, 60],
-           backgroundColor: ["#2F96FB","#FEA93B","#0A5CAC"], 
-           borderRadius:50,
-           barThickness: 30,
-        }]
-     }
+
 
     //  const doughnut =    {
     //  labels: ['Birth', 'Death'],
@@ -191,75 +214,70 @@ const Death = () => {
         // ]
     // };
 
-    let horizontalOptions = {
-        indexAxis: 'y',
-        maintainAspectRatio: false,
-        aspectRatio: 2,
-        plugins: {  
-        legend: {
-            // labels: {
-            //     color: "red",
-            //     fontSize: 18,
-            //     backgroundColor:'green',
-            // }
-            display:false
-        }
-    },
-        scales: {
-            y: {
-                grid: {
-                    display: false,
-                  }
-            },
-            x: {
-                grid: {
-                  display: false,
-                }
-              },
-          }
+    // let horizontalOptions = {
+    //     indexAxis: 'y',
+    //     maintainAspectRatio: false,
+    //     aspectRatio: 2,
+    //     plugins: {  
+    //     legend: {
+    //         // labels: {
+    //         //     color: "red",
+    //         //     fontSize: 18,
+    //         //     backgroundColor:'green',
+    //         // }
+    //         display:false
+    //     }
+    // },
+    //     scales: {
+    //         y: {
+    //             grid: {
+    //                 display: false,
+    //               }
+    //         },
+    //         x: {
+    //             grid: {
+    //               display: false,
+    //             }
+    //           },
+    //       }
       
-    };
+    // };
 
-    let basicOptions = {
-        
-        aspectRatio: 2,
-        maintainAspectRatio: false,
-        plugins: {  
-            legend: {
-                // labels: {
-                //     color: "red",
-                //     fontSize: 18,
-                //     backgroundColor:'green',
-                // }
-                display:false
-            }
-        },
-        scales: {
-            y: {
-                grid: {
-                    display: false,
-                  }
-            },
-            x: {
-                grid: {
-                  display: false,
-                }
-              },
-          }
-        // scales: {
-        //     xAxes: [{
-        //         barPercentage: 0.4
-        //     }]
-        // }
+    // let basicOptions = {
+    //     aspectRatio: 2,
+    //     maintainAspectRatio: false,
+    //     plugins: {  
+    //         legend: {
+    //             // labels: {
+    //             //     color: "red",
+    //             //     fontSize: 18,
+    //             //     backgroundColor:'green',
+    //             // }
+    //             display:false
+    //         }
+    //     },
+    //     scales: {
+    //         y: {
+    //             grid: {
+    //                 display: false,
+    //               }
+    //         },
+    //         x: {
+    //             grid: {
+    //               display: false,
+    //             }
+    //           },
+    //       }
+       
       
-    };
+    // };
 
 
   return (
         <>
         <div className="grid my-3">
               <div className="col-12  bg-green-700">
-              <span className="text-0 font-bold text-sm">Total Death Registrations: 1,550,671</span> 
+              <span className="text-0 font-bold text-sm">Total Death Registrations: {rez}</span> 
               </div>
             
     
@@ -269,7 +287,7 @@ const Death = () => {
                         <div className="flex align-items-center justify-content-between mb-3">
                             <div className="text-900 font-medium">Major causes of death</div> 
                         </div>
-                        <Chart type="bar" data={data}  options={horizontalOptions} />
+                       <DeathAgeStat/>
                     </div>
                 </div>
     
@@ -284,7 +302,8 @@ const Death = () => {
                          
                         </div>
     
-                        <Chart type="bar" data={barData} options ={basicOptions} />
+                        {/* <Chart type="bar" data={barData} options ={basicOptions} /> */}
+                        <DeathByAge/>
                     </div>
                 </div>
 
@@ -295,7 +314,8 @@ const Death = () => {
                          
                         </div>
     
-                        <Chart type="bar" data={barDats} options ={basicOptions} />
+                        {/* <Chart type="bar" data={barDats} options ={basicOptions} /> */}
+                        <State/>
                     </div>
                 </div>
 
@@ -306,7 +326,8 @@ const Death = () => {
                          
                         </div>
     
-                        <Chart type="bar" data={bar3Data} options ={basicOptions} width="100%" />
+                        {/* <Chart type="bar" data={bar3Data} options ={basicOptions} width="100%" /> */}
+                        <DeathSexBar/>
                         <div className='flex  justify-content-between'>
                         <div className='flex gap-2'>
                         <img src={male} className='' style={{width:'9px'}} alt=''/>

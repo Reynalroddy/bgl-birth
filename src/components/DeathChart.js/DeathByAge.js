@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import { Chart } from 'primereact/chart';
-import '../pages/admin.css';
-import authFetch from '../axios';
-import Loading from './Loading';
+import '../../pages/admin.css';
+import authFetch from '../../axios';
+import Loading from '../Loading';
 
 
-const U5 = () => {
+const DeathByAge = () => {
     let basicOptions = {
         
         aspectRatio: 2,
@@ -40,13 +40,13 @@ const U5 = () => {
     const chart = () => {
       let labels=[];
       let count=[];
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/under-5-aged-birthreg")
+        authFetch.get("https://npc-api.dsaved.com/v0/death-registration/stats/statistics-by-age")
         .then(res => {
             console.log(res.data);
             setLoad(false);
             for(const dataObj of res.data){
-                labels.push(dataObj.State_Name)
-                count.push(dataObj.Count);  
+                labels.push(dataObj.name)
+                count.push(dataObj.uv);  
             }
             setChartData(
                 {
@@ -83,4 +83,4 @@ const U5 = () => {
   )
 }
 
-export default U5
+export default DeathByAge

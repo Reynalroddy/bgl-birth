@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 // import { Chart } from 'primereact/chart';
-import axios from 'axios';
+import authFetch from '../axios';
 import Loading from './Loading';
 import {
     BarChart,
@@ -18,7 +18,7 @@ const MotherAge = () => {
     const [load, setLoad]  = useState(true);
     const chart = () => {
       
-        axios.get("https://npc-api.dsaved.com/v0/mother/stats/mother-age")
+        authFetch.get("https://npc-api.dsaved.com/v0/mother/stats/mother-age")
         .then(res => {
             console.log(res.data);
             setLoad(false);

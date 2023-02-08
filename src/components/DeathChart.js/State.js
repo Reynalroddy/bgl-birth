@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import { Chart } from 'primereact/chart';
-import '../pages/admin.css';
-import authFetch from '../axios';
-import Loading from './Loading';
+import '../../pages/admin.css';
+import authFetch from '../../axios';
+import Loading from '../Loading';
 
 
-const U5 = () => {
+const State = () => {
     let basicOptions = {
         
         aspectRatio: 2,
@@ -40,7 +40,7 @@ const U5 = () => {
     const chart = () => {
       let labels=[];
       let count=[];
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/under-5-aged-birthreg")
+        authFetch.get("https://npc-api.dsaved.com/v0/death-registration/stats/deaths-by-state")
         .then(res => {
             console.log(res.data);
             setLoad(false);
@@ -48,13 +48,24 @@ const U5 = () => {
                 labels.push(dataObj.State_Name)
                 count.push(dataObj.Count);  
             }
+            // const barDats = {
+            //     labels: ['Borno','Abuja','Nasarawa','Kano','Lagos','Kaduna'],
+            //     datasets: [{
+            //         label:'Death',
+            //        data: [20, 40, 60,34,55,23],
+            //        backgroundColor: ["#2F95FB"], 
+            //        borderRadius:50,
+            //        barThickness: 30,
+                   
+            //     }],
+            // } 
             setChartData(
                 {
                     labels,
                     datasets: [{
                        label:'',
                        data: count,
-                       backgroundColor: ["#29F683"], 
+                       backgroundColor: ["#2F95FB"], 
                        borderRadius:50,
                        barThickness: 30,
                        color:'white',
@@ -83,4 +94,4 @@ const U5 = () => {
   )
 }
 
-export default U5
+export default State;

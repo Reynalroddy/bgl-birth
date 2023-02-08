@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { Chart } from 'primereact/chart';
 import '../pages/admin.css';
-import axios from 'axios';
+import authFetch from '../axios';
 import Loading from './Loading';
 const Doughnut = () => {
 
@@ -12,7 +12,7 @@ const Doughnut = () => {
        const chart = () => {
          let illi;
          let lit;
-           axios.get("https://npc-api.dsaved.com/v0/mother/stats/mother-literacy")
+           authFetch.get("https://npc-api.dsaved.com/v0/mother/stats/mother-literacy")
            .then(res => {
                console.log(res.data);
                setLoad(false);

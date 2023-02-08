@@ -3,7 +3,6 @@ import React,{useState,useEffect} from 'react'
 import './admin.css';
 import male from "../assets/images/man.svg"
 import female from "../assets/images/woman.svg"
-
 import { Dialog } from 'primereact/dialog';
 
 import SexBar from '../components/SexBar';
@@ -11,7 +10,7 @@ import BirthOccurence from '../components/BirthOccurence';
 import MotherAge from '../components/MotherAge';
 import Doughnut from '../components/Doughnut';
 import U5 from '../components/U5';
-import axios from 'axios';
+import authFetch from '../axios';
 import AgeStat from '../components/AgeStat';
 import OtherReg from '../components/OtherReg';
 const Admin = () => {
@@ -36,7 +35,7 @@ useEffect(() => {
 const getStatz=async()=>{
 
     try {
-        const statistics = await axios.get('https://npc-api.dsaved.com/v0/birth-registration/stats/birth-statistic-data');
+        const statistics = await authFetch.get('https://npc-api.dsaved.com/v0/birth-registration/stats/birth-statistic-data');
 console.log(statistics.data);
 setRez(statistics.data[0]);
     } catch (error) {

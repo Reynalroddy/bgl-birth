@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { Chart } from 'primereact/chart';
-import axios from 'axios';
+import authFetch from '../axios';
 import Loading from './Loading';
 const RegStat = () => {
     const [chartData, setChartData]  = useState({});
@@ -12,7 +12,7 @@ const RegStat = () => {
         let southEas;
         let southSou ;
         let southWes;
-        axios.get("https://npc-api.dsaved.com/v0/birth-registration/stats/regional")
+        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/regional")
         .then(res => {
             console.log(res.data);
             setLoad(false);
