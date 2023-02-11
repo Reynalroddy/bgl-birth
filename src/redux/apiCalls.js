@@ -1,5 +1,7 @@
 import authFetch from "../axios";
 import { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,getSingleRegFailure,getSingleRegStart,getSingleRegSuccess } from "./birthSlice";
+import { getAttestZonesFailure,getAttestZonesStart,getAttestZonesSuccess,getAttestStateFailure,getAttestStateStart,getAttestStateSuccess,getAttestLgaFailure,getAttestLgaStart,getAttestLgaSuccess ,getAttestCenterFailure,getAttestCenterStart,getAttestCenterSuccess,getAttestRegFailure,getAttestRegStart,getAttestRegSuccess} from "./attestSlice";
+  // getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,getSingleRegFailure,getSingleRegStart,getSingleRegSuccess 
 import { getDeathZonesFailure,getDeathZonesStart,getDeathZonesSuccess,getDeathStateFailure,getDeathStateStart,getDeathStateSuccess,getDeathLgaFailure,getDeathLgaStart,getDeathLgaSuccess ,getDeathCenterFailure,getDeathCenterStart,getDeathCenterSuccess,getCauseOptionSuccess,getDeathRegFailure,getDeathRegStart,getDeathRegSuccess,getDeathSingleRegFailure,getDeathSingleRegStart,getDeathSingleRegSuccess } from "./deathSlice";
 // import nc from "../assets/images/nc.png"
 // import ne from "../assets/images/nc.png"
@@ -81,6 +83,42 @@ return it;
 
 }
 
+
+export const getAttestZones=async(dispatch)=>{
+  dispatch(getAttestZonesStart());
+  try {
+    const res = await authFetch.get("birth-attestation/stats/birth-reg-by-geozone");
+    const newRes=res.data.map((it,i)=>{
+if(it.Geo_Zone_Name ==='North-Central'){
+return {...it,img:'/assets/img/nc.png'}
+}
+if(it.Geo_Zone_Name ==='South-East'){
+  return {...it,img:'/assets/img/se.png'}
+  }
+  if(it.Geo_Zone_Name ==='North-East'){
+      return {...it,img:'/assets/img/ne.png'}
+      }
+      if(it.Geo_Zone_Name ==='North-West'){
+          return {...it,img:'/assets/img/nw.png'}
+          }
+          if(it.Geo_Zone_Name ==='South-South'){
+              return {...it,img:'/assets/img/ss.png'}
+              }
+              if(it.Geo_Zone_Name ==='South-West'){
+                  return {...it,img:'/assets/img/sw.png'}
+                  }
+return it;
+
+    })
+    dispatch(getAttestZonesSuccess(newRes));
+  } catch (error) {
+    dispatch(getAttestZonesFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
 export const getStates=async(dispatch,id)=>{
     dispatch(getStateStart());
     try {
@@ -109,6 +147,20 @@ export const getDeathStates=async(dispatch,id)=>{
 }
 
 
+export const getAttestStates=async(dispatch,id)=>{
+  dispatch(getAttestStateStart());
+  try {
+    const res = await authFetch.get(`birth-attestation/stats/birth-reg-by-states/${id}`);
+    dispatch(getAttestStateSuccess(res.data));
+  } catch (error) {
+    dispatch(getAttestStateFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
+
 export const getLgas=async(dispatch,id)=>{
   dispatch(getLgaStart());
   try {
@@ -117,6 +169,20 @@ export const getLgas=async(dispatch,id)=>{
     dispatch(getLgaSuccess(res.data));
   } catch (error) {
     dispatch(getLgaFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
+export const getAttestLgas=async(dispatch,id)=>{
+  dispatch(getAttestLgaStart());
+  try {
+    const res = await authFetch.get(`birth-attestation/stats/birth-reg-by-lga/${id}`);
+
+    dispatch(getAttestLgaSuccess(res.data));
+  } catch (error) {
+    dispatch(getAttestLgaFailure());
   console.log(error)
   }
   // clearAlert(dispatch);
@@ -145,6 +211,21 @@ export const getCenters=async(dispatch,id)=>{
     dispatch(getCenterSuccess(res.data));
   } catch (error) {
     dispatch(getCenterFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
+
+export const getAttestCenters=async(dispatch,id)=>{
+  dispatch(getAttestCenterStart());
+  try {
+    const res = await authFetch.get(`birth-attestation/stats/birth-reg-by-centre/${id}`);
+
+    dispatch(getAttestCenterSuccess(res.data));
+  } catch (error) {
+    dispatch(getAttestCenterFailure());
   console.log(error)
   }
   // clearAlert(dispatch);
@@ -210,6 +291,50 @@ export const getRegz=async(dispatch,
 
 }
 
+
+export const getAttestRegz=async(dispatch,
+  search,
+  result_per_page,
+  page,
+  stateId,
+          lgaId,
+         centerId,
+  Sex,
+  Age,
+  BirthType,
+  BirthOrder,
+  BirthPlace
+  )=>{
+  dispatch(getAttestRegStart());
+
+  const data = {
+          search: search,
+          result_per_page: result_per_page,
+          page:  page,
+          StateID: stateId,
+          LGAID: lgaId,
+          CenterId: centerId,
+          Sex: Sex,
+          Age:  Age,
+          BirthType: BirthType,
+          BirthOrder: BirthOrder,
+          BirthPlace: BirthPlace  
+  }
+  try {
+    const res = await authFetch.get(`birth-attestation/`,{
+      params: data
+    });
+
+
+    dispatch(getAttestRegSuccess(res.data));
+    console.log(res.data)
+  } catch (error) {
+    dispatch(getAttestRegFailure());
+  console.log(error)
+  }
+ 
+
+}
 
 
 export const getDeathRegz=async(dispatch,

@@ -130,6 +130,7 @@ const SingleApplication2 = () => {
     </div>
 
 
+
     <div className="grid grid-nogutter pt-2 border-top-1 border-bottom-1 border-green-300">
           <div className='col-12 p-3 uppercase border-bottom-1 border-green-300 text-md font-bold '>Particulars of informant</div>
           <div className="col-12 md:col-2 p-3">

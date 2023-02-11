@@ -18,7 +18,7 @@ import authFetch from '../axios';
 //     ResponsiveContainer,
 //   } from "recharts";
 const Death = () => {
-    const [rez,setRez] = useState();
+    const [rez,setRez] = useState(0);
     useEffect(() => {
   
         const getStatz=async()=>{

@@ -11,7 +11,6 @@ import Homez from "./components/Homez";
 import AdminFlagged from "./pages/AdminFlagged";
 import AdminVerified from "./pages/AdminVerified";
 import AdminVerified2 from "./pages/AdminVerified2";
-import AdminVerified3 from "./pages/AdminVerified3";
 import Main from "./pages/Main";
 import BirthReg from "./pages/BirthReg";
 import BirthReport from "./pages/BirthReport";
@@ -34,10 +33,6 @@ import DeathRegState from "./pages/DeathRegState";
 import DeathRegLga from "./pages/DeathRegLga";
 import DeathCenter from "./pages/DeathCenter";
 import SingleApplication2 from "./pages/SingleApplication2";
-import AttestReg from "./pages/AttestReg";
-import AttestRegLga from "./pages/AttestRegLga";
-import AttestCenter from "./pages/AttestCenter";
-import AttestRegState from "./pages/AttestRegState";
 const App = () => {
   return (
     <Router>
@@ -72,12 +67,8 @@ const App = () => {
            <Route path='birth/state/:id' element={<BirthRegState/>}/>
            <Route path='birth/lga/:id' element={<BirthRegLga/>}/>
            <Route path='birth/center/:id' element={<BirthCenter/>}/>
-          
-           <Route path='attestation/registrations' element={<AttestReg/>}/>
-           <Route path='attestation/state/:id' element={<AttestRegState/>}/>
-           <Route path='attestation/lga/:id' element={<AttestRegLga/>}/>
-           <Route path='attestation/center/:id' element={<AttestCenter/>}/>
-         
+           {/* <Route path='birth/list/:zonalid/:stateId/:lgaid' element={<BirthRegList/>}/> */}
+           {/* </Route> */}
                          
            <Route path='birth-report' element={<BirthReport/>}/>
            {/* </Route> */}
@@ -92,7 +83,6 @@ const App = () => {
            <Route path='cert-pending' element={<CertPending/>}/>
            <Route path='birth/list' element={<AdminVerified/>} />  
            <Route path='death/list' element={<AdminVerified2/>} />    
-           <Route path='attestation/list' element={<AdminVerified3/>} />    
            <Route path='hospital/pending' element={<PendingHospital/>} />    
            <Route path='hospital/public' element={<PublicHos/>} />    
            <Route path='hospital/private' element={<PrivateHos/>} />    
