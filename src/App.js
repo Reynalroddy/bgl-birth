@@ -38,6 +38,12 @@ import AttestReg from "./pages/AttestReg";
 import AttestRegLga from "./pages/AttestRegLga";
 import AttestCenter from "./pages/AttestCenter";
 import AttestRegState from "./pages/AttestRegState";
+import StillReg from "./pages/StillReg";
+import StillRegState from "./pages/StillRegState";
+import StillRegLga from "./pages/StillRegLga";
+import StillCenter from "./pages/StillCenter";
+import AdminVerified4 from "./pages/AdminVerified4";
+import SingleApplication3 from "./pages/SingleApplication3";
 const App = () => {
   return (
     <Router>
@@ -89,15 +95,21 @@ const App = () => {
            <Route path='death/center/:id' element={<DeathCenter/>}/>
            <Route path='attestation' element={<Attestation/>}/>
            <Route path='still' element={<Still/>}/>
+           <Route path='still/registrations' element={<StillReg/>}/>
+           <Route path='still/state/:id' element={<StillRegState/>}/>
+           <Route path='still/lga/:id' element={<StillRegLga/>}/>
+           <Route path='still/center/:id' element={<StillCenter/>}/>
            <Route path='cert-pending' element={<CertPending/>}/>
            <Route path='birth/list' element={<AdminVerified/>} />  
            <Route path='death/list' element={<AdminVerified2/>} />    
-           <Route path='attestation/list' element={<AdminVerified3/>} />    
+           <Route path='attestation/list' element={<AdminVerified3/>} />  
+           <Route path='still/list' element={<AdminVerified4/>} />    
            <Route path='hospital/pending' element={<PendingHospital/>} />    
            <Route path='hospital/public' element={<PublicHos/>} />    
            <Route path='hospital/private' element={<PrivateHos/>} />    
            <Route path='single/:id' element={<SingleApplication/>} />
            <Route path='single-death/:id' element={<SingleApplication2/>} />
+           <Route path='single-still/:id' element={<SingleApplication3/>} />
            <Route path='single-hospital/:id' element={<SingleHospital/>} />
            <Route path='single-registrars/:id' element={<SingleRegistrars/>} />
            <Route path='registrars' element={<Registrars/>} />

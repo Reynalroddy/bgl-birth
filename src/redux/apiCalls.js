@@ -3,6 +3,7 @@ import { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateS
 import { getAttestZonesFailure,getAttestZonesStart,getAttestZonesSuccess,getAttestStateFailure,getAttestStateStart,getAttestStateSuccess,getAttestLgaFailure,getAttestLgaStart,getAttestLgaSuccess ,getAttestCenterFailure,getAttestCenterStart,getAttestCenterSuccess,getAttestRegFailure,getAttestRegStart,getAttestRegSuccess} from "./attestSlice";
   // getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,getSingleRegFailure,getSingleRegStart,getSingleRegSuccess 
 import { getDeathZonesFailure,getDeathZonesStart,getDeathZonesSuccess,getDeathStateFailure,getDeathStateStart,getDeathStateSuccess,getDeathLgaFailure,getDeathLgaStart,getDeathLgaSuccess ,getDeathCenterFailure,getDeathCenterStart,getDeathCenterSuccess,getCauseOptionSuccess,getDeathRegFailure,getDeathRegStart,getDeathRegSuccess,getDeathSingleRegFailure,getDeathSingleRegStart,getDeathSingleRegSuccess } from "./deathSlice";
+import { getStillZonesFailure,getStillZonesStart,getStillZonesSuccess,getStillStateFailure,getStillStateStart,getStillStateSuccess,getStillLgaFailure,getStillLgaStart,getStillLgaSuccess ,getStillCenterFailure,getStillCenterStart,getStillCenterSuccess,getStillRegFailure,getStillRegStart,getStillRegSuccess,getStillSingleRegStart,getStillSingleRegSuccess,getStillSingleRegFailure} from "./stillSlice";
 // import nc from "../assets/images/nc.png"
 // import ne from "../assets/images/nc.png"
 // import nw from "../assets/images/nc.png"
@@ -119,6 +120,42 @@ return it;
 
 }
 
+
+export const getStillZones=async(dispatch)=>{
+  dispatch(getStillZonesStart());
+  try {
+    const res = await authFetch.get("stillbirth/stats/birth-reg-by-geozone");
+    const newRes=res.data.map((it,i)=>{
+if(it.Geo_Zone_Name ==='North-Central'){
+return {...it,img:'/assets/img/nc.png'}
+}
+if(it.Geo_Zone_Name ==='South-East'){
+  return {...it,img:'/assets/img/se.png'}
+  }
+  if(it.Geo_Zone_Name ==='North-East'){
+      return {...it,img:'/assets/img/ne.png'}
+      }
+      if(it.Geo_Zone_Name ==='North-West'){
+          return {...it,img:'/assets/img/nw.png'}
+          }
+          if(it.Geo_Zone_Name ==='South-South'){
+              return {...it,img:'/assets/img/ss.png'}
+              }
+              if(it.Geo_Zone_Name ==='South-West'){
+                  return {...it,img:'/assets/img/sw.png'}
+                  }
+return it;
+
+    })
+    dispatch(getStillZonesSuccess(newRes));
+  } catch (error) {
+    dispatch(getStillZonesFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
 export const getStates=async(dispatch,id)=>{
     dispatch(getStateStart());
     try {
@@ -154,6 +191,20 @@ export const getAttestStates=async(dispatch,id)=>{
     dispatch(getAttestStateSuccess(res.data));
   } catch (error) {
     dispatch(getAttestStateFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
+
+export const getStillStates=async(dispatch,id)=>{
+  dispatch(getStillStateStart());
+  try {
+    const res = await authFetch.get(`stillbirth/stats/birth-reg-by-states/${id}`);
+    dispatch(getStillStateSuccess(res.data));
+  } catch (error) {
+    dispatch(getStillStateFailure());
   console.log(error)
   }
   // clearAlert(dispatch);
@@ -203,6 +254,19 @@ export const getDeathLgas=async(dispatch,id)=>{
 
 }
 
+export const getStillLgas=async(dispatch,id)=>{
+  dispatch(getStillLgaStart());
+  try {
+    const res = await authFetch.get(`stillbirth/stats/birth-reg-by-lga/${id}`);
+    dispatch(getStillLgaSuccess(res.data));
+  } catch (error) {
+    dispatch(getStillLgaFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
 export const getCenters=async(dispatch,id)=>{
   dispatch(getCenterStart());
   try {
@@ -240,6 +304,20 @@ export const getDeathCenters=async(dispatch,id)=>{
     dispatch(getDeathCenterSuccess(res.data));
   } catch (error) {
     dispatch(getDeathCenterFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
+export const getStillCenters=async(dispatch,id)=>{
+  dispatch(getStillCenterStart());
+  try {
+    const res = await authFetch.get(`stillbirth/stats/birth-reg-by-centre/${id}`);
+
+    dispatch(getStillCenterSuccess(res.data));
+  } catch (error) {
+    dispatch(getStillCenterFailure());
   console.log(error)
   }
   // clearAlert(dispatch);
@@ -336,6 +414,46 @@ export const getAttestRegz=async(dispatch,
 
 }
 
+export const getStillRegz=async(dispatch,
+  search,
+  result_per_page,
+  page,
+  stateId,
+          lgaId,
+         centerId,
+  Sex,
+  Age,
+  BirthPlace
+  )=>{
+  dispatch(getStillRegStart());
+
+  const data = {
+          search: search,
+          result_per_page: result_per_page,
+          page:  page,
+          StateID: stateId,
+          LGAID: lgaId,
+          CenterId: centerId,
+          Sex: Sex,
+          Age:  Age,
+          BirthPlace: BirthPlace  
+  }
+  try {
+    const res = await authFetch.get(`stillbirth/`,{
+      params: data
+    });
+
+
+    dispatch(getStillRegSuccess(res.data));
+    console.log(res.data)
+  } catch (error) {
+    dispatch(getStillRegFailure());
+  console.log(error)
+  }
+ 
+
+}
+
 
 export const getDeathRegz=async(dispatch,
   search,
@@ -387,6 +505,21 @@ export const getRegs=async(dispatch,id)=>{
   } catch (error) {
 
     dispatch(getSingleRegFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
+export const getStillRegs=async(dispatch,id)=>{
+  dispatch(getStillSingleRegStart());
+  try {
+    const res = await authFetch.get(`stillbirth/${id}`);
+    dispatch(getStillSingleRegSuccess(res.data.data));
+    // console.log(res.data.data)
+  } catch (error) {
+
+    dispatch(getStillSingleRegFailure());
   console.log(error)
   }
   // clearAlert(dispatch);

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const deathSlice = createSlice({
-  name: "header",
+  name: "death",
   initialState: {
     geoPoliticalZones:[],
     states:[],

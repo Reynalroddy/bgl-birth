@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const birthSlice = createSlice({
-  name: "birth",
+export const stillSlice = createSlice({
+  name: "still",
   initialState: {
     geoPoliticalZones:[],
     states:[],
@@ -20,8 +20,6 @@ search: "",
     CenterId: null,
     Sex: null,
     Age: null,
-    BirthType: null,
-    BirthOrder: null,
     BirthPlace: null,
     sexOptions:[],
     typeOptions:[],
@@ -30,20 +28,20 @@ search: "",
   },
 
   reducers: {
-    getZonesStart: (state) => {
+    getStillZonesStart: (state) => {
         return {
           ...state,
           isLoading: true,
         };
       },
-      getZonesSuccess: (state, action) => {
+      getStillZonesSuccess: (state, action) => {
         return {
           ...state,
           isLoading: false,
           geoPoliticalZones: action.payload,
         };
       },
-      getZonesFailure: (state) => {
+      getStillZonesFailure: (state) => {
         return {
           ...state,
           isLoading: false,
@@ -92,71 +90,71 @@ search: "",
         };
       },
 
-      getStateStart: (state) => {
+      getStillStateStart: (state) => {
         return {
           ...state,
           isLoading: true,
         };
       },
-      getStateSuccess: (state, action) => {
+      getStillStateSuccess: (state, action) => {
         return {
           ...state,
           isLoading: false,
           states: action.payload,
         };
       },
-      getStateFailure: (state) => {
+      getStillStateFailure: (state) => {
         return {
           ...state,
           isLoading: false,
         };
       },
 
-      getCenterStart: (state) => {
+      getStillCenterStart: (state) => {
         return {
           ...state,
           isLoading: true,
         };
       },
-      getCenterSuccess: (state, action) => {
+      getStillCenterSuccess: (state, action) => {
         return {
           ...state,
           isLoading: false,
          centers: action.payload,
         };
       },
-      getCenterFailure: (state) => {
+      getStillCenterFailure: (state) => {
         return {
           ...state,
           isLoading: false,
         };
       },
-      getLgaStart: (state) => {
+      getStillLgaStart: (state) => {
         return {
           ...state,
           isLoading: true,
         };
       },
-      getLgaSuccess: (state, action) => {
+      getStillLgaSuccess: (state, action) => {
         return {
           ...state,
           isLoading: false,
           lgas: action.payload,
         };
       },
-      getLgaFailure: (state) => {
+      getStillLgaFailure: (state) => {
         return {
           ...state,
           isLoading: false,
         };
       },
-      getRegStart: (state) => {
+      getStillRegStart: (state) => {
         return {
           ...state,
           isLoading: true,
         };
       },
-      getRegSuccess: (state, action) => {
+      getStillRegSuccess: (state, action) => {
         return {
           ...state,
           isLoading: false,
@@ -164,20 +162,20 @@ search: "",
           numPages:action.payload.pagination.total,
         };
       },
-      getRegFailure: (state) => {
+      getStillRegFailure: (state) => {
         return {
           ...state,
           isLoading: false,
         };
       },
 
-      getSingleRegStart: (state) => {
+      getStillSingleRegStart: (state) => {
         return {
           ...state,
           isLoading: true,
         };
       },
-      getSingleRegSuccess: (state, action) => {
+      getStillSingleRegSuccess: (state, action) => {
         return {
           ...state,
           isLoading: false,
@@ -185,7 +183,7 @@ search: "",
           // numPages:action.payload.pagination.total,
         };
       },
-      getSingleRegFailure: (state) => {
+      getStillSingleRegFailure: (state) => {
         return {
           ...state,
           isLoading: false,
@@ -215,8 +213,7 @@ search: "",
           CenterId: null,
           Sex: null,
           Age: null,
-          BirthType: null,
-          BirthOrder: null,
+         
           BirthPlace: null,
         };
         return {
@@ -246,6 +243,6 @@ search: "",
   },
 });
 
-export const { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess,getRegFailure,getRegStart,getRegSuccess,changePage,handleChange,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,clearFilters,getSingleRegFailure,getSingleRegStart,getSingleRegSuccess } = birthSlice.actions;
+export const { getStillZonesFailure,getStillZonesStart,getStillZonesSuccess,getStillStateFailure,getStillStateStart,getStillStateSuccess,getStillRegFailure,getStillRegStart,getStillRegSuccess,changePage,handleChange,getStillLgaFailure,getStillLgaStart,getStillLgaSuccess,getStillCenterFailure,getStillCenterStart,getStillCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,clearFilters,getStillSingleRegFailure,getStillSingleRegStart,getStillSingleRegSuccess } = stillSlice.actions;
 
-export default birthSlice.reducer;
+export default stillSlice.reducer;

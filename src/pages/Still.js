@@ -1,6 +1,10 @@
-import React,{useRef} from 'react'
-import { Chart } from 'primereact/chart';
+import React,{useState,useEffect} from 'react'
+// import { Chart } from 'primereact/chart';
 import './admin.css';
+import Doughnut from '../components/stillChart/Doughnut';
+import MotherAge from '../components/stillChart/MotherAge';
+import AgeStat from '../components/stillChart/AgeStat';
+import authFetch from '../axios';
 // import male from "../assets/images/man.svg"
 // import female from "../assets/images/woman.svg"
 // import {
@@ -13,35 +17,25 @@ import './admin.css';
 //     ResponsiveContainer,
 //   } from "recharts";
 const Still = () => {
-const lineRef= useRef(null);
+    const [rez,setRez] = useState(0);
+// const lineRef= useRef(null);
 
 
-    const lineData = {
-        labels: ['Child birth complications', 'Disorder of digestive system', 'Disorder of nervous system', 'Not stated', 'Injuries', 'Disorder of respiratory', 'Others'],
-        datasets: [
-            {
-                label: '',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                // fill: false,
-                borderColor: 'blue',
-                tension: .4,
-                backgroundColor:'blue',
-                // fill: true
-                // fill: {
-                //     target: 'origin',
-                //     above: 'rgb(181, 232, 163,0.5)',  
-                //     below: '#B5E8A3'    
-                //   }
-            },
-            // {
-            //     label: 'Second Dataset',
-            //     data: [28, 48, 40, 19, 86, 27, 90],
-            //     fill: false,
-            //     borderColor: '#027EC9',
-            //     tension: .4
-            // }
-        ]
-    };
+    // const lineData = {
+    //     labels: ['Child birth complications', 'Disorder of digestive system', 'Disorder of nervous system', 'Not stated', 'Injuries', 'Disorder of respiratory', 'Others'],
+    //     datasets: [
+    //         {
+    //             label: '',
+    //             data: [65, 59, 80, 81, 56, 55, 40],
+    //             // fill: false,
+    //             borderColor: 'blue',
+    //             tension: .4,
+    //             backgroundColor:'blue',
+             
+    //         },
+          
+    //     ]
+    // };
     // const doughnutData = {
     //     labels: ['A', 'B', 'C'],
     //     datasets: [
@@ -60,17 +54,17 @@ const lineRef= useRef(null);
     //         }]
     // };
 
-    const barData = {
-        labels: ['Borno','Abuja','Nasarawa','Kano','Lagos','Kaduna'],
-        datasets: [{
-            label:'States',
-           data: [20, 40, 60,34,55,23],
-           backgroundColor: ["#29F683"], 
-           borderRadius:50,
-           barThickness: 30,
+    // const barData = {
+    //     labels: ['Borno','Abuja','Nasarawa','Kano','Lagos','Kaduna'],
+    //     datasets: [{
+    //         label:'States',
+    //        data: [20, 40, 60,34,55,23],
+    //        backgroundColor: ["#29F683"], 
+    //        borderRadius:50,
+    //        barThickness: 30,
            
-        }],
-    }  
+    //     }],
+    // }  
 
     // const bar3Data = {
     //     labels: ['Male','Female'],
@@ -128,20 +122,20 @@ const lineRef= useRef(null);
     //     }]
     //  }
 
-     const doughnut =    {
-     labels: ['male', 'female'],
-     datasets: [
-         {
-             data: [300, 50],
-             backgroundColor: [
-                 "#2F96FB",
-                 "#FEA93B",
+    //  const doughnut =    {
+    //  labels: ['male', 'female'],
+    //  datasets: [
+    //      {
+    //          data: [300, 50],
+    //          backgroundColor: [
+    //              "#2F96FB",
+    //              "#FEA93B",
                 
-             ],
-            }
-        ],
+    //          ],
+    //         }
+    //     ],
         
-    }
+    // }
 
     // const barData2 = {
     //     labels: ['0-5 years', '6-10 years', '11-17 years'],
@@ -211,37 +205,52 @@ const lineRef= useRef(null);
       
     // };
 
-    let basicOptions = {
+    // let basicOptions = {
         
-        aspectRatio: 2,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                grid: {
-                    display: false,
-                  }
-            },
-            x: {
-                grid: {
-                  display: false,
-                }
-              },
-          }
-        // scales: {
-        //     xAxes: [{
-        //         barPercentage: 0.4
-        //     }]
-        // }
+    //     aspectRatio: 2,
+    //     maintainAspectRatio: false,
+    //     scales: {
+    //         y: {
+    //             grid: {
+    //                 display: false,
+    //               }
+    //         },
+    //         x: {
+    //             grid: {
+    //               display: false,
+    //             }
+    //           },
+    //       }
+    //     // scales: {
+    //     //     xAxes: [{
+    //     //         barPercentage: 0.4
+    //     //     }]
+    //     // }
       
-    };
+    // };
 
-
+    useEffect(() => {
+  
+        const getStatz=async()=>{
+        
+            try {
+                const statistics = await authFetch.get('https://npc-api.dsaved.com/v0/stillbirth/stats/total');
+        console.log(statistics.data);
+        setRez(statistics.data);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        
+        getStatz();
+             
+        }, [])
     
   return (
     <>
     <div className="grid my-3">
           <div className="col-12  bg-green-700">
-          <span className="text-0 font-bold text-sm">Total Still birth: 0</span> 
+          <span className="text-0 font-bold text-sm">Total Still birth: {rez}</span> 
           </div>
         
 
@@ -310,41 +319,18 @@ const lineRef= useRef(null);
                       
                     </div>
 
-                    <Chart type="doughnut" data={doughnut} style={{  width: '50%',margin:'0 auto' }}  />
-
-                    <div className='bel flex flex-column'>
-<div className='flex flex-column '>
-<div className='flex justify-content-between'>
-<p className='text-blue-400 text-xs font-bold'>male</p>
-<p className='text-blue-400 text-xs font-bold'>1500</p>
-</div>
-<div className='border-y-3 border-blue-400 border-round-sm text-xs text-white p-1'>
-
-</div>
-</div>
-
-<div className='flex flex-column '>
-<div className='flex justify-content-between'>
-<p className='text-yellow-400 text-xs font-bold'>female</p>
-<p className='text-yellow-400 text-xs font-bold'>500</p>
-</div>
-<div className='border-y-3 border-yellow-400 border-round-sm text-xs text-white p-1 '>
-
-</div>
-</div>
-
-                    </div>
+                    <Doughnut/>
                 </div>
             </div>
 
             <div className="col-12 md:col-6 lg:col-6 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Still birth registrations per states</div>
+                        <div className="text-900 font-medium">Statistics by Type of Delivery</div>
                      
                     </div>
 
-                    <Chart type="bar" data={barData} options ={basicOptions} />
+                   <AgeStat/>
                 </div>
             </div>
         {/* <div className="col-12 md:col-6  py-4">
@@ -401,11 +387,11 @@ const lineRef= useRef(null);
             <div className="col-12 md:col-12 lg:col-12 mx-auto py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Still Birth  by cause of death</div>
+                        <div className="text-900 font-medium">Mother's age at birth</div>
                       
                     </div>
 
-                    <Chart type="line" data={lineData} ref={lineRef}  className='my-chart'/>
+                  <MotherAge/>
                 </div>
             </div>
 

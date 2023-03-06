@@ -4,28 +4,20 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { useDispatch,useSelector } from "react-redux";
-import { handleChange,clearFilters } from '../redux/attestSlice';
+import { handleChange,clearFilters } from '../redux/stillSlice';
 import { getSex } from '../redux/apiCalls';
-const Filter2 = () => {
+const Filter3 = () => {
     // const [city, setCity] = useState('');
     const dispatch = useDispatch();
     
     const {
         search,
-        Sex,        
-        // BirthType,
-        // BirthOrder,
+        Sex,
         BirthPlace,
-       
-        // typeOptions,
-    placeOptions,
-    // orderOptions,
-      } = useSelector((state) => state.attest);
-
+        placeOptions,
+      } = useSelector((state) => state.still);
       const {
-          
         sexOptions,
-
       } = useSelector((state) => state.birth);
 
     // const citySelectItems = [
@@ -83,4 +75,4 @@ const Filter2 = () => {
 )
 }
 
-export default Filter2
+export default Filter3

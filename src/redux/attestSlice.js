@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const attestSlice = createSlice({
-  name: "header",
+  name: "attest",
   initialState: {
     geoPoliticalZones:[],
     states:[],

@@ -211,7 +211,7 @@ const Homez = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link  to='/birth/registrations' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                                <Link  to='/still/registrations' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                     transition-duration-150 transition-colors w-full">
                                     <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
                                     <span className="font-medium text-white">Registrations</span>
