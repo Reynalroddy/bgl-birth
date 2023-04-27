@@ -296,7 +296,7 @@ pv: 2400,
         <div className="bg-white shadow-2 p-3 border-round">
                 <div className="flex justify-content-between mb-3">
                     <div>
-                        <span className="block  text-sm font-medium  mb-3">Total Certificates Verified</span>
+                        <span className="block  text-sm font-medium  mb-3">Total Approved Certificates</span>
                         <div className=" font-bold text-xl">{rez && rez.verified_cetificates}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
