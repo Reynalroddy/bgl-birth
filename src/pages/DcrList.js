@@ -11,7 +11,7 @@ import { FilterMatchMode } from 'primereact/api';
 // import jsPDF from 'jspdf';
 import { Tooltip } from 'primereact/tooltip';
 import authFetch from '../axios';
-const RegList = () => {
+const DcrList = () => {
     const {id}=useParams();
   const [loading1, setLoading1] = useState(true);
   const [filters1, setFilters1] = useState(null);
@@ -19,8 +19,7 @@ const RegList = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const getDatz=async ()=>{
-const statz = await authFetch.get(`/users/registra-users?search=&result_per_page=10&page=1&state_id=${id}`);
-// /users/registra-users?search=&result_per_page=5&page=1&state_id=14
+const statz = await authFetch.get(`/users/dcr-users?search=&result_per_page=10&page=1&state_id=${id}`);
 console.log(statz.data.result)
 setProducts(statz.data.result) 
    
@@ -80,7 +79,7 @@ const renderHeader1 = () => {
 }
 const header1 = renderHeader1();
 const dt = useRef(null);
-
+   
 
 
   return (
@@ -89,10 +88,10 @@ const dt = useRef(null);
      <div className="col-12 lg:col-12">
                 <div className="card border-round shadow-2 p-3 ">
                 <div className="mb-3 flex align-items-center justify-content-between p-3">
-        <span className="text-xl font-medium text-900">Registrars List</span>
+        <span className="text-xl font-medium text-900">Dcr List</span>
         <div className="flex align-items-center export-buttons">
             {/* <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" /> */}
-           <Link to={'/registrars-new'}>
+           <Link to={'/dcr-new'}>
            <Button type="button" icon="pi pi-user" label='Create new' className="p-button-success mr-2"  />
            </Link> 
             {/* <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" /> */}
@@ -119,8 +118,8 @@ const dt = useRef(null);
                             <Column field="Phone_No" header="Phone number"></Column>
                            
                             <Column field="User_ID" header="Id"></Column>
-                           
-                        <Column field="" header="state" body={statusBodyTemplate4} />
+                        <Column field="" header="State" body={statusBodyTemplate4} />
+                       
                     </DataTable>
                     <Tooltip target=".export-buttons>button" position="bottom" />
                 </div>
@@ -132,5 +131,5 @@ const dt = useRef(null);
   )
 }
 
-export default RegList;
+export default DcrList;
 

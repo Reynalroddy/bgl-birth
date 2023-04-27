@@ -37,7 +37,7 @@ const BirthOccurence = () => {
             for(const dataObj of res.data){
                 labels.push(dataObj.BirthPlace_Desc)
                
-                count.push(dataObj.Count);
+                count.push(dataObj.count);
                 
             }
 

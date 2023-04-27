@@ -13,7 +13,6 @@ const FilterDeath = () => {
     const {
         search,
         Sex,        
-       
     causeOptions,
     Cause
       } = useSelector((state) => state.death);
@@ -21,6 +20,11 @@ const FilterDeath = () => {
         sexOptions,
       } = useSelector((state) => state.birth);
 
+  
+         
+       
+         
+       
     // const citySelectItems = [
     //     {label: 'New York', value: 'NY'},
     //     {label: 'Rome', value: 'RM'},

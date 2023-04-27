@@ -46,7 +46,7 @@ const State = () => {
             setLoad(false);
             for(const dataObj of res.data){
                 labels.push(dataObj.State_Name)
-                count.push(dataObj.Count);  
+                count.push(dataObj.count);  
             }
             // const barDats = {
             //     labels: ['Borno','Abuja','Nasarawa','Kano','Lagos','Kaduna'],

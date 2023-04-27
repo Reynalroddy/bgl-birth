@@ -5,18 +5,16 @@ import {Button} from "primereact/button"
 import authFetch from '../axios';
 import { Toast } from 'primereact/toast';
 import { useNavigate } from 'react-router-dom';
-const NewReg = () => {
+const NewRegg = () => {
     const toast = useRef(null);
     const navigate = useNavigate();
     const [state,setStates] = useState([])
     const [userState,setUserState] = useState('');
-    const [userLga,setUserLga] = useState('');
-    const [userCenter,setUserCenter] = useState('');
-    const [userDcr,setUserDcr] = useState('');
+    // const [userLga,setUserLga] = useState('');
+    // const [userCenter,setUserCenter] = useState('');
+    // const [userDcr,setUserDcr] = useState('');
     const [userSig,setUserSig] = useState('');
-    const [lga,setLga] = useState([]);
-    const [center,setCenter] = useState([]);
-    const [dcr,setDcr] = useState([]);
+  
     const [nin,setNin] = useState('');
 const [username,setUsername] = useState('');
 const [phone,setPhone] = useState('');
@@ -25,24 +23,14 @@ const [pwd,setPwd] = useState('');
 
     const changeState=async(e)=>{
         setUserState(e.target.value);
-        const statz = await authFetch.get(`/option/lga/${e.target.value}`);
+        // const statz = await authFetch.get(`/option/lga/${e.target.value}`);
         // console.log(statz.data.result)
         // setMyStatz(statz.data.mtn);
-        setLga(statz.data);
+        // setLga(statz.data);
     
     }
 
-    const changeLga=async(e)=>{
-        setUserLga(e.target.value);
-        const statz = await authFetch.get(`/option/regcenter/${e.target.value}`);
-        const dcr = await authFetch.get(`/users/registra/dcr/${e.target.value}`);
-        // console.log(statz.data.result)
-        // setMyStatz(statz.data.mtn);
-        // console.log(dcr)
-        setCenter(statz.data);
-        setDcr(dcr.data)
-    
-    }
+ 
 
 
 
@@ -73,27 +61,26 @@ const [pwd,setPwd] = useState('');
                 Password: pwd,
                 NIN:nin,
                 State_ID: parseInt(userState),
-                LGA_ID: parseInt(userLga),
+                // LGA_ID: parseInt(userLga),
                 Signature:userSig,
-                Reg_Center_ID:parseInt(userCenter),
-                dcr:parseInt(userDcr)
+                // Reg_Center_ID:parseInt(userCenter),
+                // dcr:parseInt(userDcr)
             }
 
             console.log(data)
             
             
             try {
-                const statz = await authFetch.post(`/users/registra`,data);
+                const statz = await authFetch.post(`/users/state-director`,data);
                 toast.current.show({ severity: 'success', summary: 'Success', detail: `${statz.data.message}` });
                 setEmail('')
                setUserState('')
-            setUserLga('');
             setNin('');
             setUsername('');
             setPhone('');
             setEmail('');
             setPwd(''); 
-            navigate('/registrars')
+            navigate('/directors')
             } catch (error) {
                 toast.current.show({ severity: 'error', summary: 'Error', detail: `${error.response.data.message}` });
                 console.log(error);
@@ -174,47 +161,9 @@ const [pwd,setPwd] = useState('');
             </select>
         </div>
 
-        <div className="field col-12 md:col-4">
-            <label for="state">Lga</label>
-            <select id="lga"   onChange={changeLga}   className="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style={{appearance: "auto"}}>
-                <option value=''>select lga</option>
-               {
-lga.map((item,i)=>{
-return  <option value={item.LGA_ID} key={i}>{item.LGA_Name}</option>
-
-})
-               }  
-            </select>
-        </div>
-
-        <div className="field col-12 md:col-4">
-            <label for="state">Center</label>
-            <select id="cen"   onChange={(e)=>setUserCenter(e.target.value)}   className="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style={{appearance: "auto"}}>
-                <option value=''>select center</option>
-               {
-center.map((item,i)=>{
-return  <option value={item.Reg_Center_id} key={i}>{item.Reg_Center_Name}</option>
-
-})
-               }  
-            </select>
-        </div>
-
-        <div className="field col-12 md:col-4">
-            <label for="state">DCR</label>
-            <select id="dcr"   onChange={(e)=>setUserDcr(e.target.value)}   className="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style={{appearance: "auto"}}>
-                <option value=''>select dcr</option>
-               {
-dcr.map((item,i)=>{
-return  <option value={item.User_ID} key={i}>{item.UserName}</option>
-
-})
-               }  
-            </select>
-        </div>
         <div className="field col-12 ">
           
-        <Button label="Create Registrar" className="p-button-success my-2" onClick={create} />
+        <Button label="Create State director" className="p-button-success my-2" onClick={create} />
         </div>
         <Toast ref={toast} position="top-center"  />
     </div>
@@ -225,7 +174,7 @@ return  <option value={item.User_ID} key={i}>{item.UserName}</option>
   )
 }
 
-export default NewReg
+export default NewRegg
 
 
 

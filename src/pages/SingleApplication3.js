@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import { Button } from 'primereact/button';
+// import { Button } from 'primereact/button';
 
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
@@ -167,7 +167,7 @@ const SingleApplication3 = () => {
         </div>
        
     </div>
-    <Button label="View Certificate" className="p-button-success my-2" />
+    {/* <Button label="View Certificate" className="p-button-success my-2" /> */}
 </div>
 
     </div>

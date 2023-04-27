@@ -320,7 +320,7 @@ const Homez = () => {
                             <a ref={btnRef13} className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                 transition-duration-150 transition-colors w-full">
                               <i className="pi pi-users mr-2 text-white font-bold"></i>
-                               <span className="font-medium text-white font-medium">Registrars/DCR</span>
+                               <span className="font-medium text-white font-medium">User access</span>
                                 <i className="pi pi-chevron-right ml-auto mr-1 text-white"></i>
                                 <Ripple />
                             </a>
@@ -343,6 +343,17 @@ const Homez = () => {
                                     <Ripple />
                                 </Link>
                             </li>
+
+                            <li>
+                                <Link to='/directors' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">State Directors</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+
+             
                    
                         </ul>
                     </li>

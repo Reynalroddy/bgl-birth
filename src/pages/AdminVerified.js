@@ -83,7 +83,7 @@ VIEW
 }
 const genderTemplate = (rowData) => {
     return <p  className={`font-bold`}>
-{getGender(rowData.Gender)}
+{getGender(rowData.gender)}
     </p>
 }
 // const birthTypeTemplate = (rowData) => {
@@ -93,13 +93,13 @@ const genderTemplate = (rowData) => {
 // }
 const birthOrder = (rowData) => {
     return <p  className={`font-bold`}>
-    {getOrder(rowData.Birth_Order)}
+    {getOrder(rowData.birth_order)}
         </p>
 }
 
 const birthPlace = (rowData) => {
   return <p  className={`font-bold`}>
-  {getPlace(rowData.Birth_Place)}
+  {getPlace(rowData.birth_place)}
       </p>
 }
 
@@ -109,9 +109,16 @@ return <p>{rowData.Reg_CenterData.Reg_Center_Name}</p>
 
 
 
+
+
 const state=(rowData)=>{
-  return <p>{rowData.LGA_of_BirthData.States.State_Name}</p>
+  return <p>{rowData.LGA_of_BirthData.states.State_Name}</p>
   }
+
+
+
+
+
 
 const renderHeader1 = () => {
     return (

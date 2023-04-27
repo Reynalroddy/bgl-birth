@@ -46,7 +46,7 @@ const AgeStat = () => {
             setLoad(false);
             for(const dataObj of res.data){
                 labels.push(dataObj.Description)
-                count.push(dataObj.Count);  
+                count.push(dataObj.count);  
             }
             setChartData(
                 {

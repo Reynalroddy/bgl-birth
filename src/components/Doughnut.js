@@ -17,8 +17,8 @@ const Doughnut = () => {
                console.log(res.data);
                setLoad(false);
                setDats(res.data)
-             illi= res.data[0].Illiterate;
-             lit=res.data[0].Literate;
+             illi= res.data[0].illiterate;
+             lit=res.data[0].literate;
    
                setChartData(
                 {

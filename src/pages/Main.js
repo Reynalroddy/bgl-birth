@@ -237,7 +237,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block  text-sm font-medium  mb-3">Total Birth Registrations</span>
-                        <div className=" font-bold text-xl">{rez && rez.birth_registrations}</div>
+                        <div className=" font-bold text-xl">{rez && rez.birth_registration}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>

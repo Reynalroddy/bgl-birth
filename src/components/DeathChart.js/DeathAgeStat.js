@@ -44,8 +44,8 @@ const DeathAgeStat = () => {
             console.log(res.data);
             setLoad(false);
             for(const dataObj of res.data){
-                labels.push(dataObj.Cause)
-                count.push(dataObj.Count);  
+                labels.push(dataObj.cause)
+                count.push(dataObj.count);  
             }
 
             // const data = {

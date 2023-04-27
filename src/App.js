@@ -44,6 +44,12 @@ import StillRegLga from "./pages/StillRegLga";
 import StillCenter from "./pages/StillCenter";
 import AdminVerified4 from "./pages/AdminVerified4";
 import SingleApplication3 from "./pages/SingleApplication3";
+import SingleApplication4 from "./pages/SingleApplication4";
+import Dcr from "./pages/Dcr";
+import DcrList from "./pages/DcrList";
+import NewReg2 from "./pages/NewReg2";
+import RegistrarsCp from "./pages/RegistrarsCp";
+import NewRegg from "./pages/NewRegg";
 const App = () => {
   return (
     <Router>
@@ -109,12 +115,18 @@ const App = () => {
            <Route path='hospital/private' element={<PrivateHos/>} />    
            <Route path='single/:id' element={<SingleApplication/>} />
            <Route path='single-death/:id' element={<SingleApplication2/>} />
+           <Route path='single-attest/:id' element={<SingleApplication4/>} />
            <Route path='single-still/:id' element={<SingleApplication3/>} />
            <Route path='single-hospital/:id' element={<SingleHospital/>} />
            <Route path='single-registrars/:id' element={<SingleRegistrars/>} />
            <Route path='registrars' element={<Registrars/>} />
+           <Route path='directors' element={<RegistrarsCp/>} />
+           <Route path='dcr' element={<Dcr/>} />
+           <Route path='dcr-list/:id' element={<DcrList/>} />
            <Route path='registrars-list/:id' element={<RegList/>} />
            <Route path='registrars-new' element={<NewReg/>} />
+           <Route path='directors-new' element={<NewRegg/>} />
+           <Route path='dcr-new' element={<NewReg2/>} />
            <Route path='pending-cert' element={<PendingCert/>} />
            {/* <Route path='single/:id' element={<SingleApplication/>} /> */}
           {/* <Route path='single' element={<SingleApplication/>} /> */}

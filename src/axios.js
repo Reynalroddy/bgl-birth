@@ -10,7 +10,7 @@ const authFetch = axios.create({
 authFetch.interceptors.request.use(
   function (req) {
     // const token = localStorage.getItem("token");
-    const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyX0lEIjoxNjc0NSwiTEdBX0lEIjowLCJSZWdfQ2VudGVyX0lEIjowLCJVc2VyTmFtZSI6IkRvbGFwbyIsIlJvbGVfSUQiOjUsIlN0YXRlX0lEIjo3LCJFbWFpbCI6ImRvbGFwb0BlbWFpbC5jb20iLCJpYXQiOjE2NzgwOTM1MTksImV4cCI6MTY3ODE3NjMxOX0.r_qkocnSrSSqKPFwVdlupgQ7gyGQkbjxvf0cd7J3nfM"
+    const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyX0lEIjoiNCIsIkxHQV9JRCI6IjMwOSIsIlJlZ19DZW50ZXJfSUQiOiIxMzQyIiwiVXNlck5hbWUiOiJLRVNUT04iLCJSb2xlX0lEIjoiNSIsIlN0YXRlX0lEIjoiMTQiLCJFbWFpbCI6Imtlc3RvbkBlbWFpbC5jb20iLCJpYXQiOjE2ODI1MjM1NDUsImV4cCI6MTY4MjYwNjM0NX0.0T94Aj6DOxPTe3K2ZXIawxN16YODJczqMjM2MDCShhs"
     if (token) {
       // const toks = localStorage.getItem("token");
       req.headers.authorization = `Bearer ${token}`;
@@ -20,7 +20,7 @@ authFetch.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  }    
 );
 
 

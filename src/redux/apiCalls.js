@@ -1,6 +1,6 @@
 import authFetch from "../axios";
 import { getZonesFailure,getZonesStart,getZonesSuccess,getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,getSingleRegFailure,getSingleRegStart,getSingleRegSuccess } from "./birthSlice";
-import { getAttestZonesFailure,getAttestZonesStart,getAttestZonesSuccess,getAttestStateFailure,getAttestStateStart,getAttestStateSuccess,getAttestLgaFailure,getAttestLgaStart,getAttestLgaSuccess ,getAttestCenterFailure,getAttestCenterStart,getAttestCenterSuccess,getAttestRegFailure,getAttestRegStart,getAttestRegSuccess} from "./attestSlice";
+import { getAttestZonesFailure,getAttestZonesStart,getAttestZonesSuccess,getAttestStateFailure,getAttestStateStart,getAttestStateSuccess,getAttestLgaFailure,getAttestLgaStart,getAttestLgaSuccess ,getAttestCenterFailure,getAttestCenterStart,getAttestCenterSuccess,getAttestRegFailure,getAttestRegStart,getAttestRegSuccess,getAttestSingleRegFailure,getAttestSingleRegStart,getAttestSingleRegSuccess} from "./attestSlice";
   // getStateFailure,getStateStart,getStateSuccess ,getRegFailure,getRegStart,getRegSuccess,getLgaFailure,getLgaStart,getLgaSuccess,getCenterFailure,getCenterStart,getCenterSuccess,getOptionFailure,getOptionStart,getSexOptionSuccess,getTypeOptionSuccess,getOrderOptionSuccess,getPlaceOptionSuccess,getSingleRegFailure,getSingleRegStart,getSingleRegSuccess 
 import { getDeathZonesFailure,getDeathZonesStart,getDeathZonesSuccess,getDeathStateFailure,getDeathStateStart,getDeathStateSuccess,getDeathLgaFailure,getDeathLgaStart,getDeathLgaSuccess ,getDeathCenterFailure,getDeathCenterStart,getDeathCenterSuccess,getCauseOptionSuccess,getDeathRegFailure,getDeathRegStart,getDeathRegSuccess,getDeathSingleRegFailure,getDeathSingleRegStart,getDeathSingleRegSuccess } from "./deathSlice";
 import { getStillZonesFailure,getStillZonesStart,getStillZonesSuccess,getStillStateFailure,getStillStateStart,getStillStateSuccess,getStillLgaFailure,getStillLgaStart,getStillLgaSuccess ,getStillCenterFailure,getStillCenterStart,getStillCenterSuccess,getStillRegFailure,getStillRegStart,getStillRegSuccess,getStillSingleRegStart,getStillSingleRegSuccess,getStillSingleRegFailure} from "./stillSlice";
@@ -503,9 +503,12 @@ export const getRegs=async(dispatch,id)=>{
     dispatch(getSingleRegSuccess(res.data.data));
     // console.log(res.data.data)
   } catch (error) {
-
     dispatch(getSingleRegFailure());
-  console.log(error)
+  console.log(error);
+    
+    
+      
+     
   }
   // clearAlert(dispatch);
 
@@ -520,6 +523,22 @@ export const getStillRegs=async(dispatch,id)=>{
   } catch (error) {
 
     dispatch(getStillSingleRegFailure());
+  console.log(error)
+  }
+  // clearAlert(dispatch);
+
+}
+
+
+export const getStillRegs2=async(dispatch,id)=>{
+  dispatch(getAttestSingleRegStart());
+  try {
+    const res = await authFetch.get(`/birth-attestation/${id}/admin`);
+    dispatch(getAttestSingleRegSuccess(res.data.data));
+    // console.log(res.data.data)
+  } catch (error) {
+
+    dispatch(getAttestSingleRegFailure());
   console.log(error)
   }
   // clearAlert(dispatch);
@@ -548,7 +567,7 @@ export const getDeathRegs=async(dispatch,id)=>{
 
 export const getGender = (g)=>{
 let res;
-   const ans= dataOptions.gender.filter(item=>g === item.Gender_ID);
+   const ans= dataOptions.gender.filter(item=>g.toString() === item.Gender_ID);
 res = ans[0].Gender;
 // console.log(res);
 return res;
@@ -557,6 +576,7 @@ return res;
 export const getOrder=(order)=>{
     let res;
     const ans= dataOptions.birthOrder.filter(item=>order === item.Birth_Order);
+    // console.log(ans,order)
  res = ans[0].Desc;
 //  console.log(res);
  return res;
@@ -610,7 +630,7 @@ export const getSex=async(dispatch)=>{
         if (results[0].status === status) {
           const newRes = results[0].value.data.map((item,i)=>{
   
-return {label: item.Gender, value: item.Gender_ID}
+return {label: item.gender, value: item.Gender_ID}
 });
     dispatch(getSexOptionSuccess(newRes));
         }
