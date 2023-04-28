@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Attestation from "./pages/Attestation";
 import Death from "./pages/Death";
 import './App.scss';
-
+import Unauthorized from "./pages/Unauthorized";
 import Login from "./pages/Login";
 import SingleApplication from "./pages/SingleApplication";
 import Admin from "./pages/Admin";
@@ -136,6 +136,7 @@ const App = () => {
        
 
         <Route path='login' element={<Login/>} />
+        <Route path='unauth' element={<Unauthorized/>} />
       </Routes>
     </Router>
   );
