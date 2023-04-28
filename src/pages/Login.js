@@ -26,6 +26,7 @@ function parseJwt (toks) {
 
     // console.log(JSON.parse(jsonPayload));
     localStorage.setItem('userInfo-admin',jsonPayload)
+    localStorage.setItem('userInfo-admin-token',toks)
 nav('/')
 }
 parseJwt(toks);

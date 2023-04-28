@@ -21,6 +21,13 @@ const Homez = () => {
     const btnRef12 = useRef(null);
     const btnRef13 = useRef(null);
     const btnRef14 = useRef(null);
+
+
+    const handleLogout=()=>{
+        localStorage.removeItem("userInfo-admin");
+    localStorage.removeItem("userInfo-admin-token");
+    }
+    const user = JSON.parse(localStorage.getItem('userInfo-admin'));
   return (              
 
     
@@ -443,7 +450,7 @@ const Homez = () => {
                             <Ripple />
                         </a>
                     </li>
-                    <li>
+                    <li  onClick={handleLogout}>
                         {/* eslint-disable-next-line */}
                         <a className="p-ripple flex align-items-center cursor-pointer p-3 hover:bg-bluegray-900 border-round text-bluegray-100 hover:text-bluegray-50
             transition-duration-150 transition-colors w-full">
@@ -458,7 +465,8 @@ const Homez = () => {
                     <a ref={btnRef3} className="p-ripple my-3 px-3 py-2 flex align-items-center hover:bg-bluegray-900 border-round cursor-pointer text-bluegray-100 hover:text-bluegray-50
         transition-duration-150 transition-colors w-full">
                         {/* <img src="assets/images/blocks/avatars/circle/avatar-f-1.png" alt="avatar-f-1" className="mr-2" style={{ width: '28px', height: '28px' }} /> */}
-                        <span className="font-medium text-white">Amy Elsner</span>
+                        <span className="font-medium text-white">{user?.UserName
+}</span>
                         <i className="pi pi-chevron-up ml-auto text-white"></i>
                         <Ripple />
                     </a>
