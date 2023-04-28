@@ -1,7 +1,7 @@
 import React,{useRef} from 'react'
 import { StyleClass } from 'primereact/styleclass';
 import { Ripple } from 'primereact/ripple';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import Logo from '../assets/images/72.png'
 // import Avatar from "../assets/images/avatar.png";
 import { InputText } from 'primereact/inputtext';
@@ -10,6 +10,7 @@ const Homez = () => {
     // const btnRef30 = useRef(null);
     // const btnRef1 = useRef(null);
     // const btnRef2 = useRef(null);
+    const nav = useNavigate();
     const btnRef3 = useRef(null);
     const btnRef4 = useRef(null);
     const btnRef5 = useRef(null);
@@ -24,14 +25,13 @@ const Homez = () => {
 
 
     const handleLogout=()=>{
-        localStorage.removeItem("userInfo-admin");
+        localStorage.removeItem("userInfo-admin"); 
     localStorage.removeItem("userInfo-admin-token");
-    window.location.replace('https://ecvrs-main.verxid.site/welcome');
+   nav('/unauth');
     }
+      
     const user = JSON.parse(localStorage.getItem('userInfo-admin'));
-  return (              
-
-    
+  return ( 
 <div className="min-h-screen flex relative lg:static surface-ground">
     <div id="app-sidebar-1" className="surface-section h-screen hidden lg:block flex-shrink-0 absolute lg:sticky left-0 top-0 z-2 select-none" style={{ width: '280px' }}>
         <div className="flex flex-column h-full" style={{backgroundColor:"#0E7706"}}>
