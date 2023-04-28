@@ -1,17 +1,17 @@
 
-import React, { useState,useEffect } from 'react';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { Checkbox } from 'primereact/checkbox';
+import React, { useEffect } from 'react';
+// import { Button } from 'primereact/button';
+// import { InputText } from 'primereact/inputtext';
+// import { Checkbox } from 'primereact/checkbox';
 // import { Divider } from 'primereact/divider';
 // import { Carousel } from 'primereact/carousel';
 // import { Ripple } from 'primereact/ripple';
-import Logo from '../assets/images/72.png'
-import Ban  from "../assets/images/bgLogin.jpg"
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+// import Logo from '../assets/images/72.png'
+// import Ban  from "../assets/images/bgLogin.jpg"
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ProgressSpinner } from 'primereact/progressspinner';
 const Login = () => {
-    const [checked2, setChecked2] = useState(false);
+    // const [checked2, setChecked2] = useState(false);
     const [searchParams] = useSearchParams();
 const nav= useNavigate()
 const toks = searchParams.get('t'); // 10

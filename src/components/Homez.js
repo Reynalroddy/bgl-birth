@@ -26,6 +26,7 @@ const Homez = () => {
     const handleLogout=()=>{
         localStorage.removeItem("userInfo-admin");
     localStorage.removeItem("userInfo-admin-token");
+    window.location.replace('https://ecvrs-main.verxid.site/welcome');
     }
     const user = JSON.parse(localStorage.getItem('userInfo-admin'));
   return (              
