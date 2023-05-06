@@ -5,6 +5,7 @@ import {Button} from "primereact/button"
 import authFetch from '../axios';
 import { Toast } from 'primereact/toast';
 import { useNavigate } from 'react-router-dom';
+import { MultiSelect } from 'primereact/multiselect';
 const NewRegg = () => {
     const toast = useRef(null);
     const navigate = useNavigate();
@@ -19,8 +20,9 @@ const NewRegg = () => {
 const [username,setUsername] = useState('');
 const [phone,setPhone] = useState('');
 const [email,setEmail] = useState('');
-const [pwd,setPwd] = useState('');
-
+// const [pwd,setPwd] = useState('');
+const [permissions,setPermissions] = useState([]);
+const [selectedPerm,setSelectedPerm] = useState('');
     const changeState=async(e)=>{
         setUserState(e.target.value);
         // const statz = await authFetch.get(`/option/lga/${e.target.value}`);
@@ -58,11 +60,14 @@ const [pwd,setPwd] = useState('');
                 UserName: username,
                 Email: email,
                 Phone_No:phone,
-                Password: pwd,
+                // Password: pwd,
                 NIN:nin,
                 State_ID: parseInt(userState),
                 // LGA_ID: parseInt(userLga),
                 Signature:userSig,
+                Role_ID:1,
+                permissions:selectedPerm.join(","),
+                is_active:'Active'
                 // Reg_Center_ID:parseInt(userCenter),
                 // dcr:parseInt(userDcr)
             }
@@ -71,7 +76,7 @@ const [pwd,setPwd] = useState('');
             
             
             try {
-                const statz = await authFetch.post(`/users/state-director`,data);
+                const statz = await authFetch.post(`/users`,data);
                 toast.current.show({ severity: 'success', summary: 'Success', detail: `${statz.data.message}` });
                 setEmail('')
                setUserState('')
@@ -79,7 +84,7 @@ const [pwd,setPwd] = useState('');
             setUsername('');
             setPhone('');
             setEmail('');
-            setPwd(''); 
+            // setPwd(''); 
             navigate('/directors')
             } catch (error) {
                 toast.current.show({ severity: 'error', summary: 'Error', detail: `${error.response.data.message}` });
@@ -93,8 +98,9 @@ const [pwd,setPwd] = useState('');
         useEffect(() => {
             const getStates = async()=>{
                 const statz = await authFetch.get(`/option/states`);
+                const statz2 = await authFetch.get(`/option/permissions`);
                 setStates(statz.data)
-            
+                setPermissions(statz2.data);
             }
 
          
@@ -106,7 +112,7 @@ const [pwd,setPwd] = useState('');
     <div className="col-12 lg:col-12">
                <div className="card border-round shadow-2 p-3">
                {/* <div className="card"> */}
-    <h5 className='border-green-500 border-bottom-3 text-lg font-bold mb-3'>New Registrar</h5>
+    <h5 className='border-green-500 border-bottom-3 text-lg font-bold mb-3'>New State directors</h5>
     <div className="formgrid grid">
     <div className="field col-12 md:col-4">
             <label for="firstname6">username</label>
@@ -125,10 +131,10 @@ const [pwd,setPwd] = useState('');
             <label for="firstname9">email</label>
             <input id="firstname9" type="text"  onChange={(e)=>setEmail(e.target.value)}className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
         </div>
-        <div className="field col-12 md:col-4">
+        {/* <div className="field col-12 md:col-4">
             <label for="lastname6">Password</label>
             <input id="lastname6" type="password" onChange={(e)=>setPwd(e.target.value)} className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
-        </div>
+        </div> */}
         {/* <div className="field col-12 md:col-4">
         <FileUpload mode="basic" name="demo[]"  accept="image/*" customUpload uploadHandler={customBase64Uploader} />
       </div> */}
@@ -160,6 +166,11 @@ const [pwd,setPwd] = useState('');
                
             </select>
         </div>
+
+        <div className="field col-12 md:col-4">
+        <MultiSelect value={selectedPerm} onChange={(e) => setSelectedPerm(e.value)} options={permissions}  
+ placeholder="Select user permissions"  className="w-full" />
+    </div>
 
         <div className="field col-12 ">
           

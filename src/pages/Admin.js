@@ -54,7 +54,7 @@ getStatz();
     <>
     <div className="grid my-3">
           <div className="col-12  bg-green-700">
-          <span className="text-0 font-bold text-sm">Total Registrations: {rez && rez.total_registration}</span> 
+          <span className="text-0 font-bold text-sm">Total Registrations: {rez && rez.total_registration?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span> 
           </div>
         
 
@@ -63,7 +63,7 @@ getStatz();
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Pending Registrations</span>
-                        <div className="text-0 font-medium text-xl">{rez && rez.pending}</div>
+                        <div className="text-0 font-medium text-xl">{rez && rez.pending?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-exclamation-circle text-blue-500 text-xl"></i>
@@ -78,7 +78,7 @@ getStatz();
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Approved Registrations</span>
-                        <div className="text-0 font-medium text-xl">{rez? rez.approved:''}</div>
+                        <div className="text-0 font-medium text-xl">{rez? rez.approved?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):''}</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-check-circle text-orange-500 text-xl"></i>
@@ -93,7 +93,7 @@ getStatz();
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Printed Certificates</span>
-                        <div className="text-0 font-medium text-xl">{rez && rez.printed}</div>
+                        <div className="text-0 font-medium text-xl">{rez && rez.printed?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-book text-cyan-500 text-xl"></i>
@@ -108,7 +108,7 @@ getStatz();
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-0 font-medium mb-3">Queried Registrations</span>
-                        <div className="text-0 font-medium text-xl">{rez && rez.querried}</div>
+                        <div className="text-0 font-medium text-xl">{rez && rez.querried?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                     </div>
                     <div className="flex align-items-center justify-content-center bg-white border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-question-circle text-purple-500 text-xl"></i>

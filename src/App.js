@@ -50,6 +50,12 @@ import DcrList from "./pages/DcrList";
 import NewReg2 from "./pages/NewReg2";
 import RegistrarsCp from "./pages/RegistrarsCp";
 import NewRegg from "./pages/NewRegg";
+import ModBirth from "./pages/ModBirth";
+import ModDeath from "./pages/ModDeath";
+import ModAttest from "./pages/ModAttest";
+import UpdateUser from "./pages/UpdateUser";
+import Admins from "./pages/Admins";
+import NewAdmin from "./pages/NewAdmin";
 const App = () => {
   return (
     <Router>
@@ -96,6 +102,9 @@ const App = () => {
                           
            <Route path='death' element={<Death/>}/>
            <Route path='death/registrations' element={<DeathReg/>}/>
+           <Route path='modify/birth/registrations' element={<ModBirth/>}/>
+           <Route path='modify/death/registrations' element={<ModDeath/>}/>
+           <Route path='modify/attest/registrations' element={<ModAttest/>}/>
            <Route path='death/state/:id' element={<DeathRegState/>}/>
            <Route path='death/lga/:id' element={<DeathRegLga/>}/>
            <Route path='death/center/:id' element={<DeathCenter/>}/>
@@ -122,12 +131,17 @@ const App = () => {
            <Route path='registrars' element={<Registrars/>} />
            <Route path='directors' element={<RegistrarsCp/>} />
            <Route path='dcr' element={<Dcr/>} />
+           <Route path='admins' element={<Admins/>} />
            <Route path='dcr-list/:id' element={<DcrList/>} />
            <Route path='registrars-list/:id' element={<RegList/>} />
            <Route path='registrars-new' element={<NewReg/>} />
            <Route path='directors-new' element={<NewRegg/>} />
+           <Route path='admin-new' element={<NewAdmin/>} />
            <Route path='dcr-new' element={<NewReg2/>} />
            <Route path='pending-cert' element={<PendingCert/>} />
+           <Route path='update-user/:id' element={<UpdateUser/>} />
+
+
            {/* <Route path='single/:id' element={<SingleApplication/>} /> */}
           {/* <Route path='single' element={<SingleApplication/>} /> */}
         </Route>

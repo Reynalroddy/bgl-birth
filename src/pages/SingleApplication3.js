@@ -1,14 +1,19 @@
 import React,{useEffect} from 'react'
 // import { Button } from 'primereact/button';
-
+// import authFetch from '../axios';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { getStillRegs } from '../redux/apiCalls';
+// import { Button } from 'primereact/button';
+// import { Toast } from 'primereact/toast';
+// import { Dialog } from 'primereact/dialog';
 const SingleApplication3 = () => {
   const {id}=useParams();
+//   const toast = useRef(null);
   const dispatch = useDispatch();
+
   const {
         isLoading,
       reg
@@ -32,10 +37,10 @@ const SingleApplication3 = () => {
     <div className="font-medium text-md text-500 mb-3">STILL BIRTH CERTIFICATE NUMBER</div>
     {/* <div className="text-900 text-xl mb-5 font-bold">{reg&&reg.death_certificate_number}</div> */}
   </div>
-  {/* <div className='flex flex-column'>
-    <div className="font-medium text-md text-500 mb-3">BIRTH REGISTRATION VOLUME</div>
-    <div className="text-900 text-xl mb-5 font-bold">H</div>
-  </div> */}
+  <div className='flex flex-column'>
+    <div className="font-medium text-md text-500 mb-3">STATUS</div>
+    <div className="text-900 text-xl mb-5 font-bold">{reg&&reg.approval_status===2?'queried':reg.approval_status === 1?'approved':reg.approval_status === 0?'pending':''}</div>
+  </div>
   {/* <div className='flex flex-column'>
     <div className="font-medium text-md text-500 mb-3">ENTRY NUMBER</div>
     <div className="text-900 text-xl mb-5 font-bold">6432</div>
@@ -167,7 +172,8 @@ const SingleApplication3 = () => {
         </div>
        
     </div>
-    {/* <Button label="View Certificate" className="p-button-success my-2" /> */}
+
+    {/* </div> */}
 </div>
 
     </div>

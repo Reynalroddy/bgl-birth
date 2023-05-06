@@ -223,7 +223,6 @@ pv: 2400,
         }
             
         getStatz();
-             
         }, [])
         
         
@@ -237,7 +236,8 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block  text-sm font-medium  mb-3">Total Birth Registrations</span>
-                        <div className=" font-bold text-xl">{rez && rez.birth_registration}</div>
+                        <div className=" font-bold text-xl">{rez && rez.birth_registration?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>
@@ -257,7 +257,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block  text-sm font-medium  mb-3">Total Death Registrations</span>
-                        <div className=" font-bold text-xl">{rez && rez.death_registrations}</div>
+                        <div className=" font-bold text-xl">{rez && rez.death_registrations?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>
@@ -277,7 +277,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block  text-sm font-medium  mb-3">Total Birth Attestations</span>
-                        <div className=" font-bold text-xl">{rez && rez.birth_attestation}</div>
+                        <div className=" font-bold text-xl">{rez && rez.birth_attestation?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>
@@ -297,7 +297,7 @@ pv: 2400,
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block  text-sm font-medium  mb-3">Total Approved Certificates</span>
-                        <div className=" font-bold text-xl">{rez && rez.verified_cetificates}</div>
+                        <div className=" font-bold text-xl">{rez && rez.verified_cetificates?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                         <div className='flex mt-2'>
                         <i className="pi pi-arrow-up text-green-500 text-xs font-bold"></i>
                         <span className='text-xs text-green-500 font-bold'>4.6%</span>

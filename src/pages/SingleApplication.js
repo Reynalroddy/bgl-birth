@@ -30,7 +30,7 @@ try {
 } catch (error) {
     setLoading(false)
     console.log(error);
-    toast.current.show({ severity: 'error', summary: 'Error', detail: `` });
+    toast.current.show({ severity: 'error', summary: 'Error', detail: `${error.response.data.message}` });
 }
 
 
@@ -58,10 +58,10 @@ try {
     <div className="font-medium text-md text-500 mb-3">BIRTH CERTIFICATE NUMBER</div>
     <div className="text-900 text-xl mb-5 font-bold">{reg&&reg.Certificate_No}</div>
   </div>
-  {/* <div className='flex flex-column'>
-    <div className="font-medium text-md text-500 mb-3">BIRTH REGISTRATION VOLUME</div>
-    <div className="text-900 text-xl mb-5 font-bold">H</div>
-  </div> */}
+  <div className='flex flex-column'>
+    <div className="font-medium text-md text-500 mb-3">STATUS</div>
+    <div className="text-900 text-xl mb-5 font-bold">{reg&&reg.Approval_Status===2?'queried':reg.Approval_Status === 1?'approved':reg.Approval_Status === 0?'pending':''}</div>
+  </div>
   {/* <div className='flex flex-column'>
     <div className="font-medium text-md text-500 mb-3">ENTRY NUMBER</div>
     <div className="text-900 text-xl mb-5 font-bold">6432</div>

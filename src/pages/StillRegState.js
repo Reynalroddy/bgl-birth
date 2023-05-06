@@ -4,7 +4,7 @@ import './admin.css';
 
 // import nc from "../assets/images/nc.png"
 import { Link } from 'react-router-dom';
-import Logo from '../assets/images/72.png'
+// import Logo from '../assets/images/72.png'
 import { useParams ,useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { getStillStates } from '../redux/apiCalls';
@@ -83,7 +83,7 @@ return <div className='flex justify-content-center align-items-center'>
 states.map((it,i)=>{
     return <div className='col-12 md:col-4 ' key={i}>
     <div className="flex flex-column align-items-center  gap-2 surface-card shadow-2 border-round p-3">
-    <img  src={Logo} style={{width:'3rem',height:'3rem'}} alt=''/>
+    <img  src={`/assets/img/${parseInt(it.State_ID)}.png`} style={{width:'3rem',height:'3rem'}} alt=''/>
     <span className='text-md uppercase font-bold'>{it.State_Name}</span>
     <span className='text-xs text-green-500 '>{numberWithCommas(it.count)}</span>
     {/* <img  src={nc} style={{width:'3rem',height:'3rem'}} alt=''/> */}

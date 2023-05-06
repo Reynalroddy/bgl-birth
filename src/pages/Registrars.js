@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import './admin.css';
 import { Link } from 'react-router-dom';
-import Logo from '../assets/images/72.png'
+// import Logo from '../assets/images/72.png'
 import authFetch from '../axios';
 const Registrars = () => {
   const [lists,setLists]=useState([]);
@@ -56,7 +56,7 @@ lists.map((item,i)=>{
 return (
 <div className='col-12 md:col-4 ' key={i}>
 <div className="flex flex-column align-items-center  gap-2 surface-card shadow-2 border-round p-3">
-<img  src={Logo} style={{width:'3rem',height:'3rem'}} alt=''/>
+<img  src={`/assets/img/${parseInt(item.State_ID)}.png`}  style={{width:'3rem',height:'3rem'}} alt=''/>
 <span className='text-md uppercase font-bold'>{item.State_Name}</span>
 {/* icon */}
 <div className='flex gap-2 justify-content-center'>

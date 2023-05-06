@@ -5,11 +5,14 @@ import {Button} from "primereact/button"
 import authFetch from '../axios';
 import { Toast } from 'primereact/toast';
 import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from "react-router-dom";
+import { MultiSelect } from 'primereact/multiselect';
 const NewReg = () => {
+    const [searchParams] = useSearchParams();
     const toast = useRef(null);
     const navigate = useNavigate();
-    const [state,setStates] = useState([])
-    const [userState,setUserState] = useState('');
+    const [state,setStates] = useState([]);
+    const [userState,setUserState] = useState(searchParams.get('state') || "");
     const [userLga,setUserLga] = useState('');
     const [userCenter,setUserCenter] = useState('');
     const [userDcr,setUserDcr] = useState('');
@@ -21,13 +24,12 @@ const NewReg = () => {
 const [username,setUsername] = useState('');
 const [phone,setPhone] = useState('');
 const [email,setEmail] = useState('');
-const [pwd,setPwd] = useState('');
-
+const [permissions,setPermissions] = useState([]);
+const [selectedPerm,setSelectedPerm] = useState('');
+// const val=['Can_Do_Attestation']
     const changeState=async(e)=>{
         setUserState(e.target.value);
         const statz = await authFetch.get(`/option/lga/${e.target.value}`);
-        // console.log(statz.data.result)
-        // setMyStatz(statz.data.mtn);
         setLga(statz.data);
     
     }
@@ -70,31 +72,40 @@ const [pwd,setPwd] = useState('');
                 UserName: username,
                 Email: email,
                 Phone_No:phone,
-                Password: pwd,
+                // Password: pwd,
                 NIN:nin,
                 State_ID: parseInt(userState),
                 LGA_ID: parseInt(userLga),
                 Signature:userSig,
                 Reg_Center_ID:parseInt(userCenter),
-                dcr:parseInt(userDcr)
+                dcr:parseInt(userDcr),
+                Role_ID:3,
+                permissions:selectedPerm.join(","),
+                is_active:'Active'
             }
 
             console.log(data)
             
             
             try {
-                const statz = await authFetch.post(`/users/registra`,data);
-                toast.current.show({ severity: 'success', summary: 'Success', detail: `${statz.data.message}` });
-                setEmail('')
-               setUserState('')
-            setUserLga('');
-            setNin('');
-            setUsername('');
-            setPhone('');
-            setEmail('');
-            setPwd(''); 
-            navigate('/registrars')
-            } catch (error) {
+                const statz = await authFetch.post(`/users`,data);
+
+                if(statz.data.success === true){
+                    toast.current.show({ severity: 'success', summary: 'Success', detail: `${statz.data.message}` });
+                    setEmail('')
+                   setUserState('')
+                setUserLga('');
+                setNin('');
+                setUsername('');
+                setPhone('');
+                setEmail('');
+                // setPwd(''); 
+                navigate('/registrars')
+                }
+             
+            }
+                  
+            catch (error) {
                 toast.current.show({ severity: 'error', summary: 'Error', detail: `${error.response.data.message}` });
                 console.log(error);
             }
@@ -105,15 +116,26 @@ const [pwd,setPwd] = useState('');
 
         useEffect(() => {
             const getStates = async()=>{
-                const statz = await authFetch.get(`/option/states`);
-                setStates(statz.data)
-            
+                const statz1 = await authFetch.get(`/option/states`);
+                const statz2 = await authFetch.get(`/option/permissions`);
+                const statz = await authFetch.get(`/option/lga/${searchParams.get('state')}`);
+                // option/permissions
+                setStates(statz1.data)
+                setLga(statz.data);
+                setPermissions(statz2.data);
+
             }
+            // const statz = await authFetch.get(`/option/lga/${e.target.value}`);
+            // console.log(statz.data.result)
+            // setMyStatz(statz.data.mtn);
+           
 
          
             getStates();
     
-    }, []);
+    }, [searchParams]);
+
+    console.log(searchParams.get('state'))
   return (
     <div className='grid mt-2 p-4'>
     <div className="col-12 lg:col-12">
@@ -138,10 +160,10 @@ const [pwd,setPwd] = useState('');
             <label for="firstname9">email</label>
             <input id="firstname9" type="text"  onChange={(e)=>setEmail(e.target.value)}className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
         </div>
-        <div className="field col-12 md:col-4">
+        {/* <div className="field col-12 md:col-4">
             <label for="lastname6">Password</label>
             <input id="lastname6" type="password" onChange={(e)=>setPwd(e.target.value)} className="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
-        </div>
+        </div> */}
         {/* <div className="field col-12 md:col-4">
         <FileUpload mode="basic" name="demo[]"  accept="image/*" customUpload uploadHandler={customBase64Uploader} />
       </div> */}
@@ -163,7 +185,7 @@ const [pwd,setPwd] = useState('');
         </div> */}
         <div className="field col-12 md:col-4">
             <label for="state">State</label>
-            <select id="state" className="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" 
+            <select id="state" value={userState} className="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" 
             onChange={changeState}  
                style={{appearance: "auto"}}>
             <option value={''}>select state</option>
@@ -212,6 +234,18 @@ return  <option value={item.User_ID} key={i}>{item.UserName}</option>
                }  
             </select>
         </div>
+
+
+      
+        <div className="field col-12 md:col-4">
+        <MultiSelect 
+        
+        value={selectedPerm}
+        // value={val&& val}
+        onChange={(e) => setSelectedPerm(e.value)} options={permissions} 
+ placeholder="Select user permissions"  className="w-full" />
+    </div>
+
         <div className="field col-12 ">
           
         <Button label="Create Registrar" className="p-button-success my-2" onClick={create} />

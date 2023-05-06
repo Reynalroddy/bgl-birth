@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useRef,useState} from 'react'
 import { Button } from 'primereact/button';
 
 import {  useParams } from 'react-router-dom';
@@ -6,11 +6,36 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { getStillRegs2 } from '../redux/apiCalls';
+import { Dialog } from 'primereact/dialog';
+import { Toast } from 'primereact/toast';
+import authFetch from '../axios';
 const SingleApplication4 = () => {
     // const navigate=useNavigate();
     // const goBack = () => navigate(-1);
   const {id}=useParams();
+  const toast = useRef(null);
   const dispatch = useDispatch();
+const [loading,setLoading]= useState(false);
+const [visible, setVisible] = useState(false);
+const  [img,setImg] = useState('')
+  const viewBirth=async()=>{
+    // /cert/birth/${reg?.Certificate_No}
+    setLoading(true)
+try {
+    console.log(reg?.Certificate_No);
+    const res = await authFetch.get(`/cert/attestation/${reg?.attestation_number}`);
+    console.log(res.data);
+    setLoading(false)
+    setImg(res.data);
+    setVisible(true)
+} catch (error) {
+    setLoading(false)
+    console.log(error);
+    toast.current.show({ severity: 'error', summary: 'Error', detail: `${error.response.data.message}` });
+}
+
+
+  }
   const {
         isLoading,
       reg
@@ -34,10 +59,10 @@ const SingleApplication4 = () => {
         <div className="font-medium text-md text-500 mb-3">NIN</div>
         <div className="text-900 text-xl mb-5 font-bold">{reg&&reg?.nin}</div>
       </div>
-      {/* <div className='flex flex-column'>
-        <div className="font-medium text-md text-500 mb-3">BIRTH REGISTRATION VOLUME</div>
-        <div className="text-900 text-xl mb-5 font-bold">H</div>
-      </div> */}
+      <div className='flex flex-column'>
+    <div className="font-medium text-md text-500 mb-3">STATUS</div>
+    <div className="text-900 text-xl mb-5 font-bold">{reg&&reg.approval_status===2?'queried':reg.approval_status === 1?'approved':reg.approval_status === 0?'pending':''}</div>
+  </div>
       {/* <div className='flex flex-column'>
         <div className="font-medium text-md text-500 mb-3">ENTRY NUMBER</div>
         <div className="text-900 text-xl mb-5 font-bold">6432</div>
@@ -336,7 +361,16 @@ const SingleApplication4 = () => {
             </div>
            
         </div>
-        <Button label="View Certificate" className="p-button-success my-2" />
+        <Button label="View Certificate" className="p-button-success my-2" onClick={viewBirth} loading={loading} />
+
+<Toast ref={toast} />
+
+{/* <div className="card flex justify-content-center">
+        <Button label="Show" icon="pi pi-external-link" onClick={() => setVisible(true)} /> */}
+        <Dialog header="Certificate" visible={visible} style={{ width: '70vw' }} onHide={() => setVisible(false)}>
+            <img  src={`data:image/png;base64,${img} `} className='w-full' alt=''/>
+        </Dialog>
+    {/* </div> */}
     </div>
     
         </div>

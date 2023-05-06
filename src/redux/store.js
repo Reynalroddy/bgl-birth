@@ -4,12 +4,15 @@ import birthReducer from "./birthSlice";
 import deathReducer from "./deathSlice"
 import attestReducer from "./attestSlice"
 import stillReducer from "./stillSlice"
+import modBirthReducer from "./modBirthSlice"
+
 export default configureStore({
   reducer: {
     header: headerReducer,
     birth:birthReducer,
     death:deathReducer,
     attest:attestReducer,
-    still:stillReducer
+    still:stillReducer,
+    modBirth:modBirthReducer
   },
 });

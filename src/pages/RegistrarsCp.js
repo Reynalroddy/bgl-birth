@@ -9,11 +9,57 @@ import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Tooltip } from 'primereact/tooltip';
 import { Column } from 'primereact/column';
+import { Toast } from 'primereact/toast';
 const RegistrarsCp = () => {
   const [lists,setLists]=useState([]);
   const [loading,setLoading]=useState(false);
+  const toast = useRef(null);
+  const [reload, setReload] = useState(false);
   const [filters1, setFilters1] = useState(null);
   const [globalFilterValue1, setGlobalFilterValue1] = useState('');
+  const handleReset=async (id)=>{
+    // console.log(id)
+    try {
+        const statz = await authFetch.get(`/users/reset-password/${id}`);
+    console.log(statz.data)
+    if(statz.data.success === true){
+        toast.current.show({ severity: 'success', summary: 'Success', detail: `${statz.data.message},check your email` });
+        
+    }
+    else{
+    toast.current.show({ severity: 'error', summary: 'Error', detail: `${statz.data.message}.` });
+    }} catch (error) {
+        toast.current.show({ severity: 'error', summary: 'Error', detail: `${error.response.data.message}` });
+    }
+    
+  }
+
+  const handleActivate=async (id,st)=>{
+    let statuss=''
+    if(st === 1){
+statuss = 'Inactive'
+    }
+    else if(st === 0){
+        statuss = 'Active'
+            }
+    try {
+        const statz = await authFetch.post(`/users/change-status`,{
+            
+                account_id: parseInt(id),
+                status: statuss
+            
+        });
+    // console.log(statz.data)
+    if(statz.data.success === true){
+        toast.current.show({ severity: 'success', summary: 'Success', detail: `${statz.data.message}.` }); 
+        setReload(true);
+    }
+    else{
+    toast.current.show({ severity: 'error', summary: 'Error', detail: `${statz.data.message}.` });
+    }} catch (error) {
+        toast.current.show({ severity: 'error', summary: 'Error', detail: `${error.response.data.message}` });
+    }
+  }
   const initFilters1 = () => {
     setFilters1({
         'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -27,6 +73,23 @@ const statusBodyTemplate4 = (rowData) => {
   return <p  className={`btn btn-primary text-primary font-bold`} >
 {rowData.State.State_Name}
   </p>
+}
+const statusBodyTemplate5 = (rowData) => {
+  return <p  className={`btn btn-primary text-primary font-bold cursor-pointer`} onClick={()=>handleReset(rowData.User_ID)} >
+reset password
+  </p>
+}
+
+const statusBodyTemplate6 = (rowData) => {
+  return <p  className={`btn btn-primary text-primary font-bold cursor-pointer`} onClick={()=>handleActivate(rowData.User_ID,rowData.is_active)} >
+{rowData.is_active === 1?'Deactivate':rowData.is_active === 0?'Activate':''}
+  </p>
+}
+
+const statusBodyTemplate7 = (rowData) => {
+  return <Link to={`/update-user/${rowData.User_ID}`} className={`btn btn-primary text-primary font-bold cursor-pointer`}  >
+update user
+  </Link>
 }
 const onGlobalFilterChange1 = (e) => {
     const value = e.target.value;
@@ -70,7 +133,7 @@ const dt = useRef(null);
   }
     }
    viewBirth()
-  }, [])
+  }, [reload])
   
   if(loading){
   return       <div className="col-12">
@@ -121,11 +184,14 @@ const dt = useRef(null);
                             <Column field="User_ID" header="Id"></Column>
                            
                         <Column field="" header="state" body={statusBodyTemplate4} />
+                        <Column field="" header="Actions" body={statusBodyTemplate5} />
+                        <Column field="" header="" body={statusBodyTemplate6} />
+                        <Column field="" header="" body={statusBodyTemplate7} />
                     </DataTable>
                     <Tooltip target=".export-buttons>button" position="bottom" />
                 </div>
             </div>
-            
+            <Toast ref={toast} />  
            
 </div> 
     </>

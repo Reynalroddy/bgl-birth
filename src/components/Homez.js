@@ -4,7 +4,7 @@ import { Ripple } from 'primereact/ripple';
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import Logo from '../assets/images/72.png'
 // import Avatar from "../assets/images/avatar.png";
-import { InputText } from 'primereact/inputtext';
+// import { InputText } from 'primereact/inputtext';
 import './home.css';
 const Homez = () => {
     // const btnRef30 = useRef(null);
@@ -18,6 +18,7 @@ const Homez = () => {
     const btnRef7 = useRef(null);
     const btnRef8 = useRef(null);
     const btnRef9 = useRef(null);
+    const btnRef99 = useRef(null);
     const btnRef10 = useRef(null);
     const btnRef12 = useRef(null);
     const btnRef13 = useRef(null);
@@ -39,7 +40,7 @@ const Homez = () => {
                 {/* <img src="assets/images/blocks/logos/hyper-300.svg" alt="hyper-300" height={30} /> */}
                 <Link to='/' className='flex align-items-center cursor-pointer gap-2'>
                 <img src={Logo} alt="hyper-300" height="45"  />
-                <span className='text-sm text-green-500 font-bold'>ECRVS Central Management System</span>
+                <span className='text-sm text-green-500 font-bold'>VITAL REG Management System</span>
                 </Link>
             </div>
             <div className="overflow-y-auto mt-3" >
@@ -117,6 +118,8 @@ const Homez = () => {
                             
                         </ul>
                     </li>
+
+                  
 
                     <li className='border-bottom-1 border-white'>
                         <StyleClass nodeRef={btnRef7} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
@@ -230,6 +233,48 @@ const Homez = () => {
                         </ul>
                     </li>
 
+
+                    <li className='border-bottom-1 border-white'>
+                        <StyleClass nodeRef={btnRef99} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                         {/* eslint-disable-next-line */}
+                            <a ref={btnRef99} className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                transition-duration-150 transition-colors w-full">
+                                <i className="pi pi-user-edit mr-2 text-white font-bold"></i>
+                                <span className="text-white font-medium">Modifications</span>
+                                <i className="pi pi-chevron-right ml-auto mr-1 text-white"></i>
+                                <Ripple />
+                            </a>
+                        </StyleClass>
+                        <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                          
+                            <li>
+                                <Link to='/modify/birth/registrations' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Birth registrations</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/modify/death/registrations' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Death Registrations</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link to='/modify/attest/registrations' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Birth attestations</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                            
+                        </ul>
+                    </li>
                     <li className='border-bottom-1 border-white'>
                         <StyleClass nodeRef={btnRef10} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                             {/* eslint-disable-next-line */}
@@ -360,6 +405,14 @@ const Homez = () => {
                                     <Ripple />
                                 </Link>
                             </li>
+                            <li>
+                                <Link to='/admins' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Admins</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
 
              
                    
@@ -485,10 +538,10 @@ const Homez = () => {
                         <Ripple />
                     </a>
                 </StyleClass>
-                <span className="p-input-icon-left hidden lg:inline">
+                {/* <span className="p-input-icon-left hidden lg:inline">
                     <i className="pi pi-search"></i>
                     <InputText className="border-none" placeholder="Search" />
-                </span>
+                </span> */}
             </div>
             <StyleClass nodeRef={btnRef5} selector="@next" enterClassName="hidden" enterActiveClassName="fadein" leaveToClassName="hidden" leaveActiveClassName="fadeout" hideOnOutsideClick>
                  {/* eslint-disable-next-line */}
