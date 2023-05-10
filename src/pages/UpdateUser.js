@@ -111,7 +111,7 @@ const [loading1, setLoading1] = useState(false);
                 Signature:userSig,
                 Reg_Center_ID:userCenter=== null?userCenter:parseInt(userCenter),
                 dcr: userDcr === null?userDcr:parseInt(userDcr),
-                Role_ID:role,
+                Role_ID:parseInt(role),
                 permissions:selectedPerm.join(","),
                 is_active:'Active'
             }
