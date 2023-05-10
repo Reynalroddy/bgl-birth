@@ -120,7 +120,7 @@ const [loading1, setLoading1] = useState(false);
             
             
             try {
-                const statz = await authFetch.post(`/users`,data);
+                const statz = await authFetch.patch(`/users`,data);
 
                 if(statz.data.success === true){
                     toast.current.show({ severity: 'success', summary: 'Success', detail: `${statz.data.message}` });
