@@ -101,7 +101,7 @@ const [loading1, setLoading1] = useState(false);
             const data = {
 
                 
-                User_ID: id,
+                User_ID: parseInt(id),
                 UserName: username,
                 Email: email,
                 Phone_No:phone,
