@@ -2,8 +2,9 @@ import React,{useEffect,useState,useRef} from 'react'
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Dropdown } from 'primereact/dropdown';
 // import axios from "axios";
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
 // import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
@@ -12,14 +13,43 @@ import { FilterMatchMode } from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
 import authFetch from '../axios';
 import { Toast } from 'primereact/toast';
+import { Paginator } from 'primereact/paginator';
 const RegList = () => {
-    const {id}=useParams();
+    // const {id}=useParams();
     const toast = useRef(null);
   const [loading1, setLoading1] = useState(true);
+  // eslint-disable-next-line
   const [reload, setReload] = useState(false);
   const [filters1, setFilters1] = useState(null);
+  const [tot,setTot] = useState(null)
   const [globalFilterValue1, setGlobalFilterValue1] = useState('');
   const [products, setProducts] = useState([]);
+  const [lga,setLga] = useState([]);
+  const [state,setStates] = useState([]);
+  const [userState,setUserState] = useState("");
+  const [userLga,setUserLga] = useState("");
+const [page,setPage] =useState(1)
+
+      
+      
+
+  const [basicFirst, setBasicFirst] = useState(0);
+  // eslint-disable-next-line
+const [basicRows, setBasicRows] = useState(20);
+const onBasicPageChange = (event) => {
+  setBasicFirst(event.first);
+  setPage(event.page + 1);
+}
+
+const changeState=async(e)=>{
+    setUserState(e.target.value);
+    const statz = await authFetch.get(`/option/lga/${e.target.value}`);
+    setLga(statz.data);
+
+}
+          
+
+   
 
   const handleReset=async (id)=>{
     // console.log(id)
@@ -66,16 +96,18 @@ statuss = 'Inactive'
   }
   useEffect(() => {
     const getDatz=async ()=>{
-const statz = await authFetch.get(`/users/registra-users?search=&result_per_page=10&page=1&state_id=${id}`);
+const statz = await authFetch.get(`/users/?search=&result_per_page=20&page=${page}&role_id=3&state_id=${userState}&lga_id=${userLga}`);
+    
+// /users/?search=&result_per_page=10&page=1&role_id=3
 // /users/registra-users?search=&result_per_page=5&page=1&state_id=14
 console.log(statz.data.result)
 setProducts(statz.data.result) 
-   
+   setTot(statz.data.pagination.total)
     setLoading1(false)
     }
             getDatz()
 
-}, [id,reload]); 
+}, [page,userLga,userState]); 
 // eslint-disable-line react-hooks/exhaustive-deps
 
 useEffect(() => {
@@ -84,7 +116,20 @@ useEffect(() => {
 
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+useEffect(() => {
+    const getStates = async()=>{
+        const statz1 = await authFetch.get(`/option/states`);
+      
+        // option/permissions
+        setStates(statz1.data)
+    }
+    // const statz = await authFetch.get(`/option/lga/${e.target.value}`);
+    // console.log(statz.data.result)
+    // setMyStatz(statz.data.mtn);
+   
+    getStates();
 
+}, []);
 
 const initFilters1 = () => {
     setFilters1({
@@ -129,6 +174,12 @@ const statusBodyTemplate7 = (rowData) => {
 update user
     </Link>
 }
+
+const statusBodyTemplate8 = (rowData) => {
+    return <Link to={`/single-registrars/${rowData.User_ID}`} className={`btn btn-primary text-primary font-bold cursor-pointer`}  >
+view
+    </Link>
+}
 const clearFilter1 = () => {
     initFilters1();
 }
@@ -136,6 +187,16 @@ const renderHeader1 = () => {
     return (
         <div className=" hidden md:flex justify-content-between">
             <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} />
+          
+
+
+<Dropdown value={userState} options={state} onChange={ changeState} placeholder="Select State" optionLabel="State_Name" optionValue="State_ID"/>
+
+<Dropdown value={userLga} options={lga} onChange={(e) => setUserLga(e.value)} placeholder="Select lga" optionLabel="LGA_Name" optionValue="LGA_ID"/>
+   
+{/* <Dropdown value={Sex} options={sexOptions} onChange={(e) => dispatch(handleChange({ name:'Sex', value:e.value }))} placeholder="Select lga"/> */}
+
+
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText value={globalFilterValue1} onChange={onGlobalFilterChange1} placeholder="Keyword Search" />
@@ -146,7 +207,7 @@ const renderHeader1 = () => {
 const header1 = renderHeader1();
 const dt = useRef(null);
 
-console.log(id);
+// console.log(id);
 
   return (
     <>
@@ -157,7 +218,7 @@ console.log(id);
         <span className="text-xl font-medium text-900">Registrars List</span>
         <div className="flex align-items-center export-buttons">
             {/* <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" /> */}
-           <Link to={`/registrars-new?state=${id}`}>
+           <Link to={`/registrars-new`}>
            <Button type="button" icon="pi pi-user" label='Create new' className="p-button-success mr-2"  />
            </Link> 
             {/* <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" /> */}
@@ -172,27 +233,28 @@ console.log(id);
                     stripedRows
                      responsiveLayout="stack"
                      header={header1}
-                     paginator
-                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={5} rowsPerPageOptions={[5,10,50]}
-                  
+                    //  paginator
+                    //  paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                    //  currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={5} rowsPerPageOptions={[5,10,50]}
+                     
                         >
                         {/* <Column field="id" header="Device Id"></Column> */}
                             {/* <Column field="name" header="Certificate Number"></Column> */}
-                            <Column field="UserName" header="Name"></Column>
+                            <Column field="UserName" header="Name"></Column>    
                             <Column field="Email" header="Email"></Column>
                             <Column field="Phone_No" header="Phone number"></Column>
-                           
-                            <Column field="User_ID" header="Id"></Column>
-                           
+                           <Column field="User_ID" header="Id"></Column>
                         <Column field="" header="state" body={statusBodyTemplate4} />
                         <Column field="" header="Actions" body={statusBodyTemplate5} />
                         <Column field="" header="" body={statusBodyTemplate6} />
                         <Column field="" header="" body={statusBodyTemplate7} />
+                        <Column field="" header="" body={statusBodyTemplate8} />
                     </DataTable>
                     <Tooltip target=".export-buttons>button" position="bottom" />
+                    <Paginator  first ={basicFirst} rows={basicRows} totalRecords={tot}  onPageChange={onBasicPageChange}></Paginator>
                 </div>
             </div>
+                     
             <Toast ref={toast} /> 
            
 </div> 

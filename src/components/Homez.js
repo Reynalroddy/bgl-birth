@@ -381,7 +381,7 @@ const Homez = () => {
                         <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
                           
                             <li>
-                                <Link to='/registrars' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                                <Link to='/registrars-list' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                     transition-duration-150 transition-colors w-full">
                                     <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
                                     <span className="font-medium text-white">Registrars</span>
@@ -389,7 +389,7 @@ const Homez = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link  to='/dcr' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                                <Link  to='/dcr-list' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                     transition-duration-150 transition-colors w-full">
                                     <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
                                     <span className="font-medium text-white">DCR</span>

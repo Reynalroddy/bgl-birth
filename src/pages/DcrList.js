@@ -3,7 +3,7 @@ import React,{useEffect,useState,useRef} from 'react'
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 // import axios from "axios";
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
 // import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
@@ -12,15 +12,29 @@ import { FilterMatchMode } from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
 import authFetch from '../axios';
 import { Toast } from 'primereact/toast';
+import { Paginator } from 'primereact/paginator';
 const DcrList = () => {
-    const {id}=useParams();
+    // const {id}=useParams();
     const toast = useRef(null);
+    // eslint-disable-next-line
     const [reload, setReload] = useState(false);
   const [loading1, setLoading1] = useState(true);
   const [filters1, setFilters1] = useState(null);
   const [globalFilterValue1, setGlobalFilterValue1] = useState('');
+//   const [products, setProducts] = useState([]);
+  const [tot,setTot] = useState(null)
+//   const [globalFilterValue1, setGlobalFilterValue1] = useState('');
   const [products, setProducts] = useState([]);
+const [page,setPage] =useState(1)
 
+
+const [basicFirst, setBasicFirst] = useState(0);
+// eslint-disable-next-line
+const [basicRows, setBasicRows] = useState(20);
+const onBasicPageChange = (event) => {
+setBasicFirst(event.first);
+setPage(event.page + 1);
+}
 
   const handleReset=async (id)=>{
     // console.log(id)
@@ -67,15 +81,15 @@ statuss = 'Inactive'
   }
   useEffect(() => {
     const getDatz=async ()=>{
-const statz = await authFetch.get(`/users/dcr-users?search=&result_per_page=10&page=1&state_id=${id}`);
+const statz = await authFetch.get(`/users/?search=&result_per_page=20&page=${page}&role_id=2`);
 console.log(statz.data.result)
 setProducts(statz.data.result) 
-   
+setTot(statz.data.pagination.total)
     setLoading1(false)
     }
             getDatz()
 
-}, [id,reload]); 
+}, [page]); 
 // eslint-disable-line react-hooks/exhaustive-deps
 
 useEffect(() => {
@@ -129,6 +143,11 @@ const statusBodyTemplate7 = (rowData) => {
 update user
     </Link>
 }
+const statusBodyTemplate8 = (rowData) => {
+    return <Link to={`/single-dcr?lga=${rowData.LGA_ID}&id=${rowData.User_ID}`} className={`btn btn-primary text-primary font-bold cursor-pointer`}  >
+view
+    </Link>
+}
 const clearFilter1 = () => {
     initFilters1();
 }
@@ -147,7 +166,7 @@ const header1 = renderHeader1();
 const dt = useRef(null);
    
 
-
+   
   return (
     <>
     <div className='grid mt-2'>
@@ -157,7 +176,7 @@ const dt = useRef(null);
         <span className="text-xl font-medium text-900">Dcr List</span>
         <div className="flex align-items-center export-buttons">
             {/* <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" /> */}
-           <Link to={`/dcr-new?state=${id}`}>
+           <Link to={`/dcr-new}`}>
            <Button type="button" icon="pi pi-user" label='Create new' className="p-button-success mr-2"  />
            </Link> 
             {/* <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" /> */}
@@ -172,9 +191,9 @@ const dt = useRef(null);
                     stripedRows
                      responsiveLayout="stack"
                      header={header1}
-                     paginator
-                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={5} rowsPerPageOptions={[5,10,50]}
+                    //  paginator
+                    //  paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                    //  currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={5} rowsPerPageOptions={[5,10,50]}
                   
                         >
                         {/* <Column field="id" header="Device Id"></Column> */}
@@ -188,8 +207,10 @@ const dt = useRef(null);
                         <Column field="" header="Actions" body={statusBodyTemplate5} />
                         <Column field="" header="" body={statusBodyTemplate6} />
                         <Column field="" header="" body={statusBodyTemplate7} />
+                        <Column field="" header="" body={statusBodyTemplate8} />
                     </DataTable>
                     <Tooltip target=".export-buttons>button" position="bottom" />
+                    <Paginator  first ={basicFirst} rows={basicRows} totalRecords={tot}  onPageChange={onBasicPageChange}></Paginator>
                 </div>
             </div>
             

@@ -56,6 +56,7 @@ import ModAttest from "./pages/ModAttest";
 import UpdateUser from "./pages/UpdateUser";
 import Admins from "./pages/Admins";
 import NewAdmin from "./pages/NewAdmin";
+import SingleDcr from "./pages/Single-dcr";
 const App = () => {
   return (
     <Router>
@@ -110,6 +111,7 @@ const App = () => {
            <Route path='death/center/:id' element={<DeathCenter/>}/>
            <Route path='attestation' element={<Attestation/>}/>
            <Route path='still' element={<Still/>}/>
+
            <Route path='still/registrations' element={<StillReg/>}/>
            <Route path='still/state/:id' element={<StillRegState/>}/>
            <Route path='still/lga/:id' element={<StillRegLga/>}/>
@@ -128,12 +130,13 @@ const App = () => {
            <Route path='single-still/:id' element={<SingleApplication3/>} />
            <Route path='single-hospital/:id' element={<SingleHospital/>} />
            <Route path='single-registrars/:id' element={<SingleRegistrars/>} />
+           <Route path='single-dcr' element={<SingleDcr/>} />
            <Route path='registrars' element={<Registrars/>} />
            <Route path='directors' element={<RegistrarsCp/>} />
            <Route path='dcr' element={<Dcr/>} />
            <Route path='admins' element={<Admins/>} />
-           <Route path='dcr-list/:id' element={<DcrList/>} />
-           <Route path='registrars-list/:id' element={<RegList/>} />
+           <Route path='dcr-list' element={<DcrList/>} />
+           <Route path='registrars-list' element={<RegList/>} />
            <Route path='registrars-new' element={<NewReg/>} />
            <Route path='directors-new' element={<NewRegg/>} />
            <Route path='admin-new' element={<NewAdmin/>} />

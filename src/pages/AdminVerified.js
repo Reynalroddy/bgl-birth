@@ -118,8 +118,6 @@ const state=(rowData)=>{
 
 
 
-
-
 const renderHeader1 = () => {
     return (
 <Filter/>
@@ -127,8 +125,9 @@ const renderHeader1 = () => {
 }
 const header1 = renderHeader1();
 const dt = useRef(null);
-   
-
+        
+      
+      
 const cols = [
   { field: 'code', header: 'Code' },
   { field: 'name', header: 'Name' },
@@ -231,8 +230,10 @@ const saveAsExcelFile = (buffer, fileName) => {
                             <Column field="username" body={birthPlace} header="Birth place"></Column>
                             <Column body={center} header="Reg_Center_Name"></Column>
                             <Column body={state}  header="State"></Column>
+
                             {/* <Column field="phone" header="Birth Order"></Column> */}
                             {/* <Column field="imei" header="Device IMEI"></Column> */}
+                                
                         <Column field="" header="Action" body={statusBodyTemplate2} />
                     </DataTable>
                     <Tooltip target=".export-buttons>button" position="bottom" />

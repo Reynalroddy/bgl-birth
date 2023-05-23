@@ -130,8 +130,6 @@ getStatz();
             </div>
 
 
-      
-
 
             <div className="col-12 md:col-6 lg:col-6 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
@@ -182,6 +180,8 @@ getStatz();
             </div>
 
 
+           
+
             <div className="col-12 md:col-6 lg:col-4 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
@@ -208,9 +208,7 @@ getStatz();
                
             </div>
 
-
-               
-            <Dialog visible={visible} onHide={onHide} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
+ <Dialog visible={visible} onHide={onHide} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
             <div className="col-12  py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
@@ -227,4 +225,6 @@ getStatz();
   )
 }
 
+      
+       
 export default Admin

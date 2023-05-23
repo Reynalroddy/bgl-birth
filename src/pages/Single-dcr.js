@@ -3,7 +3,7 @@ import { Button } from 'primereact/button';
 // import { Dialog } from 'primereact/dialog';
 // import { Dropdown } from 'primereact/dropdown';
 import React,{useEffect,useState,useRef} from 'react'
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 // import axios from "axios";
@@ -14,10 +14,14 @@ import { InputText } from 'primereact/inputtext';
 import { FilterMatchMode } from 'primereact/api';
 // import jsPDF from 'jspdf';
 import { Tooltip } from 'primereact/tooltip';
+import { useSearchParams } from 'react-router-dom';
 import authFetch from '../axios';
-const SingleRegistrars = () => {
+const SingleDcr = () => {
 
-    const {id} = useParams();
+    // const {id} = useParams();
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get('id'); 
+    const lga = searchParams.get('lga'); 
     const [loading1, setLoading1] = useState(true);
     const [filters1, setFilters1] = useState(null);
     const [globalFilterValue1, setGlobalFilterValue1] = useState('');
@@ -35,19 +39,24 @@ const SingleRegistrars = () => {
   setProducts(statz1.data)
 //   console.log(statz.data)
       // setProducts(statz.data.results)
-      
-      const statz2 = await authFetch.get(`/users/registrar-adhoc-users?search=&result_per_page=100&page=1&regcenter_id=${statz1.data.Reg_Center_ID}`);
-      // console.log(statz1.data)
-      // setMyStatz(statz.data.mtn);
-      setProductz(statz2.data.result)
       setLoading1(false)
       }
 
-   
+      const getDatzz=async ()=>{
+        // const statz = await axios.get('https://api.verxid.site/bt-mdm/get-device');
+        // console.log(statz.data.results)
+        const statz2 = await authFetch.get(`/users/?search=&result_per_page=100&page=1&role_id=3&state_id=&lga_id=${parseInt(lga)}`);
+        // console.log(statz1.data)
+        // setMyStatz(statz.data.mtn);
+        setProductz(statz2.data.result)
+      //   console.log(statz.data)
+            // setProducts(statz.data.results)
+        
+            }
 
      
               getDatz();
-            
+              getDatzz();
              
   
   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -76,16 +85,7 @@ const SingleRegistrars = () => {
       setFilters1(_filters1);
       setGlobalFilterValue1(value);
   }
-//   const statusBodyTemplate2 = (rowData) => {
-//       return <Link  className={`bg-primary border-round-lg text-sm text-primary font-bold p-1`} to={`/single-registrars/${rowData.id}`} >
-//   VIEW CERTIFICATE
-//       </Link>
-//   }
-//   const statusBodyTemplate1 = (rowData) => {
-//     return <span  className={`btn  text-primary font-bold`} >
-// Status
-//     </span>
-// }
+
   const clearFilter1 = () => {
       initFilters1();
   }
@@ -123,9 +123,7 @@ const SingleRegistrars = () => {
     })
   }
   
-
-
-  
+     
   const exportExcel = () => {
     import('xlsx').then(xlsx => {
         const worksheet = xlsx.utils.json_to_sheet(products);
@@ -190,9 +188,6 @@ const SingleRegistrars = () => {
   return (
     <>
 <div className="surface-card p-4 shadow-2 border-round my-2">
-
-
-
         <div className="flex flex-column md:flex-row md:flex-wrap pt-2 border-top-1 border-bottom-1 border-green-300">
          
         <div className="col-12 md:col-2 p-3">
@@ -274,4 +269,4 @@ const SingleRegistrars = () => {
   )
 }
 
-export default SingleRegistrars;
+export default SingleDcr;
