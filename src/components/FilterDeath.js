@@ -44,7 +44,7 @@ const FilterDeath = () => {
     <div className=" hidden md:flex justify-content-between">
         {/* <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} /> */}
        <div className='grid '>
-<div className='col-12 md:col-3'>
+<div className='col-12 md:col-5'>
 
             <InputText 
             value={search} 
@@ -55,7 +55,7 @@ const FilterDeath = () => {
 
 </div>
 
-<div className='col-12 md:col-4'>
+<div className='col-12 md:col-3'>
 
 
 <Dropdown value={Sex} options={sexOptions} onChange={(e) => dispatch(handleChange({ name:'Sex', value:e.value }))} placeholder="Select Sex"/>

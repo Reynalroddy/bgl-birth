@@ -1,5 +1,5 @@
 import React,{useEffect,useState,useRef} from 'react'
-
+import { Dropdown } from 'primereact/dropdown';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 // import axios from "axios";
@@ -17,8 +17,13 @@ const DcrList = () => {
     // const {id}=useParams();
     const toast = useRef(null);
     // eslint-disable-next-line
+    const [userState,setUserState] = useState("");
+const [userLga,setUserLga] = useState("");
+// eslint-disable-next-line
     const [reload, setReload] = useState(false);
+    const [state,setStates] = useState([]);
   const [loading1, setLoading1] = useState(true);
+  const [lga,setLga] = useState([]);
   const [filters1, setFilters1] = useState(null);
   const [globalFilterValue1, setGlobalFilterValue1] = useState('');
 //   const [products, setProducts] = useState([]);
@@ -27,6 +32,13 @@ const DcrList = () => {
   const [products, setProducts] = useState([]);
 const [page,setPage] =useState(1)
 
+
+const changeState=async(e)=>{
+    setUserState(e.target.value);
+    const statz = await authFetch.get(`/option/lga/${e.target.value}`);
+    setLga(statz.data);
+
+}
 
 const [basicFirst, setBasicFirst] = useState(0);
 // eslint-disable-next-line
@@ -81,7 +93,7 @@ statuss = 'Inactive'
   }
   useEffect(() => {
     const getDatz=async ()=>{
-const statz = await authFetch.get(`/users/?search=&result_per_page=20&page=${page}&role_id=2`);
+const statz = await authFetch.get(`/users/?search=&result_per_page=20&page=${page}&role_id=2&state_id=${userState}&lga_id=${userLga}`);
 console.log(statz.data.result)
 setProducts(statz.data.result) 
 setTot(statz.data.pagination.total)
@@ -89,9 +101,22 @@ setTot(statz.data.pagination.total)
     }
             getDatz()
 
-}, [page]); 
+}, [page,userLga,userState]); 
 // eslint-disable-line react-hooks/exhaustive-deps
+useEffect(() => {
+    const getStates = async()=>{
+        const statz1 = await authFetch.get(`/option/states`);
+      
+        // option/permissions
+        setStates(statz1.data)
+    }
+    // const statz = await authFetch.get(`/option/lga/${e.target.value}`);
+    // console.log(statz.data.result)
+    // setMyStatz(statz.data.mtn);
+   
+    getStates();
 
+}, []);
 useEffect(() => {
    
             initFilters1();
@@ -155,6 +180,16 @@ const renderHeader1 = () => {
     return (
         <div className=" hidden md:flex justify-content-between">
             <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} />
+          
+
+
+<Dropdown value={userState} options={state} onChange={ changeState} placeholder="Select State" optionLabel="State_Name" optionValue="State_ID"/>
+
+<Dropdown value={userLga} options={lga} onChange={(e) => setUserLga(e.value)} placeholder="Select lga" optionLabel="LGA_Name" optionValue="LGA_ID"/>
+   
+{/* <Dropdown value={Sex} options={sexOptions} onChange={(e) => dispatch(handleChange({ name:'Sex', value:e.value }))} placeholder="Select lga"/> */}
+
+
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText value={globalFilterValue1} onChange={onGlobalFilterChange1} placeholder="Keyword Search" />
@@ -176,7 +211,7 @@ const dt = useRef(null);
         <span className="text-xl font-medium text-900">Dcr List</span>
         <div className="flex align-items-center export-buttons">
             {/* <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" /> */}
-           <Link to={`/dcr-new}`}>
+           <Link to={`/dcr-new`}>
            <Button type="button" icon="pi pi-user" label='Create new' className="p-button-success mr-2"  />
            </Link> 
             {/* <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" /> */}

@@ -163,7 +163,38 @@ const Homez = () => {
                     </li>
 
                 
-
+                    <li className='border-bottom-1 border-white'>
+                        <StyleClass nodeRef={btnRef14} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                            {/* eslint-disable-next-line */}
+                            <a ref={btnRef14} className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                transition-duration-150 transition-colors w-full">
+                                <i className="pi pi-book mr-2 text-white font-bold"></i>
+                                <span className="text-white font-medium">Still Birth</span>
+                                <i className="pi pi-chevron-right ml-auto mr-1 text-white"></i>
+                                <Ripple />
+                            </a>
+                        </StyleClass>
+                        <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                          
+                            <li>
+                                <Link to='/still' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Statistics</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link  to='/still/registrations' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Registrations</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
+                            
+                        </ul>
+                    </li>
 
                     <li className='border-bottom-1 border-white'>
                         <StyleClass nodeRef={btnRef9} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
@@ -200,38 +231,7 @@ const Homez = () => {
 
 
 
-                    <li className='border-bottom-1 border-white'>
-                        <StyleClass nodeRef={btnRef14} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
-                            {/* eslint-disable-next-line */}
-                            <a ref={btnRef14} className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
-                transition-duration-150 transition-colors w-full">
-                                <i className="pi pi-book mr-2 text-white font-bold"></i>
-                                <span className="text-white font-medium">Still Birth</span>
-                                <i className="pi pi-chevron-right ml-auto mr-1 text-white"></i>
-                                <Ripple />
-                            </a>
-                        </StyleClass>
-                        <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
-                          
-                            <li>
-                                <Link to='/still' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
-                    transition-duration-150 transition-colors w-full">
-                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
-                                    <span className="font-medium text-white">Statistics</span>
-                                    <Ripple />
-                                </Link>
-                            </li>
-                            <li>
-                                <Link  to='/still/registrations' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
-                    transition-duration-150 transition-colors w-full">
-                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
-                                    <span className="font-medium text-white">Registrations</span>
-                                    <Ripple />
-                                </Link>
-                            </li>
-                            
-                        </ul>
-                    </li>
+                   
 
 
                     <li className='border-bottom-1 border-white'>
@@ -380,6 +380,14 @@ const Homez = () => {
                         </StyleClass>
                         <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
                           
+                        <li>
+                                <Link to='/admins' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
+                    transition-duration-150 transition-colors w-full">
+                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
+                                    <span className="font-medium text-white">Admins</span>
+                                    <Ripple />
+                                </Link>
+                            </li>
                             <li>
                                 <Link to='/registrars-list' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                     transition-duration-150 transition-colors w-full">
@@ -405,14 +413,7 @@ const Homez = () => {
                                     <Ripple />
                                 </Link>
                             </li>
-                            <li>
-                                <Link to='/admins' className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
-                    transition-duration-150 transition-colors w-full">
-                                    <i className="pi pi-chart-line mr-2 text-white font-bold"></i>
-                                    <span className="font-medium text-white">Admins</span>
-                                    <Ripple />
-                                </Link>
-                            </li>
+                           
 
              
                    
@@ -427,15 +428,15 @@ const Homez = () => {
                             <Ripple />
                         </a>
                     </li> */}
-                    <li className='border-bottom-1 border-white'>
-                        {/* eslint-disable-next-line */}
+                    {/* <li className='border-bottom-1 border-white'>
+                        
                         <a className="p-ripple flex align-items-center cursor-pointer p-3  border-round 
                 transition-duration-150 transition-colors w-full">
                             <i className="pi pi-cog mr-2 text-white font-bold"></i>
                             <span className="font-medium text-white font-medium">Settings</span>
                             <Ripple />
                         </a>
-                    </li>
+                    </li> */}
 {/* 
                     <li className='border-bottom-1 border-white'>
                         <StyleClass nodeRef={btnRef2} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">

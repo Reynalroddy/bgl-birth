@@ -46,6 +46,7 @@ const changeState=async(e)=>{
     const statz = await authFetch.get(`/option/lga/${e.target.value}`);
     setLga(statz.data);
 
+    
 }
           
 

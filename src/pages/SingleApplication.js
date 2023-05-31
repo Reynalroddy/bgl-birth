@@ -30,7 +30,7 @@ try {
 } catch (error) {
     setLoading(false)
     console.log(error);
-    toast.current.show({ severity: 'error', summary: 'Error', detail: `${error.response.data.message}` });
+    toast.current.show({ severity: 'error', summary: '', detail: `${error.response.data.message}` });
 }
 
 
@@ -43,6 +43,13 @@ try {
     getRegs(dispatch,id)
     // console.log(reg)
     }, [dispatch,id])
+    
+
+console.log(
+    reg?.Date_Registerred?.split('T')[0]
+)
+
+
     
     if(isLoading){
     return <div className='flex justify-content-center align-items-center'>
@@ -69,7 +76,7 @@ try {
 
   <div className='flex flex-column'>
     <div className="font-medium text-md text-500 mb-3">DATE OF REGISTRATION</div>
-    <div className="text-900 text-xl mb-5 font-bold">{reg&&reg.Date_Registerred}</div>
+    <div className="text-900 text-xl mb-5 font-bold">{reg&&reg?.Date_Registerred?.split('T')[0]}</div>
   </div>
     </div>
 

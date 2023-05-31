@@ -45,7 +45,7 @@ const State = () => {
             console.log(res.data);
             setLoad(false);
             for(const dataObj of res.data){
-                labels.push(dataObj.State_Name)
+                labels.push(dataObj.State_Name.toLowerCase())
                 count.push(dataObj.count);  
             }
             // const barDats = {

@@ -413,7 +413,7 @@ pv: 2400,
            <div className="col-12 md:col-5 lg:col-5 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Birth vs Death registration</div>
+                        <div className="text-900 font-medium">Birth vs Death registration statistics</div>
                       
                     </div>
 
@@ -484,7 +484,7 @@ pv: 2400,
             <div className="col-12 md:col-6 lg:col-6 py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Major Causes of Death Stats</div>
+                        <div className="text-900 font-medium">Major Causes of Death Statistics</div>
                       
                     </div>
 

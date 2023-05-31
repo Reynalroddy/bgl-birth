@@ -90,10 +90,10 @@ useEffect(() => {
     const getStates = async()=>{
         const statz1 = await authFetch.get(`/option/states`);
         const statz2 = await authFetch.get(`/option/permissions`);
-        const statz = await authFetch.get(`/option/lga/${searchParams.get('state')}`);
+        // const statz = await authFetch.get(`/option/lga/${searchParams.get('state')}`);
         // option/permissions
         setStates(statz1.data)
-        setLga(statz.data);
+        // setLga(statz.data);
         setPermissions(statz2.data);
 
     }
@@ -169,7 +169,7 @@ return  <option value={item.LGA_ID} key={i}>{item.LGA_Name}</option>
 
         <div className="field col-12 md:col-4">
         <MultiSelect value={selectedPerm} onChange={(e) => setSelectedPerm(e.value)} options={permissions}  
- placeholder="Select user permissions"  className="w-full" />
+ placeholder="Select user permissions"  className="w-full"  maxSelectedLabels={3} />
     </div>
         <div className="field col-12 ">
           

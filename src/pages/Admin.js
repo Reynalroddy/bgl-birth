@@ -212,11 +212,11 @@ getStatz();
             <div className="col-12  py-4">
                 <div className="surface-card shadow-2 border-round p-3">
                     <div className="flex align-items-center justify-content-between mb-3">
-                        <div className="text-900 font-medium">Birth Registrations By Age Frequency By State</div> 
+                        <div className="text-900 font-medium">Birth Registrations By Age Frequency in each state.</div> 
                     </div>
                     {/* <Chart type="bar" data={data12}   /> */}
                     <OtherReg/>
-                </div>
+                </div>          
             </div>
 </Dialog>
 

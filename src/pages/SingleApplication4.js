@@ -185,7 +185,7 @@ try {
                 {/* <div className="text-900">Elliot Alderson</div> */}
             </div>
             <div className="col-12 md:col-2 p-3">
-                <div className="text-500 font-medium mb-2">mother_maiden_name</div>
+                <div className="text-500 font-medium mb-2">mother_name</div>
                 <div className="text-900">{reg&&reg?.mother_maiden_name}</div>
                 {/* <div className="text-900">Elliot Alderson</div> */}
             </div>

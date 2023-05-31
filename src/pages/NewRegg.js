@@ -169,7 +169,7 @@ const [selectedPerm,setSelectedPerm] = useState('');
 
         <div className="field col-12 md:col-4">
         <MultiSelect value={selectedPerm} onChange={(e) => setSelectedPerm(e.value)} options={permissions}  
- placeholder="Select user permissions"  className="w-full" />
+ placeholder="Select user permissions"  className="w-full" maxSelectedLabels={3} />
     </div>
 
         <div className="field col-12 ">

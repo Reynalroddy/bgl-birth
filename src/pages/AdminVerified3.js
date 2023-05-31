@@ -106,21 +106,25 @@ const birthPlace = (rowData) => {
 const state=(rowData)=>{
   return <p>{rowData.state_of_originData.State_Name}</p>
   }
+  // const state=(rowData)=>{
+  //   return <p>{rowData.state_of_originData.State_Name}</p>
+  //   }
 
 const renderHeader1 = () => {
     return (
 <Filter2/>
     )
 }
+
 const header1 = renderHeader1();
 const dt = useRef(null);
    
 
 const cols = [
-  { field: 'code', header: 'Code' },
-  { field: 'name', header: 'Name' },
-  { field: 'category', header: 'Category' },
-  { field: 'quantity', header: 'Quantity' }
+
+  { field: 'Date_Of_Birth', header: 'Date of Birth' },
+  { field: 'SurName', header: 'surname' },
+  { field: 'FirstName', header: 'firstname' }
 ];
 
 const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
@@ -130,7 +134,7 @@ const exportPdf = () => {
       import('jspdf-autotable').then(() => {
           const doc = new jsPDF.default(0, 0);
           doc.autoTable(exportColumns, registerations);
-          doc.save('products.pdf');
+          doc.save('attest-registrations.pdf');
       })
   })
 }
@@ -141,7 +145,7 @@ const exportExcel = () => {
       const worksheet = xlsx.utils.json_to_sheet(registerations);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      saveAsExcelFile(excelBuffer, 'products');
+      saveAsExcelFile(excelBuffer, 'attest-registrations');
   });
 }
 const saveAsExcelFile = (buffer, fileName) => {

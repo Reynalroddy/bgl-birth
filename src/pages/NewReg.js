@@ -113,15 +113,23 @@ const [selectedPerm,setSelectedPerm] = useState('');
             
             }
 
+            // const valueTemplate = () => {
+            //     const length = selectedPerm ? selectedPerm.length : 0;
+            //     return (
+            //         <div className="py-2 px-3">
+            //             <b>{length}</b> item{length > 1 ? 's' : ''} selected.
+            //         </div>
+            //     );
+            // };
 
         useEffect(() => {
             const getStates = async()=>{
                 const statz1 = await authFetch.get(`/option/states`);
                 const statz2 = await authFetch.get(`/option/permissions`);
-                const statz = await authFetch.get(`/option/lga/${searchParams.get('state')}`);
+                // const statz = await authFetch.get(`/option/lga/${searchParams.get('state')}`);
                 // option/permissions
                 setStates(statz1.data)
-                setLga(statz.data);
+                // setLga(statz.data);
                 setPermissions(statz2.data);
 
             }
@@ -133,9 +141,9 @@ const [selectedPerm,setSelectedPerm] = useState('');
          
             getStates();
     
-    }, [searchParams]);
+    }, []);
 
-    console.log(searchParams.get('state'))
+    // console.log(searchParams.get('state'))
   return (
     <div className='grid mt-2 p-4'>
     <div className="col-12 lg:col-12">
@@ -237,11 +245,14 @@ return  <option value={item.User_ID} key={i}>{item.UserName}</option>
 
 
       
-        <div className="field col-12 md:col-4">
+        <div className="field col-12 md:col-12 text-overflow-ellipsis">
         <MultiSelect 
         
+        // value={`selected:${selectedPerm.length}`}
         value={selectedPerm}
         // value={val&& val}
+        // valueTemplate={valueTemplate}
+        maxSelectedLabels={3}
         onChange={(e) => setSelectedPerm(e.value)} options={permissions} 
  placeholder="Select user permissions"  className="w-full" />
     </div>
