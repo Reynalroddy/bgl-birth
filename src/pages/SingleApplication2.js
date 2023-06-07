@@ -114,7 +114,7 @@ try {
         </div>
         <div className="col-12 md:col-2 p-3">
             <div className="text-500 font-medium mb-2">Gender</div>
-            <div className="text-900">{reg&&reg.deceased_sexData?.Gender}</div>
+            <div className="text-900">{reg&&reg.deceased_sexData?.gender}</div>
             
             
         </div>

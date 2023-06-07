@@ -23,7 +23,6 @@ const [basicFirst, setBasicFirst] = useState(0);
 // eslint-disable-next-line
 const [basicRows, setBasicRows] = useState(20);
 const onBasicPageChange = (event) => {
-
   // console.log(event)
   setBasicFirst(event.first);
   // setBasicRows(event.rows);
@@ -57,7 +56,7 @@ const navigate = useNavigate();
             lgaId,
            centerId,
             Sex,
-            Age,  
+            Age, 
             BirthType,   
             BirthOrder,
             BirthPlace
@@ -75,6 +74,7 @@ const navigate = useNavigate();
     BirthOrder,
     BirthPlace]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    
 
 const statusBodyTemplate2 = (rowData) => {
     return <Link  className={`btn btn-primary text-primary font-bold`} to={`/single/${rowData.Birth_Reg_ID}`} >
@@ -132,7 +132,9 @@ const cols = [
 
   { field: 'Date_Of_Birth', header: 'Date of Birth' },
   { field: 'SurName', header: 'surname' },
-  { field: 'FirstName', header: 'firstname' }
+  { field: 'FirstName', header: 'firstname' },
+  { field: 'Certificate_No', header: 'Certificate_No' }
+  
 ];
 
 const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
@@ -237,7 +239,7 @@ const saveAsExcelFile = (buffer, fileName) => {
                         <Column field="" header="Action" body={statusBodyTemplate2} />
                     </DataTable>
                     <Tooltip target=".export-buttons>button" position="bottom" />
-                    <Paginator  first ={basicFirst} rows={basicRows} totalRecords={numPages}  onPageChange={onBasicPageChange}></Paginator>
+                    <Paginator  first ={basicFirst} rows={basicRows} totalRecords={numPages} page={page}  onPageChange={onBasicPageChange}></Paginator>
                 </div>
             </div>
             

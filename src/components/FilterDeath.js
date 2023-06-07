@@ -38,8 +38,9 @@ const FilterDeath = () => {
       };
     useEffect(() => {
       getSex(dispatch);
+      
     }, [dispatch])
-    
+    console.log(causeOptions)
   return  (
     <div className=" hidden md:flex justify-content-between">
         {/* <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} /> */}

@@ -123,19 +123,17 @@ console.log(
         <div className="col-12 md:col-2 p-3">
             <div className="text-500 font-medium mb-2">Gender</div>
             <div className="text-900">{reg&&reg.GenderData?.gender}</div>
-            
-            
-        </div>
+            </div>
+
         <div className="col-12 md:col-2 p-3">
             <div className="text-500 font-medium mb-2">Place of birth</div>
             <div className="text-900">{reg&&reg.Birth_PlaceData?.BirthPlace_Desc}</div>
-           
-           
+
         </div>
         <div className="col-12 md:col-2 p-3">
             <div className="text-500 font-medium mb-2">LGA</div>
            
-            <div className="text-900">{reg&&reg.LGA_of_BirthData?.LGA_Name}</div>
+            <div className="text-900">{reg&&reg.LGA_of_OriginData?.LGA_Name}</div>
            
         </div>
         <div className="col-12 md:col-2 p-3">

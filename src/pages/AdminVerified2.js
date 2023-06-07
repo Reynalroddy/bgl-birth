@@ -75,7 +75,7 @@ VIEW
 }
 const genderTemplate = (rowData) => {
     return <p  className={`font-bold`}>
-{rowData.deceased_sexData.Gender}
+{rowData.deceased_sexData.gender} 
     </p>
 }
 

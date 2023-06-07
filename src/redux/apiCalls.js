@@ -658,7 +658,7 @@ return {label: item.BirthPlace_Desc , value: item.BirthPlace_ID}
         if (results[4].status === status) {
           const newRes = results[4].value.data.map((item,i)=>{
   
-return {label: item.BirthPlace_Desc , value: item.BirthPlace_ID}
+return {label: item.Description , value: item.id}
 });
     dispatch(getCauseOptionSuccess(newRes));
         }
