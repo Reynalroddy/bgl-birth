@@ -12,7 +12,7 @@ const Doughnut = () => {
        const chart = () => {
          let illi;
          let lit;
-           authFetch.get("https://npc-api.dsaved.com/v0/mother/stats/mother-literacy")
+           authFetch.get("https://npc-cert.verxid.site/v0/mother/stats/mother-literacy")
            .then(res => {
                console.log(res.data);
                setLoad(false);

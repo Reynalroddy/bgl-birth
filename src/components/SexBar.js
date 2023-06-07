@@ -9,7 +9,7 @@ const SexBar = () => {
     const chart = () => {
         let arr ;
        
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/bygendercount")
+        authFetch.get("https://npc-cert.verxid.site/v0/birth-registration/stats/bygendercount")
         .then(res => {
             console.log(res.data);
             setLoad(false);

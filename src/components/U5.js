@@ -40,7 +40,7 @@ const U5 = () => {
     const chart = () => {
       let labels=[];
       let count=[];
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/under-5-aged-birthreg")
+        authFetch.get("https://npc-cert.verxid.site/v0/birth-registration/stats/under-5-aged-birthreg")
         .then(res => {
             console.log(res.data);
             setLoad(false);

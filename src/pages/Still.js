@@ -234,7 +234,7 @@ const Still = () => {
         const getStatz=async()=>{
         
             try {
-                const statistics = await authFetch.get('https://npc-api.dsaved.com/v0/stillbirth/stats/total');
+                const statistics = await authFetch.get('https://npc-cert.verxid.site/v0/stillbirth/stats/total');
         console.log(statistics.data);
         setRez(statistics.data);
             } catch (error) {

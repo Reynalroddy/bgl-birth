@@ -13,7 +13,7 @@ const YearlyReg = ({data1,data2}) => {
         let birthAttest = [];
         let labels=[];
         let still=[];
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/year")
+        authFetch.get("https://npc-cert.verxid.site/v0/birth-registration/stats/year")
         .then(res => {
             console.log(res.data);
             setLoad(false);

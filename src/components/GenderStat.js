@@ -13,7 +13,7 @@ const GenderStat = () => {
         let attest ;
         let still;
        
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/gender")
+        authFetch.get("https://npc-cert.verxid.site/v0/birth-registration/stats/gender")
         .then(res => {
             console.log(res.data)
          setLoad(false);

@@ -12,7 +12,7 @@ const Gender = () => {
        const chart = () => {
          let illi;
          let lit;
-           authFetch.get("https://npc-api.dsaved.com/v0/birth-attestation/stats/bygendercount")
+           authFetch.get("https://npc-cert.verxid.site/v0/birth-attestation/stats/bygendercount")
            .then(res => {
                console.log(res.data);
                setLoad(false);

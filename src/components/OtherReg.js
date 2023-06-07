@@ -47,7 +47,7 @@ const OtherReg=()=>{
         let v3 ;
         let labels=[];
         let v4;
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/birth-reg-by-age-frequency-by-state")
+        authFetch.get("https://npc-cert.verxid.site/v0/birth-registration/stats/birth-reg-by-age-frequency-by-state")
         .then(res => {
             console.log(res.data);
             setLoad(false);

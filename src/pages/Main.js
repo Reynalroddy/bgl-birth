@@ -214,7 +214,7 @@ pv: 2400,
         const getStatz=async()=>{
         
             try {
-                const statistics = await authFetch.get('https://npc-api.dsaved.com/v0/birth-registration/stats/dcr-registras-dashboard-stat');
+                const statistics = await authFetch.get('https://npc-cert.verxid.site/v0/birth-registration/stats/dcr-registras-dashboard-stat');
         console.log(statistics.data);
         setRez(statistics.data[0]);
             } catch (error) {

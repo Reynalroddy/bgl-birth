@@ -12,7 +12,7 @@ const RegStat = () => {
         let southEas;
         let southSou ;
         let southWes;
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-registration/stats/regional")
+        authFetch.get("https://npc-cert.verxid.site/v0/birth-registration/stats/regional")
         .then(res => {
             console.log(res.data);
             setLoad(false);

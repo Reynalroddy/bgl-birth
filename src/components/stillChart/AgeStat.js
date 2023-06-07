@@ -40,7 +40,7 @@ const AgeStat = () => {
       let labels=[];
       let count=[];
 
-        authFetch.get("https://npc-api.dsaved.com/v0/stillbirth/stats/type-of-delivery")
+        authFetch.get("https://npc-cert.verxid.site/v0/stillbirth/stats/type-of-delivery")
         .then(res => {
             console.log(res.data);
             setLoad(false);

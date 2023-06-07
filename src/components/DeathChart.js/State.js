@@ -40,7 +40,7 @@ const State = () => {
     const chart = () => {
       let labels=[];
       let count=[];
-        authFetch.get("https://npc-api.dsaved.com/v0/death-registration/stats/deaths-by-state")
+        authFetch.get("https://npc-cert.verxid.site/v0/death-registration/stats/deaths-by-state")
         .then(res => {
             console.log(res.data);
             setLoad(false);

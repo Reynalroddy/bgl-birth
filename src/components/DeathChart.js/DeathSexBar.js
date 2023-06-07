@@ -9,7 +9,7 @@ const DeathSexBar = () => {
     const chart = () => {
         let arr ;
        
-        authFetch.get("https://npc-api.dsaved.com/v0/death-registration/stats/bygendercount")
+        authFetch.get("https://npc-cert.verxid.site/v0/death-registration/stats/bygendercount")
         .then(res => {
             // console.log(res.data);
             setLoad(false);

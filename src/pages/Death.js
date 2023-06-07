@@ -24,7 +24,7 @@ const Death = () => {
         const getStatz=async()=>{
         
             try {
-                const statistics = await authFetch.get('https://npc-api.dsaved.com/v0/death-registration/stats/total-death');
+                const statistics = await authFetch.get('https://npc-cert.verxid.site/v0/death-registration/stats/total-death');
         console.log(statistics);
 
         setRez(statistics.data);

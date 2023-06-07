@@ -16,7 +16,7 @@ const AttestLine = () => {
     const chart = () => {
       let labels=[];
       let count=[];
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-attestation/stats/by-state")
+        authFetch.get("https://npc-cert.verxid.site/v0/birth-attestation/stats/by-state")
         .then(res => {
             console.log(res.data);
             setLoad(false);

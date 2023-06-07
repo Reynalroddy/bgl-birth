@@ -18,7 +18,7 @@ const MotherAge = () => {
     const [load, setLoad]  = useState(true);
     const chart = () => {
       
-        authFetch.get("https://npc-api.dsaved.com/v0/mother/stats/mother-age")
+        authFetch.get("https://npc-cert.verxid.site/v0/mother/stats/mother-age")
         .then(res => {
             console.log(res.data);
             setLoad(false);

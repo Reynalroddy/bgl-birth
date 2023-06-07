@@ -40,7 +40,7 @@ const AttestU5 = () => {
     const chart = () => {
       let labels=[];
       let count=[];
-        authFetch.get("https://npc-api.dsaved.com/v0/birth-attestation/stats/statistics-by-age")
+        authFetch.get("https://npc-cert.verxid.site/v0/birth-attestation/stats/statistics-by-age")
         .then(res => {
             console.log(res.data);
             setLoad(false);

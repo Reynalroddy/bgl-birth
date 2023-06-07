@@ -10,7 +10,7 @@ const Doughnut = () => {
        const chart = () => {
          let female;
          let male;
-           authFetch.get("https://npc-api.dsaved.com/v0/stillbirth/stats/bygendercount")
+           authFetch.get("https://npc-cert.verxid.site/v0/stillbirth/stats/bygendercount")
            .then(res => {
                console.log(res.data);
                setLoad(false);
