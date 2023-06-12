@@ -103,6 +103,12 @@ const causeDeath = (rowData) => {
       </p>
 }
 
+const dater = (rowData) => {
+  return <p  className={`font-bold`}>
+  {rowData?.date_created?.split('T')[0]}
+      </p>
+}
+
 
 
 
@@ -121,9 +127,11 @@ const dt = useRef(null);
 
 const cols = [
 
-  { field: 'Date_Of_Birth', header: 'Date of Birth' },
-  { field: 'SurName', header: 'surname' },
-  { field: 'FirstName', header: 'firstname' }
+  { field: 'deceased_age_at_death', header: 'deceased age_at_death' },
+  { field: 'deceased_surname', header: 'surname' },
+  { field: 'deceased_firstname', header: 'firstname' },
+  { field: 'death_certificate_number', header: 'Certificate_No' }
+  
 ];
 
 const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
@@ -218,7 +226,7 @@ const saveAsExcelFile = (buffer, fileName) => {
                             <Column field="email" header="Gender" body={genderTemplate}></Column>
                             <Column  header="Cause of death" body={causeDeath}></Column>
                             {/* <Column field="Date_Of_Birth" header="Date of Birth"></Column> */}
-                            <Column field="date_created" header="Date registered"></Column>
+                            <Column  header="Date registered" body={dater}></Column>
                             <Column field="deceased_age_at_death"  header="Age of death"></Column>
                             {/* <Column body={center} header="Reg_Center_Name"></Column> */}
                             <Column body={state}  header="State"></Column>

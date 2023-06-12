@@ -77,7 +77,7 @@ VIEW
 }
 const genderTemplate = (rowData) => {
     return <p  className={`font-bold`}>
-{rowData.deceased_sexData.Gender}
+{rowData.deceased_sexData.gender}
     </p>
 }
 // const birthTypeTemplate = (rowData) => {
@@ -205,8 +205,8 @@ const saveAsExcelFile = (buffer, fileName) => {
                             <Column field="deceased_date_of_delivery" header="Delivery Date"></Column>
                             <Column field="" header="birth type" body={birthPlace}></Column>
                             <Column field="" header="Gender" body={genderTemplate}></Column>
-                            <Column field="mother_fullname" header="mothers name"></Column>
-                            <Column field="informant_fullname"  header="Informant name"></Column>
+                            <Column field="mother_fullname" header="mother's name"></Column>
+                            <Column field="informant_fullname"  header="Informant's name"></Column>
                           
                             {/* <Column body={state}  header="State"></Column> */}
                           

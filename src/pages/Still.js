@@ -390,7 +390,6 @@ const Still = () => {
                         <div className="text-900 font-medium">Mother's age at birth</div>
                       
                     </div>
-
                   <MotherAge/>
                 </div>
             </div>

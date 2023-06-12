@@ -237,7 +237,7 @@ const saveAsExcelFile = (buffer, fileName) => {
                             {/* <Column field="imei" header="Device IMEI"></Column> */}
                                 
                         <Column field="" header="Action" body={statusBodyTemplate2} />
-                    </DataTable>
+                    </DataTable>      
                     <Tooltip target=".export-buttons>button" position="bottom" />
                     <Paginator  first ={basicFirst} rows={basicRows} totalRecords={numPages} page={page}  onPageChange={onBasicPageChange}></Paginator>
                 </div>
